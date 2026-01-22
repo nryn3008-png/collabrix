@@ -115,35 +115,30 @@ function IconDeploy() {
 
 const steps = [
   {
-    number: '01',
     title: 'Discover',
     description:
       'I start by understanding your problem, your users, and your constraints. No assumptions. Just questions until the picture is clear.',
     icon: IconDiscover,
   },
   {
-    number: '02',
     title: 'Define',
     description:
       'Together, we scope what matters. I help prioritize features, define success metrics, and set a direction that balances ambition with what\'s buildable.',
     icon: IconDefine,
   },
   {
-    number: '03',
     title: 'Design',
     description:
       'I design in systems from day one—using Figma variables, tokens, and reusable components. You get a UI that scales, not just screens that look good.',
     icon: IconDesign,
   },
   {
-    number: '04',
     title: 'Develop',
     description:
       'Using AI-assisted tools, I build real, functional code. Not throwaway prototypes—actual React components you can ship or hand off to engineers.',
     icon: IconDevelop,
   },
   {
-    number: '05',
     title: 'Deploy',
     description:
       'I push to production. Vercel, Netlify, wherever your stack lives. You see your product working in the real world, not just in a deck.',
@@ -173,31 +168,24 @@ export default function HowIWork() {
             return (
               <StaggerItem key={index}>
                 <div
-                  className={`relative grid md:grid-cols-[60px_32px_1fr] gap-0 md:gap-0 py-8 items-start ${
+                  className={`relative grid grid-cols-[32px_1fr] gap-4 py-8 items-start ${
                     index !== steps.length - 1
                       ? 'border-b border-[var(--color-border)]'
                       : ''
                   }`}
                 >
-                  {/* Step Number */}
-                  <div className="flex items-center h-7">
-                    <span className="text-sm font-mono text-[var(--color-text-tertiary)]">
-                      {step.number}
-                    </span>
-                  </div>
-
-                  {/* Icon - between number and title */}
+                  {/* Icon - primary step marker */}
                   <div className="flex items-center justify-center h-7">
                     <span
                       className="text-[var(--color-text-secondary)]"
-                      style={{ opacity: 0.6 }}
+                      style={{ opacity: 0.65 }}
                     >
                       <Icon />
                     </span>
                   </div>
 
                   {/* Step Content */}
-                  <div className="max-w-xl pl-4">
+                  <div className="max-w-xl">
                     <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2 leading-7">
                       {step.title}
                     </h3>
