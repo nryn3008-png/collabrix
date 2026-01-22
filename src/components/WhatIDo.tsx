@@ -5,33 +5,20 @@ import { IconContainer, IconProductDesign, IconDesignSystems, IconAIDevelopment,
 /**
  * What I Do Section - Pure CSS Sticky Stacking
  *
- * LAYOUT STRUCTURE:
- * ┌─────────────────────────────────────────┐
- * │ Section (overflow: visible)            │
- * │ ┌─────────────────────────────────────┐ │
- * │ │ Header (sticky, top: 0, z: 50)     │ │
- * │ └─────────────────────────────────────┘ │
- * │ ┌─────────────────────────────────────┐ │
- * │ │ Card 0 (sticky, top: 140px, z: 1)  │ │
- * │ └─────────────────────────────────────┘ │
- * │ ┌─────────────────────────────────────┐ │
- * │ │ Card 1 (sticky, top: 160px, z: 2)  │ │
- * │ └─────────────────────────────────────┘ │
- * │ ┌─────────────────────────────────────┐ │
- * │ │ Card 2 (sticky, top: 180px, z: 3)  │ │
- * │ └─────────────────────────────────────┘ │
- * │ ┌─────────────────────────────────────┐ │
- * │ │ Card 3 (sticky, top: 200px, z: 4)  │ │
- * │ └─────────────────────────────────────┘ │
- * └─────────────────────────────────────────┘
+ * SINGLE STICKY CONTEXT:
+ * - The <section> element defines the scroll boundary
+ * - Header and cards share the SAME sticky context
+ * - Header sticks at top of viewport (below nav)
+ * - Cards stick below the header with progressive offsets
  *
- * HOW STACKING WORKS:
- * 1. Header sticks at top: 0
- * 2. Card 0 scrolls up, sticks at top: 140px (below header)
- * 3. Card 1 scrolls up, sticks at top: 160px, appears ON TOP of Card 0
- * 4. Card 2 scrolls up, sticks at top: 180px, appears ON TOP of Cards 0-1
- * 5. Card 3 scrolls up, sticks at top: 200px, appears ON TOP of Cards 0-2
- * 6. When section ends, everything scrolls away together
+ * SCROLL BEHAVIOR:
+ * 1. User scrolls into section
+ * 2. Header becomes sticky at top: 80px (below nav)
+ * 3. Card 0 becomes sticky at top: 200px
+ * 4. Card 1 stacks on top at top: 224px
+ * 5. Card 2 stacks on top at top: 248px
+ * 6. Card 3 stacks on top at top: 272px
+ * 7. Section scrolls out, header and cards release together
  */
 
 const expertise = [
@@ -62,29 +49,38 @@ const expertise = [
 ];
 
 // Layout constants
-const HEADER_HEIGHT = 140; // Height reserved for sticky header
-const CARD_STACK_OFFSET = 20; // Vertical spacing between stacked cards
+const NAV_HEIGHT = 80; // Global nav height
+const HEADER_TOP = NAV_HEIGHT; // Header sticks below nav
+const HEADER_HEIGHT = 120; // Approx height of section header
+const CARD_BASE_TOP = HEADER_TOP + HEADER_HEIGHT; // Cards start below header
+const CARD_STACK_OFFSET = 24; // Spacing between stacked cards
 
 export default function WhatIDo() {
   return (
     <section
       id="expertise"
-      className="pt-20 md:pt-32 pb-20 md:pb-32"
       style={{
-        // CRITICAL: overflow must be visible for sticky to work
+        // Section defines the sticky boundary
+        // Sufficient padding for scroll release
+        paddingTop: '5rem',
+        paddingBottom: '8rem',
+        // CRITICAL: overflow visible for sticky to work
         overflow: 'visible',
       }}
     >
+      {/* Single container - header and cards in same flow */}
       <div
         className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8"
         style={{ overflow: 'visible' }}
       >
-        {/* ===== STICKY HEADER ===== */}
+        {/* ===== SECTION HEADER ===== */}
+        {/* Sticky at top of viewport, below nav */}
         <div
-          className="sticky top-0 z-50 bg-[var(--color-bg)] pt-4 pb-8"
+          className="sticky bg-[var(--color-bg)] pb-6"
           style={{
-            // Gradient fade at bottom for smooth visual transition
-            backgroundImage: 'linear-gradient(to bottom, var(--color-bg) 85%, transparent)',
+            top: HEADER_TOP,
+            zIndex: 50,
+            // Solid background prevents card bleed-through
           }}
         >
           <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
@@ -96,32 +92,39 @@ export default function WhatIDo() {
         </div>
 
         {/* ===== STACKING CARDS ===== */}
+        {/* Same sticky context as header */}
         <div
-          className="max-w-2xl"
+          className="max-w-2xl pt-4"
           style={{ overflow: 'visible' }}
         >
           {expertise.map((item, index) => (
             <div
               key={index}
-              className="sticky mb-6 p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl"
+              className="sticky mb-6 last:mb-0"
               style={{
-                // Progressive sticky top: each card sticks lower than the previous
-                top: HEADER_HEIGHT + index * CARD_STACK_OFFSET,
-                // Later cards have higher z-index (stack on top)
+                // Cards stick below the header
+                // Each card sticks slightly lower to create stack effect
+                top: CARD_BASE_TOP + index * CARD_STACK_OFFSET,
+                // Higher index = higher z-index (stacks on top)
                 zIndex: index + 1,
-                // Subtle shadow for depth
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
               }}
             >
-              <IconContainer size="lg" className="mb-5">
-                {item.icon}
-              </IconContainer>
-              <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
-                {item.title}
-              </h3>
-              <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                {item.description}
-              </p>
+              <div
+                className="p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl"
+                style={{
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                }}
+              >
+                <IconContainer size="lg" className="mb-5">
+                  {item.icon}
+                </IconContainer>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
