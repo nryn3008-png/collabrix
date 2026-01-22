@@ -117,7 +117,7 @@ export default function About() {
               />
             </div>
 
-            <div className="max-w-xl">
+            <div className="">
               <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-8 leading-snug">
                 I bridge the gap between design and engineering—so products ship faster and better.
               </h2>
@@ -180,7 +180,7 @@ export default function About() {
 
           {/* Content Column */}
           <motion.div
-            className="max-w-xl"
+            className=""
             initial="hidden"
             whileInView="visible"
             viewport={viewportConfig}

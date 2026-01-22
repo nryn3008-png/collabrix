@@ -53,7 +53,7 @@ export default function Header() {
             ))}
             <a
               href="#contact"
-              className="text-sm font-medium px-4 py-2 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg hover:bg-[var(--color-accent-hover)] transition-colors"
+              className="text-sm font-medium px-4 py-2 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
             >
               Work with me
             </a>
@@ -106,7 +106,7 @@ export default function Header() {
               ))}
               <a
                 href="#contact"
-                className="inline-flex justify-center text-base font-medium px-4 py-3 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg hover:bg-[var(--color-accent-hover)] transition-colors mt-2"
+                className="inline-flex justify-center text-base font-medium px-4 py-3 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200 mt-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Work with me

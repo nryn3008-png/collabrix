@@ -129,6 +129,7 @@ export default function WhatIDo() {
           {expertise.map((item, i) => (
             <article
               key={i}
+              className="card-hover-effect"
               style={{
                 position: 'sticky',
                 top: NAV_HEIGHT + i * STACK_OFFSET,
@@ -141,29 +142,30 @@ export default function WhatIDo() {
                 boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)',
               }}
             >
-              {/* Icon above title */}
-              <IconContainer size="lg" className="mb-5">
-                {item.icon}
-              </IconContainer>
-              <h3
-                style={{
-                  fontSize: '1.25rem',
-                  fontWeight: 600,
-                  color: 'var(--color-text-primary)',
-                  marginBottom: 8,
-                }}
-              >
-                {item.title}
-              </h3>
-              <p
-                style={{
-                  color: 'var(--color-text-secondary)',
-                  lineHeight: 1.6,
-                  maxWidth: 640,
-                }}
-              >
-                {item.description}
-              </p>
+              <div className="card-hover-content">
+                {/* Icon above title */}
+                <IconContainer size="lg" className="mb-5">
+                  {item.icon}
+                </IconContainer>
+                <h3
+                  style={{
+                    fontSize: '1.25rem',
+                    fontWeight: 600,
+                    color: 'var(--color-text-primary)',
+                    marginBottom: 8,
+                  }}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  style={{
+                    color: 'var(--color-text-secondary)',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {item.description}
+                </p>
+              </div>
             </article>
           ))}
         </div>

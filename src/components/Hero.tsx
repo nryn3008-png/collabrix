@@ -98,7 +98,7 @@ export default function Hero() {
     return (
       <section className="min-h-screen flex items-center pt-20 md:pt-0">
         <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8 py-16 md:py-24">
-          <div className="max-w-3xl">
+          <div>
             <p className="text-sm font-medium text-[var(--color-text-tertiary)] mb-4 tracking-wide uppercase">
               Product Designer & Developer
             </p>
@@ -115,7 +115,7 @@ export default function Hero() {
               products—I handle design, systems, and code.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-14">
-              <a href="#contact" className="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg hover:bg-[var(--color-accent-hover)] transition-colors">
+              <a href="#contact" className="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200">
                 Let&apos;s build together
                 <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -143,7 +143,6 @@ export default function Hero() {
     <section className="min-h-screen flex items-center pt-20 md:pt-0">
       <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8 py-16 md:py-24">
         <motion.div
-          className="max-w-3xl"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
@@ -185,7 +184,7 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg hover:bg-[var(--color-accent-hover)] transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
             >
               Let&apos;s build together
               <svg

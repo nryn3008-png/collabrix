@@ -185,7 +185,7 @@ export default function HowIWork() {
                   </div>
 
                   {/* Step Content */}
-                  <div className="max-w-xl">
+                  <div>
                     <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2 leading-7">
                       {step.title}
                     </h3>

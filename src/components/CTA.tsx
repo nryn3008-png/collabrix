@@ -28,7 +28,7 @@ export default function CTA() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="mailto:amansoni.design@gmail.com"
-                className="inline-flex items-center justify-center px-8 py-4 text-base font-medium bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg hover:bg-[var(--color-accent-hover)] transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 text-base font-medium bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
               >
                 Get in touch
                 <svg
