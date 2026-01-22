@@ -188,17 +188,17 @@ export default function HowIWork() {
 
                   {/* Step Content */}
                   <div className="max-w-xl">
-                    {/* Title with inline icon */}
-                    <h3 className="flex items-center gap-2 text-xl font-semibold text-[var(--color-text-primary)] mb-2">
-                      <span>{step.title}</span>
+                    {/* Title with icon on left */}
+                    <h3 className="flex items-center gap-3 text-xl font-semibold text-[var(--color-text-primary)] mb-2">
                       <span
                         className="text-[var(--color-text-tertiary)]"
                         style={{ opacity: 0.6 }}
                       >
                         <Icon />
                       </span>
+                      <span>{step.title}</span>
                     </h3>
-                    <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                    <p className="text-[var(--color-text-secondary)] leading-relaxed pl-[30px]">
                       {step.description}
                     </p>
                   </div>
