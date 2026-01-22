@@ -216,3 +216,15 @@ html {
   position: relative;
   z-index: 1;
 }
+
+/* ============================================
+   Hero Emphasis - "build" underline
+   ============================================ */
+
+.hero-emphasis {
+  color: var(--color-text-emphasis);
+  text-decoration: underline;
+  text-decoration-color: var(--color-emphasis-underline);
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 0.08em;
+}
