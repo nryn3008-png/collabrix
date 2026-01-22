@@ -1,24 +1,25 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion, MotionValue } from 'framer-motion';
 import { IconContainer, IconProductDesign, IconDesignSystems, IconAIDevelopment, IconProduction } from './icons';
 
 /**
- * What I Do Section - Cumulative Scroll-Stacking Cards
+ * What I Do Section - CSS Sticky Stacking
  *
- * CRITICAL BEHAVIOR:
- * 1. At scroll=0: ONLY card 0 is visible
- * 2. Cards stack CUMULATIVELY - once stacked, position is LOCKED
- * 3. New cards slide up from below and stack underneath previous cards
- * 4. Cards never disappear or replace each other
- * 5. Sticky releases ONLY after all cards are fully stacked
+ * SIMPLE MODEL:
+ * - All cards visible in normal vertical flow
+ * - Each card has position: sticky with increasing top offset
+ * - As you scroll, cards naturally stack at their sticky positions
+ * - z-index increases so later cards appear on top of earlier ones
+ * - No scroll math, no transforms, no IntersectionObserver
  *
- * SCROLL SEGMENTS (for 4 cards):
- * - 0.00 → 0.25: Card 1 slides up and locks
- * - 0.25 → 0.50: Card 2 slides up and locks
- * - 0.50 → 0.75: Card 3 slides up and locks
- * - 0.75 → 1.00: Buffer for sticky release
+ * HOW IT WORKS:
+ * 1. Card 0: sticky at top: 120px → sticks first
+ * 2. Card 1: sticky at top: 140px → sticks 20px below card 0, appears on top
+ * 3. Card 2: sticky at top: 160px → sticks 20px below card 1, appears on top
+ * 4. Card 3: sticky at top: 180px → sticks 20px below card 2, appears on top
+ *
+ * When you scroll past all cards, the sticky behavior ends and
+ * the stack scrolls away naturally.
  */
 
 const expertise = [
@@ -48,146 +49,22 @@ const expertise = [
   },
 ];
 
-const CARD_COUNT = expertise.length;
-const CARD_HEIGHT = 220;
-const CARD_PEEK = 24; // Visible peek of each stacked card
-
-// Card that stacks cumulatively with LOCKED position after animation
-function StackingCard({
-  item,
-  index,
-  scrollYProgress,
-  totalCards,
-}: {
-  item: typeof expertise[0];
-  index: number;
-  scrollYProgress: MotionValue<number>;
-  totalCards: number;
-}) {
-  // First card is always visible and locked at y=0
-  if (index === 0) {
-    return (
-      <div
-        className="absolute left-0 right-0 p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl shadow-sm"
-        style={{
-          top: 0,
-          zIndex: totalCards - index,
-        }}
-      >
-        <IconContainer size="lg" className="mb-5">
-          {item.icon}
-        </IconContainer>
-        <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
-          {item.title}
-        </h3>
-        <p className="text-[var(--color-text-secondary)] leading-relaxed">
-          {item.description}
-        </p>
-      </div>
-    );
-  }
-
-  // Cards 1-3: Animate during their segment, then LOCK in place
-  // Segment size for animation (leaving buffer at end for clean release)
-  const animationRange = 0.75; // Use 75% of scroll for stacking
-  const segmentSize = animationRange / (totalCards - 1); // Divide among cards 1, 2, 3
-
-  const startProgress = (index - 1) * segmentSize;
-  const endProgress = index * segmentSize;
-
-  // Final stacked position
-  const stackedY = index * CARD_PEEK;
-
-  // Off-screen starting position
-  const hiddenY = CARD_HEIGHT + 100;
-
-  // CLAMPED transform:
-  // - Before startProgress: hidden (below viewport)
-  // - During startProgress → endProgress: animate to stacked position
-  // - After endProgress: LOCKED at stacked position
-  const y = useTransform(
-    scrollYProgress,
-    [0, startProgress, endProgress, 1],
-    [hiddenY, hiddenY, stackedY, stackedY]
-  );
-
-  return (
-    <motion.div
-      className="absolute left-0 right-0 p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl shadow-sm"
-      style={{
-        top: 0,
-        y,
-        zIndex: totalCards - index,
-      }}
-    >
-      <IconContainer size="lg" className="mb-5">
-        {item.icon}
-      </IconContainer>
-      <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
-        {item.title}
-      </h3>
-      <p className="text-[var(--color-text-secondary)] leading-relaxed">
-        {item.description}
-      </p>
-    </motion.div>
-  );
-}
+// Sticky positioning constants
+const HEADER_STICKY_TOP = 80; // Where header sticks (below nav)
+const CARD_BASE_TOP = 180; // Where first card sticks
+const CARD_STACK_OFFSET = 24; // Overlap between stacked cards
 
 export default function WhatIDo() {
-  const shouldReduceMotion = useReducedMotion();
-  const scrollWrapperRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: scrollWrapperRef,
-    offset: ['start start', 'end end'],
-  });
-
-  // Total height when all cards are stacked
-  const totalStackHeight = CARD_HEIGHT + (CARD_COUNT - 1) * CARD_PEEK;
-
-  // REDUCED MOTION: Static stacked layout
-  if (shouldReduceMotion) {
-    return (
-      <section id="expertise" className="py-20 md:py-32">
-        <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
-          <div className="mb-16">
-            <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
-              What I bring to the table
-            </h2>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl">
-              I combine design thinking with technical execution. Here&apos;s how that breaks down.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-            {expertise.map((item, index) => (
-              <div
-                key={index}
-                className="p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl"
-              >
-                <IconContainer size="lg" className="mb-5">
-                  {item.icon}
-                </IconContainer>
-                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // ANIMATED VERSION
   return (
-    <section id="expertise">
-      {/* Section Header - OUTSIDE scroll wrapper */}
-      <div className="pt-20 md:pt-32 pb-12">
-        <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
+    <section id="expertise" className="py-20 md:py-32">
+      <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
+        {/* Section Header - sticky at top */}
+        <div
+          className="sticky bg-[var(--color-bg)] pb-8 mb-4 z-10"
+          style={{
+            top: HEADER_STICKY_TOP,
+          }}
+        >
           <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
             What I bring to the table
           </h2>
@@ -195,44 +72,31 @@ export default function WhatIDo() {
             I combine design thinking with technical execution. Here&apos;s how that breaks down.
           </p>
         </div>
-      </div>
 
-      {/* Scroll Wrapper - consumes scroll */}
-      <div
-        ref={scrollWrapperRef}
-        style={{
-          // Height = enough to complete stacking + small buffer
-          height: `${(CARD_COUNT - 1) * 80 + 100}vh`,
-        }}
-      >
-        {/* Sticky Container - stays fixed during scroll */}
-        <div
-          className="sticky"
-          style={{
-            top: '10vh',
-            height: `calc(80vh)`, // Plenty of room for stack
-            overflow: 'visible',
-          }}
-        >
-          <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
-            {/* Cards Container - holds stacking cards ONLY */}
+        {/* Cards - each sticky with progressive top offset */}
+        <div className="max-w-2xl space-y-6">
+          {expertise.map((item, index) => (
             <div
-              className="relative max-w-2xl"
+              key={index}
+              className="sticky p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl shadow-sm"
               style={{
-                height: totalStackHeight,
+                // Each card sticks at a progressively lower position
+                top: CARD_BASE_TOP + index * CARD_STACK_OFFSET,
+                // Later cards have higher z-index (appear on top)
+                zIndex: index + 1,
               }}
             >
-              {expertise.map((item, index) => (
-                <StackingCard
-                  key={index}
-                  item={item}
-                  index={index}
-                  scrollYProgress={scrollYProgress}
-                  totalCards={CARD_COUNT}
-                />
-              ))}
+              <IconContainer size="lg" className="mb-5">
+                {item.icon}
+              </IconContainer>
+              <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                {item.title}
+              </h3>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                {item.description}
+              </p>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
