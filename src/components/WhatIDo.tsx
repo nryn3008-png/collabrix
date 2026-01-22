@@ -7,14 +7,11 @@ import { IconContainer, IconProductDesign, IconDesignSystems, IconAIDevelopment,
 /**
  * What I Do Section - Scroll-Linked Step Progression
  *
- * Pattern: Timeline-style animation driven by scroll position
+ * Pattern: Scroll-driven animation
  * - As user scrolls, each card becomes "active" in sequence
- * - Active card is highlighted, others are in calm/neutral state
- * - Feels like moving through stages of a capability timeline
- * - Vertical connector line shows progression
+ * - Active card is highlighted with border glow, others are calm/neutral
+ * - Scroll position drives which card is currently emphasized
  * - Runs once per page load, respects reduced motion
- *
- * Similar to onetwogrowth.com "From first call to running system"
  */
 
 const expertise = [
@@ -86,30 +83,17 @@ function ExpertiseCard({
   // Static render for reduced motion
   if (shouldReduceMotion) {
     return (
-      <div className="relative pl-8 md:pl-12">
-        {/* Timeline connector */}
-        <div className="absolute left-0 top-0 bottom-0 w-px bg-[var(--color-border)]" />
-        <div className="absolute left-0 top-8 w-2 h-2 -translate-x-[3.5px] rounded-full bg-[var(--color-text-primary)]" />
-
-        <div className="card-hover-effect p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl">
-          <div className="card-hover-content">
-            <div className="flex items-start gap-4 mb-4">
-              <IconContainer size="lg">
-                {item.icon}
-              </IconContainer>
-              <div className="flex-1">
-                <span className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">
-                  Step {index + 1}
-                </span>
-                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mt-1">
-                  {item.title}
-                </h3>
-              </div>
-            </div>
-            <p className="text-[var(--color-text-secondary)] leading-relaxed">
-              {item.description}
-            </p>
-          </div>
+      <div className="card-hover-effect p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl">
+        <div className="card-hover-content">
+          <IconContainer size="lg" className="mb-5">
+            {item.icon}
+          </IconContainer>
+          <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+            {item.title}
+          </h3>
+          <p className="text-[var(--color-text-secondary)] leading-relaxed">
+            {item.description}
+          </p>
         </div>
       </div>
     );
@@ -117,24 +101,8 @@ function ExpertiseCard({
 
   return (
     <motion.div
-      className="relative pl-8 md:pl-12"
       style={{ opacity }}
     >
-      {/* Timeline connector line */}
-      <div className="absolute left-0 top-0 bottom-0 w-px bg-[var(--color-border)]" />
-
-      {/* Timeline dot - animated based on active state */}
-      <motion.div
-        className="absolute left-0 top-8 w-2 h-2 -translate-x-[3.5px] rounded-full"
-        style={{
-          backgroundColor: useTransform(borderOpacity, (o) =>
-            o > 0.5 ? 'var(--color-text-primary)' : 'var(--color-border)'
-          ),
-          scale: useTransform(borderOpacity, (o) => o > 0.5 ? 1.25 : 1),
-        }}
-      />
-
-      {/* Card */}
       <motion.div
         className="card-hover-effect p-6 lg:p-8 bg-[var(--color-bg-elevated)] rounded-xl transition-colors duration-300"
         style={{
@@ -152,19 +120,12 @@ function ExpertiseCard({
         }}
       >
         <div className="card-hover-content">
-          <div className="flex items-start gap-4 mb-4">
-            <IconContainer size="lg">
-              {item.icon}
-            </IconContainer>
-            <div className="flex-1">
-              <span className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">
-                Step {index + 1}
-              </span>
-              <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mt-1">
-                {item.title}
-              </h3>
-            </div>
-          </div>
+          <IconContainer size="lg" className="mb-5">
+            {item.icon}
+          </IconContainer>
+          <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+            {item.title}
+          </h3>
           <p className="text-[var(--color-text-secondary)] leading-relaxed">
             {item.description}
           </p>
@@ -206,7 +167,7 @@ export default function WhatIDo() {
             </p>
           </div>
 
-          <div className="grid gap-8 max-w-3xl">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {expertise.map((item, index) => (
               <ExpertiseCard
                 key={index}
@@ -242,8 +203,8 @@ export default function WhatIDo() {
           </p>
         </motion.div>
 
-        {/* Cards in vertical timeline layout */}
-        <div className="grid gap-8 max-w-3xl">
+        {/* Cards Grid - scroll-linked active state */}
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {expertise.map((item, index) => (
             <ExpertiseCard
               key={index}
