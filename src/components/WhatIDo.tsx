@@ -3,23 +3,35 @@
 import { IconContainer, IconProductDesign, IconDesignSystems, IconAIDevelopment, IconProduction } from './icons';
 
 /**
- * What I Do Section - CSS Sticky Stacking
+ * What I Do Section - Pure CSS Sticky Stacking
  *
- * SIMPLE MODEL:
- * - All cards visible in normal vertical flow
- * - Each card has position: sticky with increasing top offset
- * - As you scroll, cards naturally stack at their sticky positions
- * - z-index increases so later cards appear on top of earlier ones
- * - No scroll math, no transforms, no IntersectionObserver
+ * LAYOUT STRUCTURE:
+ * ┌─────────────────────────────────────────┐
+ * │ Section (overflow: visible)            │
+ * │ ┌─────────────────────────────────────┐ │
+ * │ │ Header (sticky, top: 0, z: 50)     │ │
+ * │ └─────────────────────────────────────┘ │
+ * │ ┌─────────────────────────────────────┐ │
+ * │ │ Card 0 (sticky, top: 140px, z: 1)  │ │
+ * │ └─────────────────────────────────────┘ │
+ * │ ┌─────────────────────────────────────┐ │
+ * │ │ Card 1 (sticky, top: 160px, z: 2)  │ │
+ * │ └─────────────────────────────────────┘ │
+ * │ ┌─────────────────────────────────────┐ │
+ * │ │ Card 2 (sticky, top: 180px, z: 3)  │ │
+ * │ └─────────────────────────────────────┘ │
+ * │ ┌─────────────────────────────────────┐ │
+ * │ │ Card 3 (sticky, top: 200px, z: 4)  │ │
+ * │ └─────────────────────────────────────┘ │
+ * └─────────────────────────────────────────┘
  *
- * HOW IT WORKS:
- * 1. Card 0: sticky at top: 120px → sticks first
- * 2. Card 1: sticky at top: 140px → sticks 20px below card 0, appears on top
- * 3. Card 2: sticky at top: 160px → sticks 20px below card 1, appears on top
- * 4. Card 3: sticky at top: 180px → sticks 20px below card 2, appears on top
- *
- * When you scroll past all cards, the sticky behavior ends and
- * the stack scrolls away naturally.
+ * HOW STACKING WORKS:
+ * 1. Header sticks at top: 0
+ * 2. Card 0 scrolls up, sticks at top: 140px (below header)
+ * 3. Card 1 scrolls up, sticks at top: 160px, appears ON TOP of Card 0
+ * 4. Card 2 scrolls up, sticks at top: 180px, appears ON TOP of Cards 0-1
+ * 5. Card 3 scrolls up, sticks at top: 200px, appears ON TOP of Cards 0-2
+ * 6. When section ends, everything scrolls away together
  */
 
 const expertise = [
@@ -49,20 +61,30 @@ const expertise = [
   },
 ];
 
-// Sticky positioning constants
-const HEADER_STICKY_TOP = 80; // Where header sticks (below nav)
-const CARD_BASE_TOP = 180; // Where first card sticks
-const CARD_STACK_OFFSET = 24; // Overlap between stacked cards
+// Layout constants
+const HEADER_HEIGHT = 140; // Height reserved for sticky header
+const CARD_STACK_OFFSET = 20; // Vertical spacing between stacked cards
 
 export default function WhatIDo() {
   return (
-    <section id="expertise" className="py-20 md:py-32">
-      <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
-        {/* Section Header - sticky at top */}
+    <section
+      id="expertise"
+      className="pt-20 md:pt-32 pb-20 md:pb-32"
+      style={{
+        // CRITICAL: overflow must be visible for sticky to work
+        overflow: 'visible',
+      }}
+    >
+      <div
+        className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8"
+        style={{ overflow: 'visible' }}
+      >
+        {/* ===== STICKY HEADER ===== */}
         <div
-          className="sticky bg-[var(--color-bg)] pb-8 mb-4 z-10"
+          className="sticky top-0 z-50 bg-[var(--color-bg)] pt-4 pb-8"
           style={{
-            top: HEADER_STICKY_TOP,
+            // Gradient fade at bottom for smooth visual transition
+            backgroundImage: 'linear-gradient(to bottom, var(--color-bg) 85%, transparent)',
           }}
         >
           <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
@@ -73,17 +95,22 @@ export default function WhatIDo() {
           </p>
         </div>
 
-        {/* Cards - each sticky with progressive top offset */}
-        <div className="max-w-2xl space-y-6">
+        {/* ===== STACKING CARDS ===== */}
+        <div
+          className="max-w-2xl"
+          style={{ overflow: 'visible' }}
+        >
           {expertise.map((item, index) => (
             <div
               key={index}
-              className="sticky p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl shadow-sm"
+              className="sticky mb-6 p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl"
               style={{
-                // Each card sticks at a progressively lower position
-                top: CARD_BASE_TOP + index * CARD_STACK_OFFSET,
-                // Later cards have higher z-index (appear on top)
+                // Progressive sticky top: each card sticks lower than the previous
+                top: HEADER_HEIGHT + index * CARD_STACK_OFFSET,
+                // Later cards have higher z-index (stack on top)
                 zIndex: index + 1,
+                // Subtle shadow for depth
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
               }}
             >
               <IconContainer size="lg" className="mb-5">
