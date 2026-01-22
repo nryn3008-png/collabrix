@@ -3,21 +3,35 @@
 import { IconContainer, IconProductDesign, IconDesignSystems, IconAIDevelopment, IconProduction } from './icons';
 
 /**
- * What I Do Section - Sticky Stacking with Hard Stop
+ * What I Do Section - Minimal Sticky Stacking
  *
- * MECHANISM:
- * 1. Sticky-boundary defines the scroll range
- * 2. Header sticks at NAV_HEIGHT
- * 3. Cards stack progressively below header
- * 4. padding-bottom controls when sticky releases
- * 5. Once last card stacks, section "pauses" then scrolls away
+ * BEHAVIOR:
+ * 1. Header sticks below nav
+ * 2. Cards stack one-by-one
+ * 3. All cards stack → pause → release
+ * 4. Next section appears
  *
- * STOPPING LOGIC:
- * - padding-bottom = (CARD_COUNT × CARD_HEIGHT) + LOCK_BUFFER
- * - This ensures all cards fully stack before release
- * - The "pause" feeling comes from the LOCK_BUFFER
+ * NO animations. NO transforms. NO JS scroll logic.
  */
 
+// ============================================
+// EXPLICIT CONSTANTS (measured values)
+// ============================================
+const NAV_HEIGHT = 72;
+const HEADER_HEIGHT = 120;
+const CARD_HEIGHT = 240;
+const STACK_OFFSET = 20;
+const PAUSE_BUFFER = 100;
+const CARD_COUNT = 4;
+
+// Calculated values
+const HEADER_STICKY_TOP = NAV_HEIGHT;
+const CARD_STICKY_BASE = NAV_HEIGHT + HEADER_HEIGHT;
+const SCROLL_RANGE = CARD_COUNT * CARD_HEIGHT + PAUSE_BUFFER;
+
+// ============================================
+// DATA
+// ============================================
 const expertise = [
   {
     title: 'Product & UX Design',
@@ -46,107 +60,97 @@ const expertise = [
 ];
 
 // ============================================
-// LAYOUT CONSTANTS
+// COMPONENT
 // ============================================
-const NAV_HEIGHT = 72; // Global sticky nav height
-const HEADER_HEIGHT = 120; // Section header height
-const CARD_HEIGHT = 240; // Approximate height of each card
-const CARD_STACK_OFFSET = 20; // Vertical offset between stacked cards
-const LOCK_BUFFER = 100; // Extra scroll before release (creates "pause")
-
-const CARD_COUNT = expertise.length;
-
-// Derived sticky positions
-const HEADER_TOP = NAV_HEIGHT;
-const CARD_BASE_TOP = NAV_HEIGHT + HEADER_HEIGHT;
-
-// Calculate padding-bottom for sticky boundary
-// This determines when sticky elements release
-const STICKY_SCROLL_DISTANCE = CARD_COUNT * CARD_HEIGHT + LOCK_BUFFER;
-
 export default function WhatIDo() {
   return (
-    <section
-      id="expertise"
-      style={{
-        overflow: 'visible',
-      }}
-    >
-      {/* ============================================
-          STICKY BOUNDARY
-          - Defines the scroll range for sticky elements
-          - padding-bottom controls release timing
-          - All sticky elements share this boundary
-          ============================================ */}
+    <section id="expertise" style={{ overflow: 'visible' }}>
+      {/* STICKY BOUNDARY - defines scroll range */}
       <div
-        className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8"
         style={{
           overflow: 'visible',
-          paddingTop: '5rem',
-          // CRITICAL: This padding defines when sticky releases
-          paddingBottom: STICKY_SCROLL_DISTANCE,
+          paddingTop: 80,
+          paddingBottom: SCROLL_RANGE,
+          paddingLeft: 24,
+          paddingRight: 24,
+          maxWidth: 'var(--max-width-content)',
+          marginLeft: 'auto',
+          marginRight: 'auto',
         }}
       >
-        {/* ============================================
-            SECTION HEADER
-            - Sticks below global nav
-            - Stays locked until boundary scrolls past
-            ============================================ */}
-        <div
-          className="sticky bg-[var(--color-bg)]"
+        {/* SECTION HEADER - sticky below nav */}
+        <header
           style={{
-            top: HEADER_TOP,
-            zIndex: 40,
-            paddingTop: '0.5rem',
-            paddingBottom: '1rem',
+            position: 'sticky',
+            top: HEADER_STICKY_TOP,
+            zIndex: 50,
+            backgroundColor: 'var(--color-bg)',
+            paddingTop: 8,
+            paddingBottom: 16,
           }}
         >
-          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
+          <h2
+            style={{
+              fontSize: 'clamp(1.875rem, 4vw, 2.25rem)',
+              fontWeight: 600,
+              color: 'var(--color-text-primary)',
+              letterSpacing: '-0.02em',
+              marginBottom: 16,
+            }}
+          >
             What I bring to the table
           </h2>
-          <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl">
+          <p
+            style={{
+              fontSize: '1.125rem',
+              color: 'var(--color-text-secondary)',
+              maxWidth: 672,
+              lineHeight: 1.6,
+            }}
+          >
             I combine design thinking with technical execution. Here&apos;s how that breaks down.
           </p>
-        </div>
+        </header>
 
-        {/* ============================================
-            STACKING CARDS
-            - Each card sticks at progressive offset
-            - Cards stack on top of each other
-            - Last card determines final stack height
-            ============================================ */}
-        <div
-          className="max-w-2xl"
-          style={{ overflow: 'visible' }}
-        >
-          {expertise.map((item, index) => (
-            <div
-              key={index}
-              className="sticky mb-6 last:mb-0"
+        {/* CARDS - stack one-by-one */}
+        <div style={{ maxWidth: 672, overflow: 'visible' }}>
+          {expertise.map((item, i) => (
+            <article
+              key={i}
               style={{
-                // Progressive sticky top
-                top: CARD_BASE_TOP + index * CARD_STACK_OFFSET,
-                // Higher index = stacks on top
-                zIndex: index + 1,
+                position: 'sticky',
+                top: CARD_STICKY_BASE + i * STACK_OFFSET,
+                zIndex: 10 + i,
+                marginBottom: 24,
+                padding: 32,
+                backgroundColor: 'var(--color-bg-elevated)',
+                border: '1px solid var(--color-border)',
+                borderRadius: 12,
+                boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)',
               }}
             >
-              <div
-                className="p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl"
+              <IconContainer size="lg" className="mb-5">
+                {item.icon}
+              </IconContainer>
+              <h3
                 style={{
-                  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)',
+                  fontSize: '1.25rem',
+                  fontWeight: 600,
+                  color: 'var(--color-text-primary)',
+                  marginBottom: 12,
                 }}
               >
-                <IconContainer size="lg" className="mb-5">
-                  {item.icon}
-                </IconContainer>
-                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            </div>
+                {item.title}
+              </h3>
+              <p
+                style={{
+                  color: 'var(--color-text-secondary)',
+                  lineHeight: 1.6,
+                }}
+              >
+                {item.description}
+              </p>
+            </article>
           ))}
         </div>
       </div>
