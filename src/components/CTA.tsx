@@ -50,7 +50,7 @@ export default function CTA() {
 
           {/* Alternative Contact */}
           <StaggerItem>
-            <p className="mt-8 text-sm text-[var(--color-text-tertiary)]">
+            <p className="mt-8 text-base text-[var(--color-text-tertiary)]">
               Prefer to schedule a call?{' '}
               <a
                 href="https://cal.com/aman-soni-jjx19i/30min"
@@ -58,7 +58,7 @@ export default function CTA() {
                 rel="noopener noreferrer"
                 className="text-[var(--color-text-primary)] underline underline-offset-2 hover:no-underline"
               >
-                Book a time
+                Book a call
               </a>
             </p>
           </StaggerItem>
