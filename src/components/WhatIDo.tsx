@@ -1,17 +1,20 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView, useReducedMotion, Variants } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion, MotionValue } from 'framer-motion';
 import { IconContainer, IconProductDesign, IconDesignSystems, IconAIDevelopment, IconProduction } from './icons';
 
 /**
- * What I Do Section - Step-by-Step Card Reveal
+ * What I Do Section - Scroll-Linked Step Progression
  *
- * Pattern: Each card reveals independently when it enters viewport
- * - Fade + small translateY (8px)
- * - 400ms duration, staggered by position
- * - Runs once, no replay on scroll up
- * - Hover effects remain separate
+ * Pattern: Timeline-style animation driven by scroll position
+ * - As user scrolls, each card becomes "active" in sequence
+ * - Active card is highlighted, others are in calm/neutral state
+ * - Feels like moving through stages of a capability timeline
+ * - Vertical connector line shows progression
+ * - Runs once per page load, respects reduced motion
+ *
+ * Similar to onetwogrowth.com "From first call to running system"
  */
 
 const expertise = [
@@ -36,77 +39,77 @@ const expertise = [
   {
     title: 'Prototype to Production',
     description:
-      'I don\'t stop at mockups. I build working prototypes, deploy to Vercel, and iterate based on real usage. The gap between "designed" and "shipped" is where most projects stall. I close that gap.',
+      'I don\'t stop at mockups. I build working prototypes, deploy to Vercel, and iterate based on real usage. The gap between \"designed\" and \"shipped\" is where most projects stall. I close that gap.',
     icon: <IconProduction size={24} />,
   },
 ];
 
-// Card reveal variants
-const cardVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 8,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
+// Calculate which card should be active based on scroll progress
+function useActiveIndex(scrollYProgress: MotionValue<number>, totalCards: number): MotionValue<number> {
+  // Map scroll progress (0-1) to card index with some padding
+  // 0.15 start padding, 0.85 end padding to allow first and last to be fully visible
+  return useTransform(scrollYProgress, [0.1, 0.9], [0, totalCards - 1]);
+}
 
-// Header variants
-const headerVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 6,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-// Individual card component with viewport detection
+// Individual card with scroll-linked active state
 function ExpertiseCard({
   item,
   index,
+  activeIndex,
   shouldReduceMotion,
 }: {
   item: typeof expertise[0];
   index: number;
+  activeIndex: MotionValue<number>;
   shouldReduceMotion: boolean | null;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, {
-    once: true,
-    amount: 0.3,
-    margin: '-50px',
+  // Transform active index to opacity and scale for this card
+  const opacity = useTransform(activeIndex, (latest) => {
+    const distance = Math.abs(latest - index);
+    if (distance < 0.5) return 1;
+    if (distance < 1.5) return 0.5;
+    return 0.35;
+  });
+
+  const scale = useTransform(activeIndex, (latest) => {
+    const distance = Math.abs(latest - index);
+    if (distance < 0.5) return 1;
+    return 0.98;
+  });
+
+  const borderOpacity = useTransform(activeIndex, (latest) => {
+    const distance = Math.abs(latest - index);
+    if (distance < 0.5) return 1;
+    return 0;
   });
 
   // Static render for reduced motion
   if (shouldReduceMotion) {
     return (
-      <div
-        ref={cardRef}
-        className="card-hover-effect h-full p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl"
-      >
-        <div className="card-hover-content">
-          <IconContainer size="lg" className="mb-5">
-            {item.icon}
-          </IconContainer>
-          <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
-            {item.title}
-          </h3>
-          <p className="text-[var(--color-text-secondary)] leading-relaxed">
-            {item.description}
-          </p>
+      <div className="relative pl-8 md:pl-12">
+        {/* Timeline connector */}
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-[var(--color-border)]" />
+        <div className="absolute left-0 top-8 w-2 h-2 -translate-x-[3.5px] rounded-full bg-[var(--color-text-primary)]" />
+
+        <div className="card-hover-effect p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl">
+          <div className="card-hover-content">
+            <div className="flex items-start gap-4 mb-4">
+              <IconContainer size="lg">
+                {item.icon}
+              </IconContainer>
+              <div className="flex-1">
+                <span className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">
+                  Step {index + 1}
+                </span>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mt-1">
+                  {item.title}
+                </h3>
+              </div>
+            </div>
+            <p className="text-[var(--color-text-secondary)] leading-relaxed">
+              {item.description}
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -114,41 +117,86 @@ function ExpertiseCard({
 
   return (
     <motion.div
-      ref={cardRef}
-      className="card-hover-effect h-full p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl"
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-      variants={cardVariants}
-      style={{
-        // Small stagger based on position for cards entering together
-        transitionDelay: `${index * 0.08}s`,
-      }}
+      className="relative pl-8 md:pl-12"
+      style={{ opacity }}
     >
-      <div className="card-hover-content">
-        <IconContainer size="lg" className="mb-5">
-          {item.icon}
-        </IconContainer>
-        <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
-          {item.title}
-        </h3>
-        <p className="text-[var(--color-text-secondary)] leading-relaxed">
-          {item.description}
-        </p>
-      </div>
+      {/* Timeline connector line */}
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-[var(--color-border)]" />
+
+      {/* Timeline dot - animated based on active state */}
+      <motion.div
+        className="absolute left-0 top-8 w-2 h-2 -translate-x-[3.5px] rounded-full"
+        style={{
+          backgroundColor: useTransform(borderOpacity, (o) =>
+            o > 0.5 ? 'var(--color-text-primary)' : 'var(--color-border)'
+          ),
+          scale: useTransform(borderOpacity, (o) => o > 0.5 ? 1.25 : 1),
+        }}
+      />
+
+      {/* Card */}
+      <motion.div
+        className="card-hover-effect p-6 lg:p-8 bg-[var(--color-bg-elevated)] rounded-xl transition-colors duration-300"
+        style={{
+          scale,
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          borderColor: useTransform(borderOpacity, (o) =>
+            o > 0.5 ? 'rgba(80, 120, 200, 0.35)' : 'var(--color-border)'
+          ),
+          boxShadow: useTransform(borderOpacity, (o) =>
+            o > 0.5
+              ? '0 4px 24px rgba(80, 120, 200, 0.12), 0 0 0 1px rgba(80, 120, 200, 0.08)'
+              : 'none'
+          ),
+        }}
+      >
+        <div className="card-hover-content">
+          <div className="flex items-start gap-4 mb-4">
+            <IconContainer size="lg">
+              {item.icon}
+            </IconContainer>
+            <div className="flex-1">
+              <span className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">
+                Step {index + 1}
+              </span>
+              <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mt-1">
+                {item.title}
+              </h3>
+            </div>
+          </div>
+          <p className="text-[var(--color-text-secondary)] leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
 
 export default function WhatIDo() {
   const shouldReduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true, amount: 0.5 });
 
-  return (
-    <section id="expertise" className="py-20 md:py-32">
-      <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
-        {/* Section Header */}
-        {shouldReduceMotion ? (
+  // Track scroll progress through the section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Calculate active card index based on scroll
+  const activeIndex = useActiveIndex(scrollYProgress, expertise.length);
+
+  // Header animation based on scroll
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+  const headerY = useTransform(scrollYProgress, [0, 0.15], [20, 0]);
+
+  // Static render for reduced motion
+  if (shouldReduceMotion) {
+    return (
+      <section id="expertise" className="py-20 md:py-32" ref={sectionRef}>
+        <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
           <div className="mb-16" ref={headerRef}>
             <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
               What I bring to the table
@@ -157,30 +205,51 @@ export default function WhatIDo() {
               I combine design thinking with technical execution. Here&apos;s how that breaks down.
             </p>
           </div>
-        ) : (
-          <motion.div
-            ref={headerRef}
-            className="mb-16"
-            initial="hidden"
-            animate={headerInView ? 'visible' : 'hidden'}
-            variants={headerVariants}
-          >
-            <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
-              What I bring to the table
-            </h2>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl">
-              I combine design thinking with technical execution. Here&apos;s how that breaks down.
-            </p>
-          </motion.div>
-        )}
 
-        {/* Cards Grid - each card reveals independently */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid gap-8 max-w-3xl">
+            {expertise.map((item, index) => (
+              <ExpertiseCard
+                key={index}
+                item={item}
+                index={index}
+                activeIndex={activeIndex}
+                shouldReduceMotion={shouldReduceMotion}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id="expertise" className="py-20 md:py-32" ref={sectionRef}>
+      <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
+        {/* Section Header - fades in as section enters */}
+        <motion.div
+          ref={headerRef}
+          className="mb-16"
+          style={{
+            opacity: headerOpacity,
+            y: headerY,
+          }}
+        >
+          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
+            What I bring to the table
+          </h2>
+          <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl">
+            I combine design thinking with technical execution. Here&apos;s how that breaks down.
+          </p>
+        </motion.div>
+
+        {/* Cards in vertical timeline layout */}
+        <div className="grid gap-8 max-w-3xl">
           {expertise.map((item, index) => (
             <ExpertiseCard
               key={index}
               item={item}
               index={index}
+              activeIndex={activeIndex}
               shouldReduceMotion={shouldReduceMotion}
             />
           ))}
