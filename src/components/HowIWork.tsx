@@ -173,32 +173,35 @@ export default function HowIWork() {
             return (
               <StaggerItem key={index}>
                 <div
-                  className={`relative grid md:grid-cols-[80px_1fr] gap-4 md:gap-8 py-8 ${
+                  className={`relative grid md:grid-cols-[60px_32px_1fr] gap-0 md:gap-0 py-8 items-start ${
                     index !== steps.length - 1
                       ? 'border-b border-[var(--color-border)]'
                       : ''
                   }`}
                 >
                   {/* Step Number */}
-                  <div className="flex items-start">
+                  <div className="flex items-center h-7">
                     <span className="text-sm font-mono text-[var(--color-text-tertiary)]">
                       {step.number}
                     </span>
                   </div>
 
+                  {/* Icon - between number and title */}
+                  <div className="flex items-center justify-center h-7">
+                    <span
+                      className="text-[var(--color-text-secondary)]"
+                      style={{ opacity: 0.7 }}
+                    >
+                      <Icon />
+                    </span>
+                  </div>
+
                   {/* Step Content */}
-                  <div className="max-w-xl">
-                    {/* Title with icon on left */}
-                    <h3 className="flex items-center gap-3 text-xl font-semibold text-[var(--color-text-primary)] mb-2">
-                      <span
-                        className="text-[var(--color-text-secondary)] flex-shrink-0"
-                        style={{ opacity: 0.7 }}
-                      >
-                        <Icon />
-                      </span>
-                      <span>{step.title}</span>
+                  <div className="max-w-xl pl-4">
+                    <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2 leading-7">
+                      {step.title}
                     </h3>
-                    <p className="text-[var(--color-text-secondary)] leading-relaxed pl-[34px]">
+                    <p className="text-[var(--color-text-secondary)] leading-relaxed">
                       {step.description}
                     </p>
                   </div>
