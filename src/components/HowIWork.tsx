@@ -168,7 +168,7 @@ export default function HowIWork() {
             return (
               <StaggerItem key={index}>
                 <div
-                  className={`relative grid grid-cols-[32px_1fr] gap-4 py-8 items-start ${
+                  className={`relative grid grid-cols-[32px_1fr] gap-8 py-8 items-start ${
                     index !== steps.length - 1
                       ? 'border-b border-[var(--color-border)]'
                       : ''
