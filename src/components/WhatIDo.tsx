@@ -3,30 +3,32 @@
 import { IconContainer, IconProductDesign, IconDesignSystems, IconAIDevelopment, IconProduction } from './icons';
 
 /**
- * What I Do Section - Minimal Sticky Stacking
+ * What I Do Section - Two-Phase Scroll Model
  *
- * BEHAVIOR:
- * 1. Header sticks below nav
- * 2. Cards stack one-by-one
- * 3. All cards stack → pause → release
- * 4. Next section appears
+ * PHASE 1 — INTRODUCTION
+ * - Section header scrolls normally
+ * - Header is NOT sticky
+ * - Header disappears under global nav naturally
  *
- * NO animations. NO transforms. NO JS scroll logic.
+ * PHASE 2 — INTERACTION
+ * - Cards are the ONLY sticky elements
+ * - Cards stack progressively
+ * - Cards pause briefly, then release
+ * - Section exits cleanly
+ *
+ * NO competing sticky layers. NO transforms. NO JS scroll logic.
  */
 
 // ============================================
-// EXPLICIT CONSTANTS (measured values)
+// CONSTANTS
 // ============================================
 const NAV_HEIGHT = 72;
-const HEADER_HEIGHT = 120;
 const CARD_HEIGHT = 240;
-const STACK_OFFSET = 20;
-const PAUSE_BUFFER = 100;
+const STACK_OFFSET = 24;
+const PAUSE_BUFFER = 120;
 const CARD_COUNT = 4;
 
-// Calculated values
-const HEADER_STICKY_TOP = NAV_HEIGHT;
-const CARD_STICKY_BASE = NAV_HEIGHT + HEADER_HEIGHT;
+// Stack boundary scroll range
 const SCROLL_RANGE = CARD_COUNT * CARD_HEIGHT + PAUSE_BUFFER;
 
 // ============================================
@@ -65,12 +67,16 @@ const expertise = [
 export default function WhatIDo() {
   return (
     <section id="expertise" style={{ overflow: 'visible' }}>
-      {/* STICKY BOUNDARY - defines scroll range */}
+
+      {/* ========================================
+          PHASE 1 — INTRODUCTION
+          Normal scroll. NOT sticky.
+          Header scrolls away naturally.
+          ======================================== */}
       <div
         style={{
-          overflow: 'visible',
           paddingTop: 80,
-          paddingBottom: SCROLL_RANGE,
+          paddingBottom: 48,
           paddingLeft: 24,
           paddingRight: 24,
           maxWidth: 'var(--max-width-content)',
@@ -78,48 +84,52 @@ export default function WhatIDo() {
           marginRight: 'auto',
         }}
       >
-        {/* SECTION HEADER - sticky below nav */}
-        <header
+        <h2
           style={{
-            position: 'sticky',
-            top: HEADER_STICKY_TOP,
-            zIndex: 50,
-            backgroundColor: 'var(--color-bg)',
-            paddingTop: 8,
-            paddingBottom: 16,
+            fontSize: 'clamp(1.875rem, 4vw, 2.25rem)',
+            fontWeight: 600,
+            color: 'var(--color-text-primary)',
+            letterSpacing: '-0.02em',
+            marginBottom: 16,
           }}
         >
-          <h2
-            style={{
-              fontSize: 'clamp(1.875rem, 4vw, 2.25rem)',
-              fontWeight: 600,
-              color: 'var(--color-text-primary)',
-              letterSpacing: '-0.02em',
-              marginBottom: 16,
-            }}
-          >
-            What I bring to the table
-          </h2>
-          <p
-            style={{
-              fontSize: '1.125rem',
-              color: 'var(--color-text-secondary)',
-              maxWidth: 672,
-              lineHeight: 1.6,
-            }}
-          >
-            I combine design thinking with technical execution. Here&apos;s how that breaks down.
-          </p>
-        </header>
+          What I bring to the table
+        </h2>
+        <p
+          style={{
+            fontSize: '1.125rem',
+            color: 'var(--color-text-secondary)',
+            maxWidth: 640,
+            lineHeight: 1.6,
+          }}
+        >
+          I combine design thinking with technical execution. Here&apos;s how that breaks down.
+        </p>
+      </div>
 
-        {/* CARDS - stack one-by-one */}
-        <div style={{ maxWidth: 672, overflow: 'visible' }}>
+      {/* ========================================
+          PHASE 2 — INTERACTION
+          Cards are the ONLY sticky elements.
+          Stack boundary defines scroll range.
+          ======================================== */}
+      <div
+        style={{
+          overflow: 'visible',
+          paddingLeft: 24,
+          paddingRight: 24,
+          paddingBottom: SCROLL_RANGE,
+          maxWidth: 'var(--max-width-content)',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <div style={{ maxWidth: 640, overflow: 'visible' }}>
           {expertise.map((item, i) => (
             <article
               key={i}
               style={{
                 position: 'sticky',
-                top: CARD_STICKY_BASE + i * STACK_OFFSET,
+                top: NAV_HEIGHT + i * STACK_OFFSET,
                 zIndex: 10 + i,
                 marginBottom: 24,
                 padding: 32,
@@ -154,6 +164,7 @@ export default function WhatIDo() {
           ))}
         </div>
       </div>
+
     </section>
   );
 }
