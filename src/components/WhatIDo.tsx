@@ -141,33 +141,29 @@ export default function WhatIDo() {
                 boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)',
               }}
             >
-              <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-                <IconContainer size="lg" className="flex-shrink-0">
-                  {item.icon}
-                </IconContainer>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <h3
-                    style={{
-                      fontSize: '1.25rem',
-                      fontWeight: 600,
-                      color: 'var(--color-text-primary)',
-                      marginBottom: 8,
-                    }}
-                  >
-                    {item.title}
-                  </h3>
-                  {/* Text max-width for readability */}
-                  <p
-                    style={{
-                      color: 'var(--color-text-secondary)',
-                      lineHeight: 1.6,
-                      maxWidth: 640,
-                    }}
-                  >
-                    {item.description}
-                  </p>
-                </div>
-              </div>
+              {/* Icon above title */}
+              <IconContainer size="lg" className="mb-5">
+                {item.icon}
+              </IconContainer>
+              <h3
+                style={{
+                  fontSize: '1.25rem',
+                  fontWeight: 600,
+                  color: 'var(--color-text-primary)',
+                  marginBottom: 8,
+                }}
+              >
+                {item.title}
+              </h3>
+              <p
+                style={{
+                  color: 'var(--color-text-secondary)',
+                  lineHeight: 1.6,
+                  maxWidth: 640,
+                }}
+              >
+                {item.description}
+              </p>
             </article>
           ))}
         </div>
