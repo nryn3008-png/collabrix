@@ -23,13 +23,14 @@ import { IconContainer, IconProductDesign, IconDesignSystems, IconAIDevelopment,
 // CONSTANTS
 // ============================================
 const NAV_HEIGHT = 72;
-const CARD_HEIGHT = 240;
 const STACK_OFFSET = 24;
-const PAUSE_BUFFER = 120;
+const PAUSE_BUFFER = 80;
 const CARD_COUNT = 4;
 
 // Stack boundary scroll range
-const SCROLL_RANGE = CARD_COUNT * CARD_HEIGHT + PAUSE_BUFFER;
+// Cards already occupy height in normal flow — do NOT include card heights
+// Only account for: stacking offsets + brief pause
+const SCROLL_RANGE = (CARD_COUNT - 1) * STACK_OFFSET + PAUSE_BUFFER;
 
 // ============================================
 // DATA
