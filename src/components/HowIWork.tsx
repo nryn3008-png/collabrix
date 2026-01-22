@@ -12,12 +12,12 @@ import { SectionReveal, StaggerContainer, StaggerItem } from '@/lib/motion';
 function IconDiscover() {
   return (
     <svg
-      width="18"
-      height="18"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -32,12 +32,12 @@ function IconDiscover() {
 function IconDefine() {
   return (
     <svg
-      width="18"
-      height="18"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -53,12 +53,12 @@ function IconDefine() {
 function IconDesign() {
   return (
     <svg
-      width="18"
-      height="18"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -75,12 +75,12 @@ function IconDesign() {
 function IconDevelop() {
   return (
     <svg
-      width="18"
-      height="18"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -95,12 +95,12 @@ function IconDevelop() {
 function IconDeploy() {
   return (
     <svg
-      width="18"
-      height="18"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -191,14 +191,14 @@ export default function HowIWork() {
                     {/* Title with icon on left */}
                     <h3 className="flex items-center gap-3 text-xl font-semibold text-[var(--color-text-primary)] mb-2">
                       <span
-                        className="text-[var(--color-text-tertiary)]"
-                        style={{ opacity: 0.6 }}
+                        className="text-[var(--color-text-secondary)] flex-shrink-0"
+                        style={{ opacity: 0.7 }}
                       >
                         <Icon />
                       </span>
                       <span>{step.title}</span>
                     </h3>
-                    <p className="text-[var(--color-text-secondary)] leading-relaxed pl-[30px]">
+                    <p className="text-[var(--color-text-secondary)] leading-relaxed pl-[34px]">
                       {step.description}
                     </p>
                   </div>
