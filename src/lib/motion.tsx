@@ -87,9 +87,9 @@ export const heroContainerVariants: Variants = {
 
 // Viewport trigger settings
 const viewportSettings = {
-  once: true,       // Only animate once
-  amount: 0.15,     // Trigger when 15% visible
-  margin: '-50px',  // Start slightly before in view
+  once: false,      // Replay on re-enter
+  amount: 0.2,      // Trigger when 20% visible
+  margin: '-40px',  // Start slightly before in view
 };
 
 // Section wrapper - reveals entire section on scroll
