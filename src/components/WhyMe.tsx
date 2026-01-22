@@ -1,3 +1,7 @@
+'use client';
+
+import { SectionReveal, StaggerContainer, StaggerItem } from '@/lib/motion';
+
 const differentiators = [
   {
     title: 'I understand both sides',
@@ -23,7 +27,7 @@ const differentiators = [
 
 export default function WhyMe() {
   return (
-    <section className="py-20 md:py-32 bg-[var(--color-bg-elevated)]">
+    <SectionReveal className="py-20 md:py-32 bg-[var(--color-bg-elevated)]">
       <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-16">
@@ -37,19 +41,21 @@ export default function WhyMe() {
         </div>
 
         {/* Differentiators Grid */}
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-10">
+        <StaggerContainer className="grid md:grid-cols-2 gap-x-12 gap-y-10">
           {differentiators.map((item, index) => (
-            <div key={index} className="relative pl-6 border-l-2 border-[var(--color-border)]">
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
-                {item.title}
-              </h3>
-              <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                {item.description}
-              </p>
-            </div>
+            <StaggerItem key={index}>
+              <div className="relative pl-6 border-l-2 border-[var(--color-border)]">
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
-    </section>
+    </SectionReveal>
   );
 }

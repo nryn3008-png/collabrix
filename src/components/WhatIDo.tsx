@@ -1,3 +1,7 @@
+'use client';
+
+import { SectionReveal, StaggerContainer, StaggerItem } from '@/lib/motion';
+
 const expertise = [
   {
     title: 'Product & UX Design',
@@ -83,7 +87,7 @@ const expertise = [
 
 export default function WhatIDo() {
   return (
-    <section id="expertise" className="py-20 md:py-32">
+    <SectionReveal id="expertise" className="py-20 md:py-32">
       <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-16">
@@ -97,25 +101,24 @@ export default function WhatIDo() {
         </div>
 
         {/* Expertise Grid */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        <StaggerContainer className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {expertise.map((item, index) => (
-            <div
-              key={index}
-              className="p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl hover:border-[var(--color-text-tertiary)] transition-colors"
-            >
-              <div className="w-12 h-12 flex items-center justify-center bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg mb-5 text-[var(--color-text-primary)]">
-                {item.icon}
+            <StaggerItem key={index}>
+              <div className="h-full p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl hover:border-[var(--color-text-tertiary)] transition-colors">
+                <div className="w-12 h-12 flex items-center justify-center bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg mb-5 text-[var(--color-text-primary)]">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                  {item.description}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
-                {item.title}
-              </h3>
-              <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                {item.description}
-              </p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
-    </section>
+    </SectionReveal>
   );
 }

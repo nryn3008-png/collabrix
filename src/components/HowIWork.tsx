@@ -1,3 +1,7 @@
+'use client';
+
+import { SectionReveal, StaggerContainer, StaggerItem } from '@/lib/motion';
+
 const steps = [
   {
     number: '01',
@@ -33,7 +37,7 @@ const steps = [
 
 export default function HowIWork() {
   return (
-    <section id="process" className="py-20 md:py-32 bg-[var(--color-bg-elevated)]">
+    <SectionReveal id="process" className="py-20 md:py-32 bg-[var(--color-bg-elevated)]">
       <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-16">
@@ -47,36 +51,37 @@ export default function HowIWork() {
         </div>
 
         {/* Process Steps */}
-        <div className="space-y-0">
+        <StaggerContainer className="space-y-0">
           {steps.map((step, index) => (
-            <div
-              key={index}
-              className={`relative grid md:grid-cols-[80px_1fr] gap-4 md:gap-8 py-8 ${
-                index !== steps.length - 1
-                  ? 'border-b border-[var(--color-border)]'
-                  : ''
-              }`}
-            >
-              {/* Step Number */}
-              <div className="flex items-start">
-                <span className="text-sm font-mono text-[var(--color-text-tertiary)]">
-                  {step.number}
-                </span>
-              </div>
+            <StaggerItem key={index}>
+              <div
+                className={`relative grid md:grid-cols-[80px_1fr] gap-4 md:gap-8 py-8 ${
+                  index !== steps.length - 1
+                    ? 'border-b border-[var(--color-border)]'
+                    : ''
+                }`}
+              >
+                {/* Step Number */}
+                <div className="flex items-start">
+                  <span className="text-sm font-mono text-[var(--color-text-tertiary)]">
+                    {step.number}
+                  </span>
+                </div>
 
-              {/* Step Content */}
-              <div className="max-w-xl">
-                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                  {step.description}
-                </p>
+                {/* Step Content */}
+                <div className="max-w-xl">
+                  <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
-    </section>
+    </SectionReveal>
   );
 }

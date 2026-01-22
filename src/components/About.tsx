@@ -1,8 +1,11 @@
+'use client';
+
 import Image from 'next/image';
+import { SectionReveal, StaggerContainer, StaggerItem } from '@/lib/motion';
 
 export default function About() {
   return (
-    <section id="about" className="py-20 md:py-32 bg-[var(--color-bg-elevated)]">
+    <SectionReveal id="about" className="py-20 md:py-32 bg-[var(--color-bg-elevated)]">
       <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
         {/* Section Label */}
         <p className="text-sm font-medium text-[var(--color-text-tertiary)] mb-4 tracking-wide uppercase">
@@ -23,35 +26,43 @@ export default function About() {
           </div>
 
           {/* Content Column */}
-          <div className="max-w-xl">
-            <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">
-              I&apos;m Aman—a product designer who writes code and ships real products.
-            </h2>
+          <StaggerContainer className="max-w-xl">
+            <StaggerItem>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">
+                I&apos;m Aman—a product designer who writes code and ships real products.
+              </h2>
+            </StaggerItem>
 
             <div className="space-y-4 text-[var(--color-text-secondary)] leading-relaxed">
-              <p>
-                Over the past 4+ years, I&apos;ve worked across startups and product teams,
-                designing everything from MVPs to complex SaaS platforms. But I got tired
-                of handing off designs and watching them get lost in translation.
-              </p>
+              <StaggerItem>
+                <p>
+                  Over the past 4+ years, I&apos;ve worked across startups and product teams,
+                  designing everything from MVPs to complex SaaS platforms. But I got tired
+                  of handing off designs and watching them get lost in translation.
+                </p>
+              </StaggerItem>
 
-              <p>
-                So I learned to build. Now I design in Figma with real systems—variables,
-                tokens, scalable components—and then I write the code myself using AI-assisted
-                tools like Claude Code. The result: fewer handoffs, faster iteration, and
-                products that actually ship.
-              </p>
+              <StaggerItem>
+                <p>
+                  So I learned to build. Now I design in Figma with real systems—variables,
+                  tokens, scalable components—and then I write the code myself using AI-assisted
+                  tools like Claude Code. The result: fewer handoffs, faster iteration, and
+                  products that actually ship.
+                </p>
+              </StaggerItem>
 
-              <p>
-                I think the best products come from people who understand both sides.
-                When you can see the constraints of code while designing, you make better
-                decisions. When you understand design intent while building, you don&apos;t
-                cut corners. That&apos;s how I work.
-              </p>
+              <StaggerItem>
+                <p>
+                  I think the best products come from people who understand both sides.
+                  When you can see the constraints of code while designing, you make better
+                  decisions. When you understand design intent while building, you don&apos;t
+                  cut corners. That&apos;s how I work.
+                </p>
+              </StaggerItem>
             </div>
-          </div>
+          </StaggerContainer>
         </div>
       </div>
-    </section>
+    </SectionReveal>
   );
 }
