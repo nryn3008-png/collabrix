@@ -49,16 +49,18 @@ export default function WhatIDo() {
         <StaggerContainer className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {expertise.map((item, index) => (
             <StaggerItem key={index}>
-              <div className="h-full p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl hover:border-[var(--color-text-tertiary)] transition-colors">
-                <IconContainer size="lg" className="mb-5">
-                  {item.icon}
-                </IconContainer>
-                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                  {item.description}
-                </p>
+              <div className="card-hover-effect h-full p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl hover:border-[var(--color-text-tertiary)] transition-colors">
+                <div className="card-hover-content">
+                  <IconContainer size="lg" className="mb-5">
+                    {item.icon}
+                  </IconContainer>
+                  <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
               </div>
             </StaggerItem>
           ))}
