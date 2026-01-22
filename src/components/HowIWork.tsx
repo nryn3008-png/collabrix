@@ -190,7 +190,7 @@ export default function HowIWork() {
                   <div className="flex items-center justify-center h-7">
                     <span
                       className="text-[var(--color-text-secondary)]"
-                      style={{ opacity: 0.7 }}
+                      style={{ opacity: 0.6 }}
                     >
                       <Icon />
                     </span>
