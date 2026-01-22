@@ -5,13 +5,18 @@ import { motion, useScroll, useTransform, useReducedMotion, MotionValue } from '
 import { IconContainer, IconProductDesign, IconDesignSystems, IconAIDevelopment, IconProduction } from './icons';
 
 /**
- * What I Do Section - Scroll-Linked Step Progression
+ * What I Do Section - Scroll-Stacking Cards
  *
- * Pattern: Scroll-driven animation
- * - As user scrolls, each card becomes "active" in sequence
- * - Active card is highlighted with border glow, others are calm/neutral
- * - Scroll position drives which card is currently emphasized
- * - Runs once per page load, respects reduced motion
+ * Pattern: Sticky container with scroll-driven card stacking
+ *
+ * How it works:
+ * 1. Outer wrapper has extended height (cards × 100vh)
+ * 2. Inner sticky container stays fixed during scroll
+ * 3. Scroll progress drives card translateY (cards stack from bottom)
+ * 4. Once all cards stacked, sticky releases and normal scroll resumes
+ *
+ * The scroll is "consumed" by the extended height - the viewport stays
+ * on the sticky container while scroll input advances the card stack.
  */
 
 const expertise = [
@@ -41,49 +46,49 @@ const expertise = [
   },
 ];
 
-// Calculate which card should be active based on scroll progress
-function useActiveIndex(scrollYProgress: MotionValue<number>, totalCards: number): MotionValue<number> {
-  // Map scroll progress (0-1) to card index with some padding
-  // 0.15 start padding, 0.85 end padding to allow first and last to be fully visible
-  return useTransform(scrollYProgress, [0.1, 0.9], [0, totalCards - 1]);
-}
+const CARD_COUNT = expertise.length;
+const CARD_HEIGHT = 220; // Approximate card height in pixels
+const CARD_OFFSET = 16; // Vertical offset between stacked cards
 
-// Individual card with scroll-linked active state
-function ExpertiseCard({
+// Individual stacking card
+function StackingCard({
   item,
   index,
-  activeIndex,
-  shouldReduceMotion,
+  scrollYProgress,
 }: {
   item: typeof expertise[0];
   index: number;
-  activeIndex: MotionValue<number>;
-  shouldReduceMotion: boolean | null;
+  scrollYProgress: MotionValue<number>;
 }) {
-  // Transform active index to opacity and scale for this card
-  const opacity = useTransform(activeIndex, (latest) => {
-    const distance = Math.abs(latest - index);
-    if (distance < 0.5) return 1;
-    if (distance < 1.5) return 0.5;
-    return 0.35;
-  });
+  // Calculate scroll range for this card
+  // Card 0: already visible (no animation needed)
+  // Card 1: animates in during 0.0-0.33
+  // Card 2: animates in during 0.33-0.66
+  // Card 3: animates in during 0.66-1.0
+  const segmentSize = 1 / CARD_COUNT;
+  const startProgress = index * segmentSize;
+  const endProgress = (index + 1) * segmentSize;
 
-  const scale = useTransform(activeIndex, (latest) => {
-    const distance = Math.abs(latest - index);
-    if (distance < 0.5) return 1;
-    return 0.98;
-  });
+  // Card starts below (translateY = 100%) and moves to its stacked position
+  // First card is always at position 0, subsequent cards stack with offset
+  const targetY = index * CARD_OFFSET;
 
-  const borderOpacity = useTransform(activeIndex, (latest) => {
-    const distance = Math.abs(latest - index);
-    if (distance < 0.5) return 1;
-    return 0;
-  });
+  const y = useTransform(
+    scrollYProgress,
+    [startProgress, endProgress],
+    [CARD_HEIGHT + 50, targetY] // Start off-screen, end at stacked position
+  );
 
-  // Static render for reduced motion
-  if (shouldReduceMotion) {
+  // First card doesn't need animation - it's always visible
+  if (index === 0) {
     return (
-      <div className="card-hover-effect p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl">
+      <div
+        className="absolute left-0 right-0 card-hover-effect p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl"
+        style={{
+          top: 0,
+          zIndex: CARD_COUNT - index, // First card has highest z-index
+        }}
+      >
         <div className="card-hover-content">
           <IconContainer size="lg" className="mb-5">
             {item.icon}
@@ -101,64 +106,44 @@ function ExpertiseCard({
 
   return (
     <motion.div
-      style={{ opacity }}
+      className="absolute left-0 right-0 card-hover-effect p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl"
+      style={{
+        top: 0,
+        y,
+        zIndex: CARD_COUNT - index, // Higher index = lower z-index (stacks underneath)
+      }}
     >
-      <motion.div
-        className="card-hover-effect p-6 lg:p-8 bg-[var(--color-bg-elevated)] rounded-xl transition-colors duration-300"
-        style={{
-          scale,
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          borderColor: useTransform(borderOpacity, (o) =>
-            o > 0.5 ? 'rgba(80, 120, 200, 0.35)' : 'var(--color-border)'
-          ),
-          boxShadow: useTransform(borderOpacity, (o) =>
-            o > 0.5
-              ? '0 4px 24px rgba(80, 120, 200, 0.12), 0 0 0 1px rgba(80, 120, 200, 0.08)'
-              : 'none'
-          ),
-        }}
-      >
-        <div className="card-hover-content">
-          <IconContainer size="lg" className="mb-5">
-            {item.icon}
-          </IconContainer>
-          <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
-            {item.title}
-          </h3>
-          <p className="text-[var(--color-text-secondary)] leading-relaxed">
-            {item.description}
-          </p>
-        </div>
-      </motion.div>
+      <div className="card-hover-content">
+        <IconContainer size="lg" className="mb-5">
+          {item.icon}
+        </IconContainer>
+        <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+          {item.title}
+        </h3>
+        <p className="text-[var(--color-text-secondary)] leading-relaxed">
+          {item.description}
+        </p>
+      </div>
     </motion.div>
   );
 }
 
 export default function WhatIDo() {
   const shouldReduceMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Track scroll progress through the section
+  // Track scroll progress through the extended-height section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ['start start', 'end end'],
   });
 
-  // Calculate active card index based on scroll
-  const activeIndex = useActiveIndex(scrollYProgress, expertise.length);
-
-  // Header animation based on scroll
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
-  const headerY = useTransform(scrollYProgress, [0, 0.15], [20, 0]);
-
-  // Static render for reduced motion
+  // Static stacked layout for reduced motion
   if (shouldReduceMotion) {
     return (
-      <section id="expertise" className="py-20 md:py-32" ref={sectionRef}>
+      <section id="expertise" className="py-20 md:py-32">
         <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
-          <div className="mb-16" ref={headerRef}>
+          <div className="mb-16">
             <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
               What I bring to the table
             </h2>
@@ -169,13 +154,22 @@ export default function WhatIDo() {
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {expertise.map((item, index) => (
-              <ExpertiseCard
+              <div
                 key={index}
-                item={item}
-                index={index}
-                activeIndex={activeIndex}
-                shouldReduceMotion={shouldReduceMotion}
-              />
+                className="card-hover-effect p-6 lg:p-8 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl"
+              >
+                <div className="card-hover-content">
+                  <IconContainer size="lg" className="mb-5">
+                    {item.icon}
+                  </IconContainer>
+                  <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -183,37 +177,55 @@ export default function WhatIDo() {
     );
   }
 
+  // Calculate total stack height when all cards are stacked
+  const totalStackHeight = CARD_HEIGHT + (CARD_COUNT - 1) * CARD_OFFSET;
+
   return (
-    <section id="expertise" className="py-20 md:py-32" ref={sectionRef}>
-      <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
-        {/* Section Header - fades in as section enters */}
-        <motion.div
-          ref={headerRef}
-          className="mb-16"
+    <section id="expertise">
+      {/* Extended height wrapper - this is what gets scrolled through */}
+      <div
+        ref={sectionRef}
+        style={{
+          height: `${CARD_COUNT * 100}vh`, // Extended scroll height
+        }}
+      >
+        {/* Sticky container - stays fixed while scrolling through wrapper */}
+        <div
+          className="sticky"
           style={{
-            opacity: headerOpacity,
-            y: headerY,
+            top: '15vh', // Positioned from top of viewport
+            paddingTop: '2rem',
+            paddingBottom: '2rem',
           }}
         >
-          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
-            What I bring to the table
-          </h2>
-          <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl">
-            I combine design thinking with technical execution. Here&apos;s how that breaks down.
-          </p>
-        </motion.div>
+          <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8">
+            {/* Section Header */}
+            <div className="mb-12">
+              <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
+                What I bring to the table
+              </h2>
+              <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl">
+                I combine design thinking with technical execution. Here&apos;s how that breaks down.
+              </p>
+            </div>
 
-        {/* Cards Grid - scroll-linked active state */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-          {expertise.map((item, index) => (
-            <ExpertiseCard
-              key={index}
-              item={item}
-              index={index}
-              activeIndex={activeIndex}
-              shouldReduceMotion={shouldReduceMotion}
-            />
-          ))}
+            {/* Stacking cards container */}
+            <div
+              className="relative max-w-2xl"
+              style={{
+                height: totalStackHeight, // Reserve space for all stacked cards
+              }}
+            >
+              {expertise.map((item, index) => (
+                <StackingCard
+                  key={index}
+                  item={item}
+                  index={index}
+                  scrollYProgress={scrollYProgress}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
