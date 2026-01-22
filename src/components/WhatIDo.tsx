@@ -3,22 +3,19 @@
 import { IconContainer, IconProductDesign, IconDesignSystems, IconAIDevelopment, IconProduction } from './icons';
 
 /**
- * What I Do Section - CSS Sticky Stacking with Global Nav Awareness
+ * What I Do Section - Sticky Stacking with Hard Stop
  *
- * GLOBAL CONTEXT:
- * - Site has a sticky nav at top: 0
- * - ALL section sticky elements must account for nav height
- * - No element may use top: 0 or it will slide under the nav
+ * MECHANISM:
+ * 1. Sticky-boundary defines the scroll range
+ * 2. Header sticks at NAV_HEIGHT
+ * 3. Cards stack progressively below header
+ * 4. padding-bottom controls when sticky releases
+ * 5. Once last card stacks, section "pauses" then scrolls away
  *
- * STICKY HIERARCHY:
- * 1. Global Nav:      top: 0,          z-index: 100 (defined elsewhere)
- * 2. Section Header:  top: NAV_HEIGHT, z-index: 40
- * 3. Cards:           top: NAV_HEIGHT + HEADER_HEIGHT + offset, z-index: 1-4
- *
- * SCROLL BEHAVIOR:
- * - Header sticks directly below the nav
- * - Cards stack below the header
- * - All sticky elements release when section exits viewport
+ * STOPPING LOGIC:
+ * - padding-bottom = (CARD_COUNT × CARD_HEIGHT) + LOCK_BUFFER
+ * - This ensures all cards fully stack before release
+ * - The "pause" feeling comes from the LOCK_BUFFER
  */
 
 const expertise = [
@@ -49,44 +46,59 @@ const expertise = [
 ];
 
 // ============================================
-// LAYOUT CONSTANTS - Derived from global nav
+// LAYOUT CONSTANTS
 // ============================================
-const NAV_HEIGHT = 72; // Height of global sticky nav (px)
-const HEADER_HEIGHT = 100; // Section header height (px)
-const CARD_STACK_OFFSET = 20; // Spacing between stacked cards (px)
+const NAV_HEIGHT = 72; // Global sticky nav height
+const HEADER_HEIGHT = 120; // Section header height
+const CARD_HEIGHT = 240; // Approximate height of each card
+const CARD_STACK_OFFSET = 20; // Vertical offset between stacked cards
+const LOCK_BUFFER = 100; // Extra scroll before release (creates "pause")
 
-// Derived values
-const SECTION_HEADER_TOP = NAV_HEIGHT; // Header sticks below nav
-const CARD_BASE_TOP = NAV_HEIGHT + HEADER_HEIGHT; // Cards start below header
+const CARD_COUNT = expertise.length;
+
+// Derived sticky positions
+const HEADER_TOP = NAV_HEIGHT;
+const CARD_BASE_TOP = NAV_HEIGHT + HEADER_HEIGHT;
+
+// Calculate padding-bottom for sticky boundary
+// This determines when sticky elements release
+const STICKY_SCROLL_DISTANCE = CARD_COUNT * CARD_HEIGHT + LOCK_BUFFER;
 
 export default function WhatIDo() {
   return (
     <section
       id="expertise"
       style={{
-        // Section defines the sticky boundary
-        paddingTop: '5rem',
-        paddingBottom: '10rem', // Extra padding for clean scroll release
-        overflow: 'visible', // CRITICAL for sticky to work
+        overflow: 'visible',
       }}
     >
+      {/* ============================================
+          STICKY BOUNDARY
+          - Defines the scroll range for sticky elements
+          - padding-bottom controls release timing
+          - All sticky elements share this boundary
+          ============================================ */}
       <div
         className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8"
-        style={{ overflow: 'visible' }}
+        style={{
+          overflow: 'visible',
+          paddingTop: '5rem',
+          // CRITICAL: This padding defines when sticky releases
+          paddingBottom: STICKY_SCROLL_DISTANCE,
+        }}
       >
         {/* ============================================
             SECTION HEADER
-            - Sticks directly below global nav
-            - Solid background prevents bleed-through
-            - Highest z-index within section
+            - Sticks below global nav
+            - Stays locked until boundary scrolls past
             ============================================ */}
         <div
           className="sticky bg-[var(--color-bg)]"
           style={{
-            top: SECTION_HEADER_TOP,
+            top: HEADER_TOP,
             zIndex: 40,
-            paddingTop: '1rem',
-            paddingBottom: '1.5rem',
+            paddingTop: '0.5rem',
+            paddingBottom: '1rem',
           }}
         >
           <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-4">
@@ -99,9 +111,9 @@ export default function WhatIDo() {
 
         {/* ============================================
             STACKING CARDS
-            - Each card sticks below the header
-            - Progressive top values create stack effect
-            - Higher index = higher z-index (stacks on top)
+            - Each card sticks at progressive offset
+            - Cards stack on top of each other
+            - Last card determines final stack height
             ============================================ */}
         <div
           className="max-w-2xl"
@@ -112,9 +124,9 @@ export default function WhatIDo() {
               key={index}
               className="sticky mb-6 last:mb-0"
               style={{
-                // Each card sticks at: NAV + HEADER + (index × offset)
+                // Progressive sticky top
                 top: CARD_BASE_TOP + index * CARD_STACK_OFFSET,
-                // Later cards have higher z-index
+                // Higher index = stacks on top
                 zIndex: index + 1,
               }}
             >
