@@ -1,8 +1,13 @@
 'use client';
 
+import { motion, useReducedMotion } from 'framer-motion';
 import { HeroReveal, HeroItem } from '@/lib/motion';
 
+const processSteps = ['Idea', 'Design', 'Build', 'Ship'];
+
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="min-h-screen flex items-center pt-20 md:pt-0">
       <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8 py-16 md:py-24">
@@ -46,7 +51,7 @@ export default function Hero() {
 
           {/* CTAs */}
           <HeroItem>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-16">
               <a
                 href="#contact"
                 className="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg hover:bg-[var(--color-accent-hover)] transition-colors"
@@ -72,6 +77,56 @@ export default function Hero() {
               >
                 See how I work
               </a>
+            </div>
+          </HeroItem>
+
+          {/* Process Flow - Text-based motion element */}
+          <HeroItem>
+            <div className="pt-8 border-t border-[var(--color-border-subtle)]">
+              <div className="flex items-center gap-3 md:gap-4 flex-wrap">
+                {processSteps.map((step, index) => (
+                  <div key={step} className="flex items-center gap-3 md:gap-4">
+                    {shouldReduceMotion ? (
+                      <span className="text-sm md:text-base font-medium text-[var(--color-text-tertiary)]">
+                        {step}
+                      </span>
+                    ) : (
+                      <motion.span
+                        className="text-sm md:text-base font-medium text-[var(--color-text-tertiary)]"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          duration: 0.4,
+                          delay: 0.8 + index * 0.15,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                      >
+                        {step}
+                      </motion.span>
+                    )}
+                    {index < processSteps.length - 1 && (
+                      shouldReduceMotion ? (
+                        <span className="text-[var(--color-text-tertiary)] opacity-40">
+                          →
+                        </span>
+                      ) : (
+                        <motion.span
+                          className="text-[var(--color-text-tertiary)] opacity-40"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 0.4 }}
+                          transition={{
+                            duration: 0.3,
+                            delay: 0.95 + index * 0.15,
+                            ease: 'easeOut',
+                          }}
+                        >
+                          →
+                        </motion.span>
+                      )
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </HeroItem>
         </HeroReveal>
