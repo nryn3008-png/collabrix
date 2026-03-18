@@ -53,7 +53,7 @@ export default function Header() {
             ))}
             <div className="flex items-center gap-4">
               <a
-                href="#expertise"
+                href="/work"
                 className="text-sm font-medium px-4 py-2 rounded-lg border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] hover:border-[var(--color-text-tertiary)] transition-colors"
               >
                 View my work
@@ -113,7 +113,7 @@ export default function Header() {
                 </a>
               ))}
               <a
-                href="#expertise"
+                href="/work"
                 className="inline-flex justify-center text-base font-medium px-4 py-3 rounded-lg border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] hover:border-[var(--color-text-tertiary)] transition-colors mt-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

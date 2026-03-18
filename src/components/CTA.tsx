@@ -45,6 +45,12 @@ export default function CTA() {
                   />
                 </svg>
               </a>
+              <a
+                href="/work"
+                className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-lg hover:bg-[var(--color-bg-elevated)] hover:border-[var(--color-text-tertiary)] transition-colors"
+              >
+                View my work
+              </a>
             </div>
           </StaggerItem>
 
