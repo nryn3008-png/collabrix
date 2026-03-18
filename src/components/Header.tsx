@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
-        isScrolled
+        isScrolled || isMobileMenuOpen
           ? 'bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[var(--color-border)]'
           : 'bg-transparent'
       }`}
@@ -51,12 +51,20 @@ export default function Header() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contact"
-              className="text-sm font-medium px-4 py-2 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
-            >
-              Work with me
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                href="#expertise"
+                className="text-sm font-medium px-4 py-2 rounded-lg border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] hover:border-[var(--color-text-tertiary)] transition-colors"
+              >
+                View my work
+              </a>
+              <a
+                href="#contact"
+                className="text-sm font-medium px-4 py-2 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
+              >
+                Work with me
+              </a>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -105,8 +113,15 @@ export default function Header() {
                 </a>
               ))}
               <a
+                href="#expertise"
+                className="inline-flex justify-center text-base font-medium px-4 py-3 rounded-lg border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] hover:border-[var(--color-text-tertiary)] transition-colors mt-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                View my work
+              </a>
+              <a
                 href="#contact"
-                className="inline-flex justify-center text-base font-medium px-4 py-3 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200 mt-2"
+                className="inline-flex justify-center text-base font-medium px-4 py-3 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Work with me
