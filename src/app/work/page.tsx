@@ -30,6 +30,32 @@ const projects = [
     ],
     status: 'Live',
     url: 'jobs.brdg.app',
+    gradient: 'from-[#0038FF]/5 to-[#7450DA]/5',
+  },
+  {
+    slug: 'bridge-perks-portal',
+    title: 'Bridge Perks Portal — Exclusive Vendor Perks for VC-Backed Startups',
+    category: 'Product Design · Design System · Full-Stack Development · SaaS',
+    timeline: 'Dec 2025 — Feb 2026',
+    description:
+      'Designed and developed a domain-gated perks marketplace serving 400+ offers across 100+ vendors, with tiered access control, admin analytics, and API resilience — as a solo product designer using AI-assisted development.',
+    stats: [
+      { value: '400+', label: 'Perks Available' },
+      { value: '100+', label: 'Vendors' },
+      { value: '300+', label: 'Whitelisted Domains' },
+      { value: '7', label: 'Admin Sections' },
+    ],
+    tags: [
+      'Product Design',
+      'Design System',
+      'Next.js 14',
+      'Supabase',
+      'B2B SaaS',
+      'Access Control UX',
+    ],
+    status: 'Live',
+    url: 'perks.brdg.app',
+    gradient: 'from-[#7450DA]/5 to-[#0038FF]/5',
   },
 ];
 
@@ -41,13 +67,13 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
     >
       {/* Thumbnail area */}
       <div className="w-full h-48 md:h-64 bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0038FF]/5 to-[#7450DA]/5" />
+        <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`} />
         <div className="text-center z-10">
           <p className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight">
-            Bridge Jobs
+            {project.title.split('—')[0].trim()}
           </p>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
-            jobs.brdg.app
+            {project.url}
           </p>
         </div>
       </div>
