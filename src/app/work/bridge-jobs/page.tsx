@@ -302,48 +302,267 @@ export default function BridgeJobsCaseStudy() {
           <Reveal>
             <section>
               <SectionLabel>Design Process</SectionLabel>
-              <SectionTitle>Four design decisions that shaped the product</SectionTitle>
+              <SectionTitle>Four product decisions that shaped the architecture</SectionTitle>
 
-              <div className="max-w-3xl text-[var(--color-text-secondary)] leading-relaxed mb-10">
-                <p>I didn&apos;t just design screens — I made strategic product decisions that determined how the platform would feel, scale, and differentiate. Each one involved a tradeoff, and in each case the data and design principles pointed me to the less obvious choice.</p>
+              <div className="max-w-3xl text-[var(--color-text-secondary)] leading-relaxed mb-14">
+                <p>These aren&apos;t UI polish decisions. Each one determined how four user roles, 120+ companies, and 13 ATS providers coexist in a single product — and each one required choosing the harder path because the obvious solution didn&apos;t scale.</p>
               </div>
 
-              <div className="space-y-4 mb-12">
-                {[
-                  {
-                    title: 'Contextual breadcrumbs via URL params',
-                    problem: 'When a user navigates from a company page to a job detail, generic breadcrumbs ("Jobs > Software Engineer") don\'t help them remember where they came from.',
-                    solution: 'I designed contextual breadcrumbs using ?from_company= query params. If you came from Stripe, the breadcrumb reads "Stripe > Software Engineer" — preserving your mental model.',
-                    rationale: 'This follows recognition over recall (Nielsen\'s heuristic #6). The interface tells users where they came from — they never have to remember.',
-                  },
-                  {
-                    title: 'Warm intros card with three auth-dependent states',
-                    problem: 'The warm intros widget needed different content for signed-in vs. signed-out users, but conditionally hiding the card would cause layout shifts.',
-                    solution: 'I designed three persistent states: (1) Not signed in → "Sign in to see warm paths" CTA. (2) Signed in, has paths → count badge + suggestions. (3) Signed in, no paths → "No warm paths found." The card is always visible.',
-                    rationale: 'Layout stability is non-negotiable. The card\'s persistent presence also acts as a trust signal — even when empty, it communicates that the network advantage exists.',
-                  },
-                  {
-                    title: 'Branded career pages as a full product surface',
-                    problem: 'VC networks wanted their own hiring presence, but white-label solutions feel generic and disconnected.',
-                    solution: 'I designed fully customizable career pages at /careers/:domain with branding, custom colors, hero, social links, SEO, JSON-LD, and an offline screen. Not white-label — a distinct product surface with custom domain support.',
-                    rationale: 'The career page IS the VC\'s talent brand. It needed to feel owned, not rented. This also became the primary distribution channel — VCs share their career page URL, not the Bridge homepage.',
-                  },
-                  {
-                    title: 'Companies tab alongside Jobs on the main board',
-                    problem: 'Browsing by job title misses a huge signal: the company behind the role. VC-backed companies are inherently trusted, but that signal was buried.',
-                    solution: 'I added a Companies tab alongside Jobs. Company cards show logo, industry, funding stage, open jobs count, and which VC networks back them — deduplicated across VCs.',
-                    rationale: 'Job seekers in VC networks often care more about the company than the role. This inverts the hierarchy: discover companies first, then explore their openings. VC badges on cards reinforce trust at browse-time.',
-                  },
-                ].map((d) => (
-                  <div key={d.title} className="rounded-xl border border-[var(--color-border)] p-6">
-                    <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-3">{d.title}</p>
-                    <div className="space-y-3 text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                      <p><span className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Problem: </span>{d.problem}</p>
-                      <p><span className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">What I designed: </span>{d.solution}</p>
-                      <p className="pt-3 border-t border-[var(--color-border)]"><span className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Why: </span><span className="text-[var(--color-text-primary)]">{d.rationale}</span></p>
+              {/* ── Decision 1: One Job Record, Three Experiences ── */}
+              <div className="mb-20">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">01</span>
+                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Data architecture</p>
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-4">One job record, three completely different experiences</h3>
+                <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-8">
+                  <p>The obvious approach: build a job board and bolt on VC management later. Instead, I treated each VC&apos;s data scope as the fundamental design unit. A single job record in the database flows through three entirely different user experiences — with zero data duplication.</p>
+                  <p>The key insight: a VC should be able to hide a job from their branded career page without affecting the public board or other VCs. This isn&apos;t a visibility toggle on the job itself — it&apos;s <em>context-dependent availability</em>. The same &quot;Senior Engineer at Stripe&quot; listing can be visible on the public board, hidden from Techstars&apos; career page, and featured on Orange DAO&apos;s — all from one database record.</p>
+                </div>
+
+                {/* Visual: Single record → three surfaces */}
+                <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-6">
+                  <div className="p-5 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-[#0038FF]/10 flex items-center justify-center"><IconCube className="text-[#0038FF]" /></div>
+                      <div>
+                        <p className="text-xs font-semibold text-[var(--color-text-primary)]">Senior Engineer at Stripe</p>
+                        <p className="text-[10px] text-[var(--color-text-tertiary)]">Single record in database &middot; source: Greenhouse &middot; synced 2h ago</p>
+                      </div>
                     </div>
                   </div>
-                ))}
+                  <div className="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
+                    <div className="p-5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <IconGlobe className="text-[#0038FF]" />
+                        <p className="text-xs font-semibold text-[var(--color-text-primary)]">Public Job Board</p>
+                      </div>
+                      <div className="flex items-center gap-1.5 mb-2"><IconCheck className="text-[#0EA02E]" /><p className="text-[11px] text-[var(--color-text-secondary)]">Visible to all talent</p></div>
+                      <p className="text-[10px] text-[var(--color-text-tertiary)] leading-relaxed">Aggregated across all VCs. Deduplicated by company domain. Shows every active job.</p>
+                    </div>
+                    <div className="p-5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-5 h-5 rounded" style={{ backgroundColor: '#00B2A9' }} />
+                        <p className="text-xs font-semibold text-[var(--color-text-primary)]">Techstars Careers</p>
+                      </div>
+                      <div className="flex items-center gap-1.5 mb-2"><IconX className="text-[#E13535]" /><p className="text-[11px] text-[var(--color-text-secondary)]">Hidden by VC manager</p></div>
+                      <p className="text-[10px] text-[var(--color-text-tertiary)] leading-relaxed">VcHiddenJob record exists. This job won&apos;t appear on Techstars&apos; branded page.</p>
+                    </div>
+                    <div className="p-5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-5 h-5 rounded" style={{ backgroundColor: '#FF6B00' }} />
+                        <p className="text-xs font-semibold text-[var(--color-text-primary)]">Orange DAO Careers</p>
+                      </div>
+                      <div className="flex items-center gap-1.5 mb-2"><IconCheck className="text-[#0EA02E]" /><p className="text-[11px] text-[var(--color-text-secondary)]">Featured on their page</p></div>
+                      <p className="text-[10px] text-[var(--color-text-tertiary)] leading-relaxed">No hidden record. Stripe is in Orange DAO&apos;s portfolio, so the job appears.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                  <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Why this matters:</span> Most multi-tenant platforms duplicate data per tenant or use simple boolean flags. I designed a join-table approach (<code className="text-[10px] font-mono bg-[var(--color-bg-elevated)] px-1 rounded">VcHiddenJob</code>) that creates scope isolation without copying records. One source of truth, infinite presentation contexts. A VC controls their brand narrative without affecting the rest of the platform.</p>
+                </div>
+              </div>
+
+              {/* ── Decision 2: Role as a Lens, Not a Gate ── */}
+              <div className="mb-20">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">02</span>
+                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Multi-role UX</p>
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-4">Same data, four different relationships — role as a lens, not a gate</h3>
+                <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-8">
+                  <p>The standard approach to multi-role products: show different features per role. Show more buttons for admins, fewer for talent. But Bridge&apos;s users don&apos;t just need different features — they need a fundamentally different <em>relationship</em> with the same data.</p>
+                  <p>A VC manager looking at &quot;23 jobs this week&quot; sees a portfolio health metric. An admin seeing the same number sees a platform growth signal. Talent sees opportunity. Same number, three meanings. I designed the entire interface around this principle: roles don&apos;t just gate access — they change what data <em>means</em>.</p>
+                </div>
+
+                {/* Visual: NavSwitcher + Data reinterpretation */}
+                <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-6">
+                  {/* NavSwitcher mockup */}
+                  <div className="flex items-center gap-3 px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                    <p className="text-xs font-medium text-[var(--color-text-tertiary)]">NavSwitcher</p>
+                    <div className="flex gap-1">
+                      {['Job Board', 'VC Manager', 'Admin'].map((v, i) => (
+                        <span key={v} className={`text-[10px] font-medium px-2.5 py-1 rounded-full ${i === 1 ? 'bg-[#0038FF] text-white' : 'text-[var(--color-text-tertiary)] bg-[var(--color-bg-elevated)]'}`}>{v}</span>
+                      ))}
+                    </div>
+                    <p className="text-[10px] text-[var(--color-text-tertiary)] ml-auto">One dropdown changes everything</p>
+                  </div>
+                  <div className="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
+                    {[
+                      { role: 'Talent', metric: '23 new jobs', meaning: 'Opportunity to explore', sees: 'Job cards with salary, location, warm intro paths', color: '#568FFF' },
+                      { role: 'VC Manager', metric: '23 new jobs', meaning: 'Portfolio hiring velocity', sees: 'Trend chart, top hiring companies, sync freshness', color: '#0038FF' },
+                      { role: 'Admin', metric: '23 new jobs', meaning: 'Platform-wide growth', sees: 'Cross-VC aggregates, provider distribution, system health', color: '#7450DA' },
+                    ].map((r) => (
+                      <div key={r.role} className="p-5">
+                        <p className="text-[10px] font-medium uppercase tracking-widest mb-3" style={{ color: r.color }}>{r.role}</p>
+                        <p className="text-2xl font-bold text-[var(--color-text-primary)] mb-1">23</p>
+                        <p className="text-xs font-medium text-[var(--color-text-secondary)] mb-3">{r.meaning}</p>
+                        <p className="text-[10px] text-[var(--color-text-tertiary)] leading-relaxed pt-3 border-t border-[var(--color-border)]">{r.sees}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Shared component reuse diagram */}
+                <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                  <div className="rounded-xl border border-[var(--color-border)] p-5">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-3">The component architecture</p>
+                    <div className="space-y-2">
+                      {[
+                        { component: 'VcDashboardSections', usedBy: 'VC dashboard, Admin dashboard, Admin VC detail' },
+                        { component: 'StatCard + valueColor', usedBy: 'Same card shows green/amber/red based on data freshness' },
+                        { component: 'JobTrendChart', usedBy: 'VC sees their portfolio; Admin sees all networks' },
+                      ].map((c) => (
+                        <div key={c.component} className="flex items-start gap-2">
+                          <IconLayers className="text-[#0038FF] mt-0.5 shrink-0" />
+                          <div>
+                            <p className="text-[11px] font-medium text-[var(--color-text-primary)]">{c.component}</p>
+                            <p className="text-[10px] text-[var(--color-text-tertiary)]">{c.usedBy}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="rounded-xl border border-[var(--color-border)] p-5">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-3">What changes per role</p>
+                    <div className="space-y-2">
+                      {[
+                        { what: 'Data scope', how: 'basePath prop switches between /vc/:domain and /admin' },
+                        { what: 'Stat meaning', how: 'Color-coded freshness: green (<6h), amber (6-48h), red (>48h)' },
+                        { what: 'Available actions', how: 'VC: sync + brand. Admin: sync + edit + manage users' },
+                      ].map((c) => (
+                        <div key={c.what} className="flex items-start gap-2">
+                          <IconCog className="text-[var(--color-text-tertiary)] mt-0.5 shrink-0" />
+                          <div>
+                            <p className="text-[11px] font-medium text-[var(--color-text-primary)]">{c.what}</p>
+                            <p className="text-[10px] text-[var(--color-text-tertiary)]">{c.how}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                  <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Why this matters:</span> I designed one shared <code className="text-[10px] font-mono bg-[var(--color-bg-elevated)] px-1 rounded">VcDashboardSections</code> component that renders identically across three dashboards — only the data scope changes via a <code className="text-[10px] font-mono bg-[var(--color-bg-elevated)] px-1 rounded">basePath</code> prop. A design change to &quot;Top Hiring Companies&quot; fixes all three views simultaneously. This is composition over duplication — and it means the product feels consistent even as it serves radically different user needs.</p>
+                </div>
+              </div>
+
+              {/* ── Decision 3: Making Bridge Disappear ── */}
+              <div className="mb-20">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">03</span>
+                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Platform strategy</p>
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-4">Making Bridge disappear — career pages as invisible infrastructure</h3>
+                <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-8">
+                  <p>Here&apos;s the counterintuitive product decision: Bridge&apos;s best outcome is when VCs forget they&apos;re using Bridge. The career page at <code className="text-xs bg-[var(--color-bg)] border border-[var(--color-border)] px-1.5 py-0.5 rounded font-mono">careers.techstars.com</code> shouldn&apos;t look like a Bridge product — it should look like Techstars built it themselves.</p>
+                  <p>I designed the career pages not as white-label templates (slap a logo on and ship), but as fully owned product surfaces. Custom domain routing at the edge proxy level. Per-VC navigation, hero content, footer links, and social icons — all configurable from the VC Manager settings panel. JSON-LD structured data scoped to each VC. Even an offline screen that carries the VC&apos;s brand, not Bridge&apos;s.</p>
+                  <p>This changed Bridge&apos;s distribution model. VCs don&apos;t share bridge.app links — they share <em>their own</em> career page URL. Bridge becomes invisible infrastructure, and that&apos;s exactly what makes VCs adopt it.</p>
+                </div>
+
+                {/* Visual: What the VC Manager controls */}
+                <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-6">
+                  <div className="px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">VC Manager Settings &rarr; what they control</p>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-[var(--color-border)]">
+                    {[
+                      { area: 'Brand', items: ['Logo (light + dark)', 'Brand color', 'Accent color', 'Favicon'] },
+                      { area: 'Content', items: ['Hero headline', 'Hero subtext', 'Display name', 'Description'] },
+                      { area: 'Navigation', items: ['Custom nav links', 'Footer links', 'Social links', '"Post a Job" toggle'] },
+                      { area: 'Distribution', items: ['Custom domain', 'SEO metadata', 'JSON-LD schema', 'Owner banner'] },
+                    ].map((section) => (
+                      <div key={section.area} className="p-4">
+                        <p className="text-[10px] font-semibold text-[#0038FF] uppercase tracking-widest mb-2">{section.area}</p>
+                        {section.items.map((item) => (
+                          <p key={item} className="text-[10px] text-[var(--color-text-tertiary)] leading-relaxed">{item}</p>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Visual: Three different branded pages */}
+                <div className="grid sm:grid-cols-3 gap-3 mb-6">
+                  {[
+                    { name: 'Techstars', color: '#00B2A9', domain: 'careers.techstars.com' },
+                    { name: 'Orange DAO', color: '#FF6B00', domain: 'careers.orangedao.xyz' },
+                    { name: 'Angel Invest', color: '#7450DA', domain: 'careers.angelinvest.ventures' },
+                  ].map((vc) => (
+                    <div key={vc.name} className="rounded-xl overflow-hidden border border-[var(--color-border)]">
+                      <div className="h-2" style={{ backgroundColor: vc.color }} />
+                      <div className="p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-4 h-4 rounded" style={{ backgroundColor: vc.color }} />
+                          <p className="text-[11px] font-semibold text-[var(--color-text-primary)]">{vc.name}</p>
+                        </div>
+                        <p className="text-[10px] text-[var(--color-text-tertiary)] font-mono mb-3">{vc.domain}</p>
+                        <div className="flex gap-1">
+                          {['Jobs', 'Companies'].map((tab, i) => (
+                            <span key={tab} className="text-[9px] px-2 py-0.5 rounded-full" style={{ backgroundColor: i === 0 ? vc.color + '15' : 'transparent', color: i === 0 ? vc.color : 'var(--color-text-tertiary)' }}>{tab}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                  <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Why this matters:</span> The edge proxy rewrites vanity domains to internal routes before the app even renders. The VC Manager settings panel lets non-technical fund operators configure everything. The owner banner detects when a VC visits their own page and shows &quot;You&apos;re viewing your own directory&quot; — context-aware UI that treats the owner as special. This isn&apos;t white-label. It&apos;s infrastructure that earns trust by being invisible.</p>
+                </div>
+              </div>
+
+              {/* ── Decision 4: Sync Freshness as a First-Class Metric ── */}
+              <div className="mb-12">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">04</span>
+                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Trust through transparency</p>
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-4">Exposing the machine — sync freshness as a visible trust metric</h3>
+                <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-8">
+                  <p>A job board that shows stale listings is worse than no job board at all. But most platforms hide their sync status behind admin dashboards or monitoring tools. I made a different choice: make data freshness a first-class, visible metric that VC managers and admins see every time they open their dashboard.</p>
+                  <p>The &quot;Last synced&quot; stat card uses color-coded urgency — green when fresh, amber when aging, red when stale. This isn&apos;t decoration. It&apos;s a trust mechanism that turns infrastructure health into a product feature. VCs can immediately tell if their job data is current without filing a support ticket.</p>
+                </div>
+
+                {/* Visual: Freshness color system */}
+                <div className="grid sm:grid-cols-3 gap-4 mb-6">
+                  {[
+                    { label: 'Fresh', time: '2 hours ago', color: '#0D7C47', bg: '#0D7C47', desc: 'Synced within the last 6 hours. Jobs are current. No action needed.' },
+                    { label: 'Aging', time: '18 hours ago', color: '#B08A00', bg: '#B08A00', desc: 'Between 6-48 hours since last sync. May be worth a manual refresh.' },
+                    { label: 'Stale', time: '3 days ago', color: '#D93025', bg: '#D93025', desc: 'Over 48 hours. Something may be wrong. Investigate immediately.' },
+                  ].map((s) => (
+                    <div key={s.label} className="rounded-xl border border-[var(--color-border)] p-5">
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: s.bg }} />
+                        <p className="text-[10px] font-medium uppercase tracking-widest" style={{ color: s.color }}>{s.label}</p>
+                      </div>
+                      <p className="text-lg font-bold mb-1" style={{ color: s.color }}>{s.time}</p>
+                      <p className="text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-wide mb-3">Last synced</p>
+                      <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed pt-3 border-t border-[var(--color-border)]">{s.desc}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* How it connects to the bigger picture */}
+                <div className="rounded-xl border border-[var(--color-border)] p-5 mb-6">
+                  <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-4">The full trust chain</p>
+                  <div className="flex flex-wrap items-center gap-2 text-[11px]">
+                    {[
+                      '13 ATS providers sync every 6h',
+                      'Freshness color on dashboard',
+                      'Activity log records every sync',
+                      'VC manager sees audit trail',
+                      'Candidates see current jobs',
+                    ].map((step, i) => (
+                      <span key={step} className="flex items-center gap-2">
+                        <span className="px-2.5 py-1 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-secondary)] font-medium">{step}</span>
+                        {i < 4 && <IconArrowRight className="text-[var(--color-text-tertiary)]" />}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                  <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Why this matters:</span> Most platforms treat sync status as a dev-ops concern. I treated it as a user-facing trust signal. The <code className="text-[10px] font-mono bg-[var(--color-bg-elevated)] px-1 rounded">valueColor</code> prop on stat cards creates a visual grammar where any number can communicate urgency — reusable across the entire dashboard. Combined with the activity audit log (every sync, branding change, and portfolio update is timestamped with actor name), VCs never have to wonder &quot;is this data current?&quot; They can see it.</p>
+                </div>
               </div>
 
               {/* Design System */}
