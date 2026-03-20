@@ -259,8 +259,12 @@ export default function BridgePerksPortalCaseStudy() {
               <div className="max-w-3xl text-[var(--color-text-secondary)] leading-relaxed mb-10">
                 <p>Access control is typically treated as a binary gate — you&apos;re in or you&apos;re out. I designed a tiered system with distinct UX for each state, turning the restriction itself into an engagement mechanism. The core insight: showing restricted content builds desire; hiding it kills it.</p>
               </div>
+            </section>
+          </Reveal>
 
               {/* The Access Gate */}
+          <Reveal>
+            <section>
               <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">The 8-second access gate I designed</h3>
               <div className="rounded-xl border border-[var(--color-border)] p-6 mb-8">
                 <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4">
@@ -276,7 +280,12 @@ export default function BridgePerksPortalCaseStudy() {
                 </div>
               </div>
 
+            </section>
+          </Reveal>
+
               {/* Three Access States */}
+          <Reveal>
+            <section>
               <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">Three result states I designed</h3>
               <div className="space-y-4 mb-10">
                 {[
@@ -298,7 +307,12 @@ export default function BridgePerksPortalCaseStudy() {
                 })}
               </div>
 
+            </section>
+          </Reveal>
+
               {/* Access Request Flow */}
+          <Reveal>
+            <section>
               <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">The access request flow I designed to minimize friction</h3>
               <div className="rounded-xl border border-[var(--color-border)] p-6 mb-12">
                 <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4">The biggest friction point in access request flows is the open-ended &quot;who&apos;s your VC?&quot; text input. I replaced it with an interactive directory — a searchable grid of 300+ approved VCs with logos. Clicking a VC pre-fills the form, reducing the entire question to a single tap.</p>
@@ -320,7 +334,12 @@ export default function BridgePerksPortalCaseStudy() {
                 </ol>
               </div>
 
+            </section>
+          </Reveal>
+
               {/* Design System */}
+          <Reveal>
+            <section>
               <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">The design system I built for brand alignment</h3>
               <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-6 max-w-3xl">I created a complete design token system used across 60+ files — ensuring every screen felt unmistakably like a Bridge product. Tokens were codified as direct hex values, not abstraction layers that could drift.</p>
               <div className="rounded-xl border border-[var(--color-border)] p-6">

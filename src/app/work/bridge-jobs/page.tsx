@@ -307,8 +307,12 @@ export default function BridgeJobsCaseStudy() {
               <div className="max-w-3xl text-[var(--color-text-secondary)] leading-relaxed mb-14">
                 <p>These aren&apos;t UI polish decisions. Each one determined how four user roles, 120+ companies, and 13 ATS providers coexist in a single product — and each one required choosing the harder path because the obvious solution didn&apos;t scale.</p>
               </div>
+            </section>
+          </Reveal>
 
               {/* ── Decision 1: One Job Record, Three Experiences ── */}
+          <Reveal>
+            <section>
               <div className="mb-20">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">01</span>
@@ -363,7 +367,12 @@ export default function BridgeJobsCaseStudy() {
                 </div>
               </div>
 
+            </section>
+          </Reveal>
+
               {/* ── Decision 2: Role as a Lens, Not a Gate ── */}
+          <Reveal>
+            <section>
               <div className="mb-20">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">02</span>
@@ -447,7 +456,12 @@ export default function BridgeJobsCaseStudy() {
                 </div>
               </div>
 
+            </section>
+          </Reveal>
+
               {/* ── Decision 3: Making Bridge Disappear ── */}
+          <Reveal>
+            <section>
               <div className="mb-20">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">03</span>
@@ -511,7 +525,12 @@ export default function BridgeJobsCaseStudy() {
                 </div>
               </div>
 
+            </section>
+          </Reveal>
+
               {/* ── Decision 4: Sync Freshness as a First-Class Metric ── */}
+          <Reveal>
+            <section>
               <div className="mb-12">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">04</span>
@@ -565,7 +584,12 @@ export default function BridgeJobsCaseStudy() {
                 </div>
               </div>
 
+            </section>
+          </Reveal>
+
               {/* Design System */}
+          <Reveal>
+            <section>
               <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">The design system I built</h3>
               <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-6 max-w-3xl">I created a comprehensive design system before the first line of code — then codified it into CSS custom properties and Tailwind utilities. This became the single source of truth, and critically, the instruction set that kept AI-generated code consistent with my design intent.</p>
               <div className="rounded-xl border border-[var(--color-border)] p-6">
