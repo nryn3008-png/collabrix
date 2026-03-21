@@ -176,8 +176,8 @@ export default function BridgeJobsCaseStudy() {
                     const Icon = col.icon;
                     return (
                       <div key={col.label} className="p-5">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Icon className="shrink-0" style={{ color: col.color }} />
+                        <div className="flex items-center gap-2 mb-3" style={{ color: col.color }}>
+                          <Icon className="shrink-0" />
                           <p className="text-xs font-semibold text-[var(--color-text-primary)]">{col.label}</p>
                         </div>
                         <div className="space-y-1.5">
@@ -237,8 +237,8 @@ export default function BridgeJobsCaseStudy() {
                         <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: p.color, backgroundColor: p.color + '12' }}>{p.num}</span>
                         <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">{p.lens}</p>
                       </div>
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: p.color + '10' }}>
-                        <Icon style={{ color: p.color }} />
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: p.color + '10', color: p.color }}>
+                        <Icon />
                       </div>
                       <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{p.text}</p>
                     </div>
@@ -361,8 +361,8 @@ export default function BridgeJobsCaseStudy() {
                         <div className="h-1" style={{ backgroundColor: p.color }} />
                         <div className="p-5">
                           <div className="flex items-center gap-3 mb-3">
-                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: p.color + '10' }}>
-                              <Icon style={{ color: p.color }} />
+                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: p.color + '10', color: p.color }}>
+                              <Icon />
                             </div>
                             <div>
                               <p className="text-sm font-semibold text-[var(--color-text-primary)]">{p.role}</p>
@@ -373,7 +373,7 @@ export default function BridgeJobsCaseStudy() {
                           <div className="space-y-2 pt-3 border-t border-[var(--color-border)]">
                             {p.needs.map((n) => (
                               <div key={n} className="flex items-start gap-2">
-                                <IconCheck className="shrink-0 mt-0.5" style={{ color: p.color }} />
+                                <span style={{ color: p.color }}><IconCheck className="shrink-0 mt-0.5" /></span>
                                 <p className="text-[11px] text-[var(--color-text-tertiary)]">{n}</p>
                               </div>
                             ))}
@@ -924,8 +924,8 @@ export default function BridgeJobsCaseStudy() {
                         <div className="p-6">
                           <div className="flex items-center gap-3 mb-3">
                             <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: item.color, backgroundColor: item.color + '12' }}>0{i + 1}</span>
-                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: item.color + '10' }}>
-                              <Icon style={{ color: item.color }} />
+                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: item.color + '10', color: item.color }}>
+                              <Icon />
                             </div>
                           </div>
                           <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">{item.t}</p>
@@ -999,8 +999,8 @@ export default function BridgeJobsCaseStudy() {
                       <div className="p-5">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: r.color, backgroundColor: r.color + '12' }}>{r.num}</span>
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: r.color + '10' }}>
-                            <Icon style={{ color: r.color }} />
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: r.color + '10', color: r.color }}>
+                            <Icon />
                           </div>
                         </div>
                         <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">{r.title}</p>
