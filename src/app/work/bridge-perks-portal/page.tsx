@@ -48,6 +48,18 @@ function IconExclamation({ className = '' }: { className?: string }) {
   return (<svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>);
 }
 
+function IconChart({ className = '' }: { className?: string }) {
+  return (<svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>);
+}
+
+function IconGlobe({ className = '' }: { className?: string }) {
+  return (<svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>);
+}
+
+function IconHeart({ className = '' }: { className?: string }) {
+  return (<svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>);
+}
+
 function IconCheck({ className = '' }: { className?: string }) {
   return (<svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>);
 }
@@ -61,14 +73,6 @@ function IconArrowRight({ className = '' }: { className?: string }) {
 }
 
 /* ─── Utility Components ─── */
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide mb-3">{children}</p>;
-}
-
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">{children}</h2>;
-}
 
 function Divider() {
   return <hr className="border-[var(--color-border)] my-16 md:my-20" />;
@@ -145,12 +149,63 @@ export default function BridgePerksPortalCaseStudy() {
           {/* ━━━ CONTEXT — Setting the Stage ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>Context</SectionLabel>
-              <SectionTitle>Bridge needed to turn a generic vendor portal into a product that reinforced VC exclusivity</SectionTitle>
-              <div className="max-w-3xl space-y-4 text-[var(--color-text-secondary)] leading-relaxed">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Context</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Setting the stage</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">Bridge needed to turn a generic vendor portal into a product that reinforced VC exclusivity</h2>
+
+              <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-10">
                 <p>Bridge is a platform connecting VC firms with their portfolio companies. They had an existing perks marketplace powered by GetProven — a third-party vendor portal offering cloud credits, dev tools, marketing spend, and HR platforms to startup founders. But it was a generic iframe with no access control, no brand alignment, and no VC-specific flows.</p>
                 <p>I owned the entire product — from discovery and access control UX strategy through design system creation, visual design, and production development. I used Claude Code as my development partner, writing detailed design specs that the AI implemented while I reviewed every output against my design intent.</p>
-                <p>The timeline was approximately 3 months, and the core constraint was clear: the perks portal had to feel like a Bridge product, not a white-labeled third-party tool. And access control — the thing that makes these perks exclusive — had to feel motivating, not frustrating.</p>
+              </div>
+
+              {/* Visual: Ecosystem gap diagram */}
+              <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-6">
+                <div className="px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                  <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">Bridge perks ecosystem &mdash; the missing layer</p>
+                </div>
+                <div className="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
+                  {[
+                    { icon: IconShield, label: 'What Bridge had', items: ['VC social graph', 'Portfolio relationships', 'GetProven vendor API', 'Basic perk listings'], color: '#0EA02E' },
+                    { icon: IconX, label: 'What was missing', items: ['Domain-gated access control', 'Brand alignment with Bridge', 'API failure resilience', 'Admin marketplace tooling'], color: '#E13535' },
+                    { icon: IconBolt, label: 'What I built', items: ['Tiered access gate system', 'Full Bridge design system', 'Cached fallback architecture', '7-section admin dashboard'], color: '#0038FF' },
+                  ].map((col) => {
+                    const Icon = col.icon;
+                    return (
+                      <div key={col.label} className="p-5">
+                        <div className="flex items-center gap-2 mb-3" style={{ color: col.color }}>
+                          <Icon className="shrink-0" />
+                          <p className="text-xs font-semibold text-[var(--color-text-primary)]">{col.label}</p>
+                        </div>
+                        <div className="space-y-1.5">
+                          {col.items.map((item) => (
+                            <p key={item} className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{item}</p>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* My role + scope */}
+              <div className="grid sm:grid-cols-3 gap-4 mb-6">
+                {[
+                  { label: 'My role', value: 'Solo Product Designer + Developer', detail: 'End-to-end ownership: research, UX strategy, design system, visual design, production code' },
+                  { label: 'AI partnership', value: 'Claude Code as Dev Partner', detail: 'Wrote detailed design specs; AI implemented while I reviewed every output against design intent' },
+                  { label: 'Timeline', value: '~3 Months', detail: 'Dec 2025 – Feb 2026. Next.js 14, TypeScript, Tailwind CSS, Supabase' },
+                ].map((s) => (
+                  <div key={s.label} className="rounded-xl border border-[var(--color-border)] p-5">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-2">{s.label}</p>
+                    <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-1">{s.value}</p>
+                    <p className="text-[11px] text-[var(--color-text-tertiary)] leading-relaxed">{s.detail}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">The constraint:</span> The perks portal had to feel like a Bridge product, not a white-labeled third-party tool. And access control — the thing that makes these perks exclusive — had to feel motivating, not frustrating. Every design decision flowed from this constraint.</p>
               </div>
             </section>
           </Reveal>
@@ -160,32 +215,62 @@ export default function BridgePerksPortalCaseStudy() {
           {/* ━━━ THE PROBLEM — What Was Broken ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>The Problem</SectionLabel>
-              <SectionTitle>Without meaningful access control, a perks marketplace is just another coupon site</SectionTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Problem</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">What was broken</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">Without meaningful access control, a perks marketplace is just another coupon site</h2>
 
-              <div className="max-w-3xl space-y-4 text-[var(--color-text-secondary)] leading-relaxed mb-10">
-                <p><strong className="text-[var(--color-text-primary)]">From the user&apos;s perspective:</strong> Founders navigated a third-party interface that didn&apos;t feel like Bridge. There was no sense of exclusivity — anyone could browse and redeem, which undermined the core value proposition of being VC-backed. When GetProven went down, founders saw blank pages with no explanation.</p>
-                <p><strong className="text-[var(--color-text-primary)]">From the business perspective:</strong> The perks program was a key retention lever for Bridge&apos;s VC network. If portfolio company founders didn&apos;t feel the perks were exclusive and valuable, VCs had less reason to stay on Bridge. The generic portal was actively undermining the network&apos;s value.</p>
-                <p><strong className="text-[var(--color-text-primary)]">From the technical perspective:</strong> The upstream GetProven API had reliability issues, and there was no caching layer. Denied users received no context about why they were restricted or how to get access. Admin visibility into the marketplace was nonexistent.</p>
+              {/* Three perspectives as numbered cards */}
+              <div className="grid md:grid-cols-3 gap-4 mb-10">
+                {[
+                  { num: '01', lens: 'User perspective', icon: IconUser, text: 'Founders navigated a third-party interface that didn\u2019t feel like Bridge. There was no sense of exclusivity \u2014 anyone could browse and redeem, which undermined the core value proposition of being VC-backed. When GetProven went down, founders saw blank pages with no explanation.', color: '#568FFF' },
+                  { num: '02', lens: 'Business perspective', icon: IconChart, text: 'The perks program was a key retention lever for Bridge\u2019s VC network. If portfolio company founders didn\u2019t feel the perks were exclusive and valuable, VCs had less reason to stay on Bridge. The generic portal was actively undermining the network\u2019s value.', color: '#0038FF' },
+                  { num: '03', lens: 'Technical perspective', icon: IconCog, text: 'The upstream GetProven API had reliability issues, and there was no caching layer. Denied users received no context about why they were restricted or how to get access. Admin visibility into the marketplace was nonexistent.', color: '#7450DA' },
+                ].map((p) => {
+                  const Icon = p.icon;
+                  return (
+                    <div key={p.num} className="rounded-xl border border-[var(--color-border)] p-5">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: p.color, backgroundColor: p.color + '12' }}>{p.num}</span>
+                        <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">{p.lens}</p>
+                      </div>
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: p.color + '10', color: p.color }}>
+                        <Icon />
+                      </div>
+                      <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{p.text}</p>
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Before / After */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="rounded-xl border border-[var(--color-border)] p-6 bg-[var(--color-bg-elevated)]">
-                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide mb-4">Before — GetProven iframe</p>
-                  <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
-                    {['No access control — anyone could browse and redeem', 'Generic third-party UI with no Bridge branding', 'Blank pages during API outages', 'No admin visibility into usage or vendor health', 'Denied users had no path to access'].map((item) => (
-                      <li key={item} className="flex items-start gap-2"><IconX className="text-[var(--color-text-tertiary)] shrink-0 mt-0.5" />{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="rounded-xl border border-[var(--color-text-primary)] p-6">
-                  <p className="text-xs font-medium text-[var(--color-text-primary)] uppercase tracking-wide mb-4">After — Bridge Perks Portal</p>
-                  <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
-                    {['Domain-gated access with 300+ whitelisted VCs', 'Full Bridge brand alignment across every screen', 'Tiered UX — granted, browse, and restricted states', 'Cached fallback with staleness indicators during outages', '7-section admin dashboard for full marketplace operations'].map((item) => (
-                      <li key={item} className="flex items-start gap-2"><IconCheck className="text-[var(--color-text-primary)] shrink-0 mt-0.5" />{item}</li>
-                    ))}
-                  </ul>
+              <div className="rounded-xl border border-[var(--color-border)] overflow-hidden">
+                <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[var(--color-border)]">
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-2 h-2 rounded-full bg-[#E13535]" />
+                      <p className="text-[10px] font-medium text-[#E13535] uppercase tracking-widest">Before &mdash; GetProven iframe</p>
+                    </div>
+                    <div className="space-y-2">
+                      {['No access control — anyone could browse and redeem', 'Generic third-party UI with no Bridge branding', 'Blank pages during API outages', 'No admin visibility into usage or vendor health', 'Denied users had no path to access'].map((item) => (
+                        <div key={item} className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]"><IconX className="text-[#E13535]/60 shrink-0 mt-0.5" />{item}</div>
+                      ))}
+                    </div>
+                    <p className="text-[10px] text-[var(--color-text-tertiary)] mt-4 pt-3 border-t border-[var(--color-border)]">Generic portal. No exclusivity. No brand. No resilience.</p>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-2 h-2 rounded-full bg-[#0EA02E]" />
+                      <p className="text-[10px] font-medium text-[#0EA02E] uppercase tracking-widest">After &mdash; Bridge Perks Portal</p>
+                    </div>
+                    <div className="space-y-2">
+                      {['Domain-gated access with 300+ whitelisted VCs', 'Full Bridge brand alignment across every screen', 'Tiered UX — granted, browse, and restricted states', 'Cached fallback with staleness indicators during outages', '7-section admin dashboard for full marketplace operations'].map((item) => (
+                        <div key={item} className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]"><IconCheck className="text-[#0EA02E] shrink-0 mt-0.5" />{item}</div>
+                      ))}
+                    </div>
+                    <p className="text-[10px] text-[var(--color-text-tertiary)] mt-4 pt-3 border-t border-[var(--color-border)]">VC-gated exclusivity. Bridge brand. Resilient architecture.</p>
+                  </div>
                 </div>
               </div>
             </section>
@@ -196,55 +281,103 @@ export default function BridgePerksPortalCaseStudy() {
           {/* ━━━ DISCOVERY — How I Understood the Problem ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>Discovery &amp; Research</SectionLabel>
-              <SectionTitle>I started with the access control problem because it was the one nobody had solved well</SectionTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Discovery</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Research &amp; synthesis</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">I started with the access control problem because it was the one nobody had solved well</h2>
 
-              <div className="max-w-3xl space-y-4 text-[var(--color-text-secondary)] leading-relaxed mb-10">
+              <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-10">
                 <p>Before designing any screens, I needed to answer four questions that would determine the shape of the entire product. Each one looked like a technical problem on the surface, but was actually a UX design challenge.</p>
+                <p>The core insight came early: access to perks IS the product. Without meaningful access control, the portal is just another vendor directory. The design challenge was making exclusivity feel motivating for both approved and denied users.</p>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 mb-10">
-                {[
-                  { icon: IconEye, q: 'How do you communicate "you\'re not approved yet" without killing engagement?', insight: 'I discovered that showing the catalog but blocking at redemption builds desire — hiding it kills both desire and trust.' },
-                  { icon: IconShield, q: 'How do you make the verification process feel trustworthy?', insight: 'An instant "approved" feels cheap. I designed an 8-second scanning animation that communicates rigor even though the check is instant.' },
-                  { icon: IconArrowRight, q: 'How should denied users discover the path to access?', insight: 'I designed an interactive VC directory where clicking a VC pre-fills the request form — reducing friction from a text input to a single tap.' },
-                  { icon: IconCog, q: 'What does an admin need to manage a VC-gated marketplace at scale?', insight: 'Admins needed 7 distinct sections — from analytics and offer management to access request review with colleague lookup.' },
-                ].map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={item.q} className="rounded-xl border border-[var(--color-border)] p-5">
-                      <div className="flex gap-3 mb-3">
-                        <IconBox><Icon className="text-[var(--color-text-primary)]" /></IconBox>
-                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{item.q}</p>
-                      </div>
-                      <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed pt-3 border-t border-[var(--color-border)]"><span className="font-medium">What I discovered:</span> {item.insight}</p>
-                    </div>
-                  );
-                })}
+              {/* Research process flow */}
+              <div className="rounded-xl border border-[var(--color-border)] p-5 mb-10">
+                <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-4">Research &rarr; synthesis process</p>
+                <div className="flex flex-wrap items-center gap-2 text-[11px]">
+                  {[
+                    'Access control UX audit',
+                    'User role mapping (3 types)',
+                    'GetProven API reliability analysis',
+                    'Design principles (4 pillars)',
+                    'Product specification document',
+                  ].map((step, i) => (
+                    <span key={step} className="flex items-center gap-2">
+                      <span className="px-2.5 py-1 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-secondary)] font-medium">{step}</span>
+                      {i < 4 && <IconArrowRight className="text-[var(--color-text-tertiary)]" />}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               {/* Personas */}
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-6">Three user types I designed for</h3>
-              <Stagger className="grid md:grid-cols-3 gap-4">
+              <div className="flex items-center gap-3 mb-6">
+                <IconUser className="text-[#0038FF]" />
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">User personas I designed for</h3>
+              </div>
+              <Stagger className="grid md:grid-cols-3 gap-4 mb-10">
                 {[
-                  { icon: IconUser, role: 'Startup Founders & Employees', ctx: 'VC-backed company team members', goal: 'Browse and redeem exclusive perks — cloud credits, dev tools, marketing spend, HR platforms.', needs: ['Quick browsing with filters', 'Clear redemption flow', 'Understand access status instantly'] },
-                  { icon: IconBuilding, role: 'VC Firm Team Members', ctx: 'Partners, associates, talent partners', goal: 'Access perks themselves and manage their portfolio companies\' whitelist.', needs: ['Self-serve access', 'Portfolio company management', 'See what perks their network offers'] },
-                  { icon: IconCog, role: 'Bridge Admins', ctx: 'Platform operations team', goal: 'Manage the full marketplace — providers, vendors, offers, access requests, analytics.', needs: ['Bulk operations', 'Vendor health monitoring', 'Access request review with context'] },
+                  { icon: IconUser, role: 'Startup Founders & Employees', ctx: 'VC-backed company team members', goal: 'Browse and redeem exclusive perks — cloud credits, dev tools, marketing spend, HR platforms.', needs: ['Quick browsing with filters', 'Clear redemption flow', 'Understand access status instantly'], color: '#568FFF' },
+                  { icon: IconBuilding, role: 'VC Firm Team Members', ctx: 'Partners, associates, talent partners', goal: 'Access perks themselves and manage their portfolio companies\u2019 whitelist.', needs: ['Self-serve access', 'Portfolio company management', 'See what perks their network offers'], color: '#0038FF' },
+                  { icon: IconCog, role: 'Bridge Admins', ctx: 'Platform operations team', goal: 'Manage the full marketplace — providers, vendors, offers, access requests, analytics.', needs: ['Bulk operations', 'Vendor health monitoring', 'Access request review with context'], color: '#7450DA' },
                 ].map((p) => {
                   const Icon = p.icon;
                   return (
                     <Item key={p.role}>
-                      <div className="rounded-xl border border-[var(--color-border)] p-5 h-full">
-                        <IconBox><Icon className="text-[var(--color-text-primary)]" /></IconBox>
-                        <p className="text-sm font-semibold text-[var(--color-text-primary)] mt-3 mb-0.5">{p.role}</p>
-                        <p className="text-xs text-[var(--color-text-tertiary)] mb-3">{p.ctx}</p>
-                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-3">{p.goal}</p>
-                        <ul className="space-y-1.5">{p.needs.map((n) => (<li key={n} className="text-xs text-[var(--color-text-tertiary)] flex gap-1.5"><IconArrowRight className="shrink-0 mt-0.5" />{n}</li>))}</ul>
+                      <div className="rounded-xl border border-[var(--color-border)] overflow-hidden h-full">
+                        <div className="p-5">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: p.color + '10', color: p.color }}>
+                              <Icon />
+                            </div>
+                            <div>
+                              <p className="text-sm font-semibold text-[var(--color-text-primary)]">{p.role}</p>
+                              <p className="text-[10px] text-[var(--color-text-tertiary)]">{p.ctx}</p>
+                            </div>
+                          </div>
+                          <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed mb-4">{p.goal}</p>
+                          <div className="space-y-2 pt-3 border-t border-[var(--color-border)]">
+                            {p.needs.map((n) => (
+                              <div key={n} className="flex items-start gap-2">
+                                <span style={{ color: p.color }}><IconCheck className="shrink-0 mt-0.5" /></span>
+                                <p className="text-[11px] text-[var(--color-text-tertiary)]">{n}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </Item>
                   );
                 })}
               </Stagger>
+
+              {/* Design Principles */}
+              <div className="flex items-center gap-3 mb-6">
+                <IconShield className="text-[#0038FF]" />
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">Design principles I established</h3>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  { icon: IconLock, t: 'Exclusivity as engagement', d: 'Access control should feel motivating, not punishing. Showing restricted content builds desire; hiding it kills both desire and trust.' },
+                  { icon: IconShield, t: 'Trust through designed delay', d: 'Instant verification feels cheap for a gated product. Intentional animation communicates rigor and reinforces the value of what\u2019s behind the gate.' },
+                  { icon: IconGlobe, t: 'Bridge-native experience', d: 'Every screen must feel unmistakably like a Bridge product. No generic white-label aesthetics. Full design token alignment.' },
+                  { icon: IconBolt, t: 'Graceful degradation', d: 'When the upstream API fails, users see cached data with clear staleness indicators \u2014 never a blank page or error screen.' },
+                ].map((p) => {
+                  const Icon = p.icon;
+                  return (
+                    <div key={p.t} className="rounded-xl border border-[var(--color-border)] p-5">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-8 h-8 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] flex items-center justify-center">
+                          <Icon className="text-[var(--color-text-primary)]" />
+                        </div>
+                        <p className="text-sm font-semibold text-[var(--color-text-primary)]">{p.t}</p>
+                      </div>
+                      <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{p.d}</p>
+                    </div>
+                  );
+                })}
+              </div>
             </section>
           </Reveal>
 
@@ -253,118 +386,308 @@ export default function BridgePerksPortalCaseStudy() {
           {/* ━━━ DESIGN PROCESS — Core Decisions ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>Design Process</SectionLabel>
-              <SectionTitle>Access control was the most design-intensive area — I treated it as a UX problem, not a technical gate</SectionTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Process</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Architecture decisions</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">Four design decisions that shaped the product</h2>
 
-              <div className="max-w-3xl text-[var(--color-text-secondary)] leading-relaxed mb-10">
-                <p>Access control is typically treated as a binary gate — you&apos;re in or you&apos;re out. I designed a tiered system with distinct UX for each state, turning the restriction itself into an engagement mechanism. The core insight: showing restricted content builds desire; hiding it kills it.</p>
+              <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed mb-14">
+                <p>Access control is typically treated as a binary gate — you&apos;re in or you&apos;re out. I designed a tiered system with distinct UX for each state, turning the restriction itself into an engagement mechanism. Each decision below required choosing the harder path because the obvious solution undermined the product&apos;s core value.</p>
               </div>
             </section>
           </Reveal>
 
-              {/* The Access Gate */}
+          {/* ── Decision 1: The 8-Second Access Gate ── */}
           <Reveal>
             <section>
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">The 8-second access gate I designed</h3>
-              <div className="rounded-xl border border-[var(--color-border)] p-6 mb-8">
-                <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4">
-                  I designed a scanning metaphor: VC logos cycle through a conveyor belt while the user&apos;s email domain is verified against 300+ whitelisted domains. Pulsating rings, a progress bar, and sequential status messages create a sense of intentional verification — the technical check is instant, but the 8-second animation communicates &quot;we&apos;re checking something real.&quot;
-                </p>
-                <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4">
-                  This was a deliberate design choice. An instant &quot;approved&quot; feels cheap for a gated product. The animation builds trust and reinforces exclusivity. It respects <code className="text-xs bg-[var(--color-bg)] border border-[var(--color-border)] px-1 rounded">prefers-reduced-motion</code> and skips entirely on return visits.
-                </p>
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--color-border)]">
+              <div className="mb-20">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">01</span>
+                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Trust through delay</p>
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-4">The 8-second access gate — a scanning metaphor that builds trust</h3>
+                <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-8">
+                  <p>The obvious approach: check the user&apos;s email domain against the whitelist and show an instant result. But instant &quot;approved&quot; feels cheap for a gated product. I designed an 8-second scanning metaphor that communicates &quot;we&apos;re checking something real.&quot;</p>
+                  <p>VC logos cycle through a conveyor belt while the user&apos;s email domain is verified against 300+ whitelisted domains. Pulsating rings, a progress bar, and sequential status messages create a sense of intentional verification. The technical check is instant, but the animation communicates rigor and reinforces exclusivity.</p>
+                </div>
+
+                {/* Visual: The three result states */}
+                <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-6">
+                  <div className="px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">Access gate &mdash; three result states</p>
+                  </div>
+                  <div className="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
+                    {[
+                      { icon: IconShield, state: 'Granted', visual: 'Green check', trigger: 'Email matches whitelisted VC/portfolio domain', desc: 'Full access to all perk details and redemption links. VC affiliation shown as trust badge.', color: '#0EA02E' },
+                      { icon: IconEye, state: 'Browse Mode', visual: 'Eye icon', trigger: 'Work email not in whitelist', desc: 'Can browse all perk cards freely. Blocked at redemption with access request flow.', color: '#568FFF' },
+                      { icon: IconGlobe, state: 'Explore Mode', visual: 'Compass icon', trigger: 'Personal email (Gmail, Yahoo, etc.)', desc: 'Same browse access. Prompted to re-enter work email for domain verification.', color: '#7450DA' },
+                    ].map((s) => (
+                      <div key={s.state} className="p-5">
+                        <div className="flex items-center gap-2 mb-3" style={{ color: s.color }}>
+                          <s.icon className="shrink-0" />
+                          <p className="text-xs font-semibold text-[var(--color-text-primary)]">{s.state}</p>
+                        </div>
+                        <p className="text-[10px] text-[var(--color-text-tertiary)] mb-2">{s.visual} &middot; {s.trigger}</p>
+                        <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{s.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Animation components */}
+                <div className="flex flex-wrap gap-2 mb-6">
                   {['Conveyor belt logo animation', 'Pulsating ring effect', 'Sequential status messages', 'Progress bar', 'Reduced motion fallback', 'Skip on return visits'].map((tag) => (
                     <span key={tag} className="px-2.5 py-1 text-xs font-medium text-[var(--color-text-tertiary)] bg-[var(--color-bg)] border border-[var(--color-border)] rounded-md">{tag}</span>
                   ))}
                 </div>
-              </div>
 
+                <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                  <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Why this matters:</span> This applies <span className="text-[var(--color-text-secondary)] font-medium">the Aesthetic-Usability Effect</span> — users perceive a more carefully designed experience as more trustworthy. The 8-second delay is &quot;security theater&quot; in the best sense: it makes the real verification (which is instant) feel rigorous. It respects <code className="text-[10px] font-mono bg-[var(--color-bg-elevated)] px-1 rounded">prefers-reduced-motion</code> and skips entirely on return visits, applying <span className="text-[var(--color-text-secondary)] font-medium">Jakob&apos;s Law</span> — repeat users get the fast path they expect.</p>
+                </div>
+              </div>
             </section>
           </Reveal>
 
-              {/* Three Access States */}
+          {/* ── Decision 2: Browse Mode for Denied Users ── */}
           <Reveal>
             <section>
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">Three result states I designed</h3>
-              <div className="space-y-4 mb-10">
-                {[
-                  { icon: IconShield, state: 'Granted', visual: 'Green check, "Access Granted"', exp: 'Full access to all perk details, redemption links, and exclusive offers. The user\'s VC affiliation is shown as a trust badge throughout the session.', trigger: 'Email domain matches one of 300+ whitelisted VC/portfolio domains' },
-                  { icon: IconEye, state: 'Denied — Work Email (Browse Mode)', visual: 'Eye icon, "Browse Perks"', exp: 'I made the deliberate choice to let denied users browse ALL perk cards freely — but block at redemption. Detail pages show blurred content with a modal overlay explaining how to request access. This was counterintuitive to stakeholders, but the data is clear: you can\'t want what you can\'t see. Showing the catalog builds desire; hiding it kills both desire and trust.', trigger: 'Work email recognized but domain not in whitelist' },
-                  { icon: IconLock, state: 'Denied — Personal Email', visual: 'Compass icon, "Explore Perks"', exp: 'Same browse access as work-email denied users. The access request flow prompts them to re-enter a work email, since personal domains can\'t be verified against VC portfolios.', trigger: 'Gmail, Yahoo, Outlook, or other personal email provider' },
-                ].map((s) => {
-                  const Icon = s.icon;
-                  return (
-                    <div key={s.state} className="rounded-xl border border-[var(--color-border)] p-6">
-                      <div className="flex items-center gap-3 mb-3">
-                        <IconBox><Icon className="text-[var(--color-text-primary)]" /></IconBox>
-                        <div><p className="text-sm font-semibold text-[var(--color-text-primary)]">{s.state}</p><p className="text-xs text-[var(--color-text-tertiary)]">{s.visual}</p></div>
+              <div className="mb-20">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">02</span>
+                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Engagement architecture</p>
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-4">Browse mode for denied users — show the catalog, block at redemption</h3>
+                <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-8">
+                  <p>The standard approach: denied users see a locked door. &quot;You don&apos;t have access. Request it.&quot; This kills engagement instantly because users can&apos;t evaluate whether access is worth requesting.</p>
+                  <p>I made the deliberate choice to let denied users browse ALL perk cards freely — but block at redemption. Detail pages show blurred content with a modal overlay explaining how to request access. This was counterintuitive to stakeholders, but the logic is clear: you can&apos;t want what you can&apos;t see. Showing the catalog builds desire; hiding it kills both desire and trust.</p>
+                </div>
+
+                {/* Visual: Browse vs Restricted comparison */}
+                <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-6">
+                  <div className="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
+                    <div className="p-5">
+                      <p className="text-[10px] font-medium text-[#0EA02E] uppercase tracking-widest mb-3">What denied users CAN do</p>
+                      <div className="space-y-2">
+                        {['Browse all 400+ perk cards freely', 'Use filters and search', 'Switch between Grid and By Vendor views', 'See perk titles, vendors, and categories', 'Discover the full breadth of the marketplace'].map((item) => (
+                          <div key={item} className="flex items-start gap-2 text-[11px] text-[var(--color-text-secondary)]"><IconCheck className="text-[#0EA02E] shrink-0 mt-0.5" />{item}</div>
+                        ))}
                       </div>
-                      <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-2">{s.exp}</p>
-                      <p className="text-xs text-[var(--color-text-tertiary)] pt-3 border-t border-[var(--color-border)]"><span className="font-medium">Trigger:</span> {s.trigger}</p>
                     </div>
-                  );
-                })}
-              </div>
+                    <div className="p-5">
+                      <p className="text-[10px] font-medium text-[#E13535] uppercase tracking-widest mb-3">What denied users CANNOT do</p>
+                      <div className="space-y-2">
+                        {['See perk detail content (blurred)', 'Access redemption links', 'View deal values and discount specifics', 'Redeem any offer'].map((item) => (
+                          <div key={item} className="flex items-start gap-2 text-[11px] text-[var(--color-text-secondary)]"><IconX className="text-[#E13535]/60 shrink-0 mt-0.5" />{item}</div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
+                {/* The restricted modal spec */}
+                <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                  <div className="rounded-xl border border-[var(--color-border)] p-5">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-3">Restricted modal — design system component</p>
+                    <div className="space-y-2">
+                      {[
+                        { what: 'Mobile', how: 'Full-screen bottom sheet' },
+                        { what: 'Desktop', how: 'Centered card with backdrop blur' },
+                        { what: 'Interaction', how: 'Focus-trapped, keyboard-dismissible, exit animations' },
+                        { what: 'Content', how: 'Explains restriction + path to access in 3 steps' },
+                      ].map((c) => (
+                        <div key={c.what} className="flex items-start gap-2">
+                          <IconCog className="text-[var(--color-text-tertiary)] mt-0.5 shrink-0" />
+                          <div>
+                            <p className="text-[11px] font-medium text-[var(--color-text-primary)]">{c.what}</p>
+                            <p className="text-[10px] text-[var(--color-text-tertiary)]">{c.how}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="rounded-xl border border-[var(--color-border)] p-5">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-3">The engagement funnel</p>
+                    <div className="space-y-2">
+                      {[
+                        'User browses perk cards freely',
+                        'Clicks into a perk they want',
+                        'Sees blurred detail + restricted modal',
+                        'Modal explains: "Request access from your VC"',
+                        'One tap to start access request flow',
+                      ].map((step, i) => (
+                        <div key={step} className="flex gap-2 text-[11px]">
+                          <span className="w-5 h-5 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] flex items-center justify-center text-[9px] font-medium text-[var(--color-text-tertiary)] shrink-0">{i + 1}</span>
+                          <span className="text-[var(--color-text-secondary)] leading-relaxed">{step}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                  <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Why this matters:</span> This applies <span className="text-[var(--color-text-secondary)] font-medium">the Peak-End Rule</span> — by letting users explore freely before hitting the restriction, the &quot;peak&quot; of their experience is discovering valuable perks, not being told &quot;no.&quot; The restriction at redemption (not at browse) creates <span className="text-[var(--color-text-secondary)] font-medium">the IKEA Effect</span> in reverse — users who invested time browsing are more motivated to request access than users who were blocked at the door.</p>
+                </div>
+              </div>
             </section>
           </Reveal>
 
-              {/* Access Request Flow */}
+          {/* ── Decision 3: Interactive VC Directory ── */}
           <Reveal>
             <section>
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">The access request flow I designed to minimize friction</h3>
-              <div className="rounded-xl border border-[var(--color-border)] p-6 mb-12">
-                <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4">The biggest friction point in access request flows is the open-ended &quot;who&apos;s your VC?&quot; text input. I replaced it with an interactive directory — a searchable grid of 300+ approved VCs with logos. Clicking a VC pre-fills the form, reducing the entire question to a single tap.</p>
-                <ol className="space-y-2.5">
-                  {[
-                    'User sees restricted modal on perk detail page',
-                    'Clicks "Request Access" — opens multi-step flow',
-                    'Discovered investors shown as green chips (auto-detected from Bridge API)',
-                    'Interactive VC directory: searchable grid of 300+ approved VCs with logos',
-                    'Clicking a VC pre-fills the request form — single tap, not a text input',
-                    'Form collects VC contact info for admin verification',
-                    'Admin reviews with expandable details and colleague lookup',
-                  ].map((step, i) => (
-                    <li key={step} className="flex gap-3 text-sm">
-                      <span className="w-6 h-6 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] flex items-center justify-center text-xs font-medium text-[var(--color-text-tertiary)] shrink-0">{i + 1}</span>
-                      <span className="text-[var(--color-text-secondary)] leading-relaxed">{step}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
+              <div className="mb-20">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">03</span>
+                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Friction reduction</p>
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-4">Interactive VC directory — replacing text input with single-tap selection</h3>
+                <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-8">
+                  <p>The biggest friction point in access request flows is the open-ended &quot;who&apos;s your VC?&quot; text input. Users misspell fund names, use abbreviations, or don&apos;t know which entity to list. Every failed submission is a user lost.</p>
+                  <p>I replaced the text input with an interactive directory — a searchable grid of 300+ approved VCs with logos. Clicking a VC pre-fills the request form, reducing the entire question to a single tap. Discovered investors are shown as green chips, auto-detected from Bridge&apos;s API.</p>
+                </div>
 
+                {/* Visual: Access request flow */}
+                <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-6">
+                  <div className="px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">Access request flow &mdash; 7 steps</p>
+                  </div>
+                  <div className="p-5">
+                    <ol className="space-y-2.5">
+                      {[
+                        'User sees restricted modal on perk detail page',
+                        'Clicks "Request Access" — opens multi-step flow',
+                        'Discovered investors shown as green chips (auto-detected from Bridge API)',
+                        'Interactive VC directory: searchable grid of 300+ approved VCs with logos',
+                        'Clicking a VC pre-fills the request form — single tap, not a text input',
+                        'Form collects VC contact info for admin verification',
+                        'Admin reviews with expandable details and colleague lookup',
+                      ].map((step, i) => (
+                        <li key={step} className="flex gap-3 text-sm">
+                          <span className="w-6 h-6 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] flex items-center justify-center text-xs font-medium text-[var(--color-text-tertiary)] shrink-0">{i + 1}</span>
+                          <span className="text-[var(--color-text-secondary)] leading-relaxed">{step}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </div>
+
+                <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                  <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Why this matters:</span> This applies <span className="text-[var(--color-text-secondary)] font-medium">Hick&apos;s Law</span> — by presenting a visual directory instead of an open text field, I transformed an unbounded decision (type any name) into a bounded selection (pick from a grid). The auto-detected green chips apply <span className="text-[var(--color-text-secondary)] font-medium">Recognition over Recall</span> — users don&apos;t have to remember their VC; the system surfaces it. This also follows <span className="text-[var(--color-text-secondary)] font-medium">Fitts&apos;s Law</span> — a large, clickable VC card is faster to hit than typing a name in a small input field.</p>
+                </div>
+              </div>
             </section>
           </Reveal>
 
-              {/* Design System */}
+          {/* ── Decision 4: Designing for API Failure ── */}
           <Reveal>
             <section>
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">The design system I built for brand alignment</h3>
-              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-6 max-w-3xl">I created a complete design token system used across 60+ files — ensuring every screen felt unmistakably like a Bridge product. Tokens were codified as direct hex values, not abstraction layers that could drift.</p>
-              <div className="rounded-xl border border-[var(--color-border)] p-6">
-                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide mb-4">Color palette — 20+ named tokens</p>
-                <div className="flex flex-wrap gap-3 mb-6">
+              <div className="mb-12">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">04</span>
+                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Resilience architecture</p>
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-4">Designing for API failure — cached fallback with staleness indicators</h3>
+                <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-8">
+                  <p>The upstream GetProven API had reliability issues — and previously, outages meant founders saw blank pages. The naive solution: show an error message. The better solution: design a fallback experience that prioritizes user continuity over data freshness.</p>
+                  <p>I designed a cached data layer using Supabase tracker tables that stores the last known good state. When the API is down, users see slightly stale perks with clear visual indicators — never a blank page. The design challenge wasn&apos;t technical caching; it was communicating staleness honestly without undermining trust.</p>
+                </div>
+
+                {/* Visual: Freshness states */}
+                <div className="grid sm:grid-cols-3 gap-4 mb-6">
                   {[
-                    { n: 'Royal Blue', h: '#0038FF', r: 'Primary' }, { n: 'Charcoal', h: '#0D1531', r: 'Text' }, { n: 'Slate', h: '#F9F9FA', r: 'Background' }, { n: 'Mist', h: '#E8EAF0', r: 'Borders' },
-                    { n: 'Kelly', h: '#0EA02E', r: 'Success' }, { n: 'Honey', h: '#E19500', r: 'Warning' }, { n: 'Ruby', h: '#E13535', r: 'Error' },
-                  ].map((c) => (
-                    <div key={c.n} className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-md border border-[var(--color-border)]" style={{ backgroundColor: c.h }} />
-                      <div><p className="text-xs font-medium text-[var(--color-text-primary)]">{c.n}</p><p className="text-[10px] text-[var(--color-text-tertiary)]">{c.h} · {c.r}</p></div>
+                    { label: 'Live', time: 'API responding', color: '#0D7C47', desc: 'Fresh data from GetProven. No indicators needed. This is the normal state.' },
+                    { label: 'Cached', time: 'API down, data < 24h', color: '#B08A00', desc: 'Amber "Showing cached data" banner. Users can browse and plan. Data is slightly stale but functional.' },
+                    { label: 'Stale', time: 'API down, data > 24h', color: '#D93025', desc: 'Enhanced warning with timestamp. Users know the data may be outdated. Admin gets sync failure alerts.' },
+                  ].map((s) => (
+                    <div key={s.label} className="rounded-xl border border-[var(--color-border)] p-5">
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: s.color }} />
+                        <p className="text-[10px] font-medium uppercase tracking-widest" style={{ color: s.color }}>{s.label}</p>
+                      </div>
+                      <p className="text-lg font-bold mb-1" style={{ color: s.color }}>{s.time}</p>
+                      <p className="text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-wide mb-3">Status</p>
+                      <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed pt-3 border-t border-[var(--color-border)]">{s.desc}</p>
                     </div>
                   ))}
                 </div>
-                <div className="grid sm:grid-cols-2 gap-4 pt-4 border-t border-[var(--color-border)]">
-                  {[
-                    { n: 'Button', d: '5 variants (primary/secondary/outline/ghost/destructive), pill-shaped, 3 sizes' },
-                    { n: 'Badge', d: '6 color variants, single size, 4px radius, always-bordered, optional icon' },
-                    { n: 'Card', d: 'Unified hover shadow token, subtle lift on interaction' },
-                    { n: 'Input', d: 'Pill-shaped, token-based borders, focus ring in Royal Blue' },
-                  ].map((c) => (
-                    <div key={c.n}><p className="text-xs font-medium text-[var(--color-text-primary)] mb-0.5">{c.n}</p><p className="text-xs text-[var(--color-text-secondary)]">{c.d}</p></div>
-                  ))}
+
+                {/* The full resilience chain */}
+                <div className="rounded-xl border border-[var(--color-border)] p-5 mb-6">
+                  <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-4">The resilience chain</p>
+                  <div className="flex flex-wrap items-center gap-2 text-[11px]">
+                    {[
+                      'GetProven API syncs to Supabase',
+                      'Tracker tables store last good state',
+                      'API health check on each request',
+                      'Fallback to cached data if down',
+                      'Staleness banner shown to users',
+                    ].map((step, i) => (
+                      <span key={step} className="flex items-center gap-2">
+                        <span className="px-2.5 py-1 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-secondary)] font-medium">{step}</span>
+                        {i < 4 && <IconArrowRight className="text-[var(--color-text-tertiary)]" />}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+
+                <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                  <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Why this matters:</span> This applies <span className="text-[var(--color-text-secondary)] font-medium">the Visibility of System Status</span> (Nielsen&apos;s #1 heuristic) — but elevated from error messages to honest communication. The amber/red color system follows <span className="text-[var(--color-text-secondary)] font-medium">Pre-attentive Processing</span> — users process color faster than reading text, so staleness registers visually before the banner is even read. Slightly stale perks are infinitely better than a blank page, applying <span className="text-[var(--color-text-secondary)] font-medium">Postel&apos;s Law</span> to UX — be liberal in what you accept (stale data), conservative in what you show (clear indicators).</p>
+                </div>
+              </div>
+            </section>
+          </Reveal>
+
+          {/* Design System */}
+          <Reveal>
+            <section>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">System</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Design foundation</p>
+              </div>
+              <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-4">The design system I built for brand alignment</h3>
+              <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-8">
+                <p>I created a complete design token system used across 60+ files — ensuring every screen felt unmistakably like a Bridge product. Tokens were codified as direct hex values, not abstraction layers that could drift.</p>
+              </div>
+
+              {/* Color palette */}
+              <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-4">
+                <div className="px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                  <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">Color palette &mdash; 20+ named tokens</p>
+                </div>
+                <div className="p-5">
+                  <div className="grid grid-cols-4 sm:grid-cols-7 gap-3">
+                    {[
+                      { n: 'Royal Blue', h: '#0038FF', r: 'Primary' }, { n: 'Charcoal', h: '#0D1531', r: 'Text' }, { n: 'Slate', h: '#F9F9FA', r: 'Background' }, { n: 'Mist', h: '#E8EAF0', r: 'Borders' },
+                      { n: 'Kelly', h: '#0EA02E', r: 'Success' }, { n: 'Honey', h: '#E19500', r: 'Warning' }, { n: 'Ruby', h: '#E13535', r: 'Error' },
+                    ].map((c) => (
+                      <div key={c.n} className="text-center">
+                        <div className="w-full aspect-square rounded-lg border border-[var(--color-border)] mb-2" style={{ backgroundColor: c.h }} />
+                        <p className="text-[10px] font-medium text-[var(--color-text-primary)]">{c.n}</p>
+                        <p className="text-[9px] text-[var(--color-text-tertiary)] font-mono">{c.h}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* System specs grid */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                {[
+                  { label: 'Typography', value: 'Mulish', detail: 'Weights 400\u2013700, consistent sizing hierarchy' },
+                  { label: 'Components', value: 'Button + Badge + Card + Input', detail: '5 button variants, 6 badge colors, pill-shaped inputs' },
+                  { label: 'Animation', value: '6 Tokens', detail: 'fade-in, fade-in-up, scale-in, scale-out, fade-out, shimmer' },
+                  { label: 'Radii', value: 'Contextual', detail: 'xl for cards, full for buttons/search, 4px for badges' },
+                ].map((s) => (
+                  <div key={s.label} className="rounded-xl border border-[var(--color-border)] p-4">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-1">{s.label}</p>
+                    <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-1">{s.value}</p>
+                    <p className="text-[10px] text-[var(--color-text-tertiary)] leading-relaxed">{s.detail}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Why this matters for AI development:</span> The design system wasn&apos;t just documentation — it was the <em>instruction set</em> for Claude Code. Every CSS custom property, animation token, and component spec became a constraint that kept AI-generated code on-brand. Without this system, the output would have drifted into visual inconsistency.</p>
               </div>
             </section>
           </Reveal>
@@ -374,67 +697,72 @@ export default function BridgePerksPortalCaseStudy() {
           {/* ━━━ WHAT I SHIPPED ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>What I Shipped</SectionLabel>
-              <SectionTitle>Every page designed with intent — from landing to admin dashboard</SectionTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Shipped</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Production features</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">Every page designed with intent — from landing to admin dashboard</h2>
 
-              <div className="max-w-3xl text-[var(--color-text-secondary)] leading-relaxed mb-10">
+              <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed mb-10">
                 <p>Everything below is live at perks.brdg.app and actively used by Bridge&apos;s VC network. I owned the design end-to-end and partnered with Claude Code for implementation, writing detailed specs and reviewing every output against my design intent.</p>
               </div>
 
-              <Stagger className="space-y-4 mb-12">
+              <Stagger className="grid md:grid-cols-2 gap-4 mb-12">
                 {[
-                  { t: 'Landing Page', desc: 'Scroll-triggered animations with staggered fade-in-up, count-up stats, infinite logo marquee. Three-step "How It Works" with animated connector lines. Gradient CTA section transitioning from Royal Blue to Accent Blue.', why: 'The page needs to do two things: communicate exclusivity and show breadth. The logo marquee signals "real companies use this." The count-up stats make the scale tangible. The gradient CTA creates urgency without being aggressive.' },
-                  { t: 'Perks Listing', desc: 'Dual view modes: Grid (card layout) and By Vendor (accordion groups with smooth CSS grid height animation). Combined filter dropdown with 4 cascading categories. Three-tier default sort: Featured first, grouped second, ungrouped last. "Recently Added" section with time-based badging.', why: 'The dual view maps to two real browsing behaviors: "I know what I need" (grid + filters) vs. "I want to see what Stripe/AWS/etc. offers" (vendor view). Three-tier sort puts the best content at top without requiring user action.' },
-                  { t: 'Perk Detail Page', desc: 'Two-column layout: offer context + redemption sidebar. Value pills showing deal value, discount, and estimated savings. Related perks grid. Glassmorphic hero section with backdrop blur. For denied users: blurred content + modal.', why: 'Value pills are the key conversion element — they translate abstract "perks" into concrete dollar amounts. For denied users, the blurred content + modal creates FOMO without frustration — you can see what you\'re missing.' },
-                  { t: 'Admin Dashboard — 7 Sections', desc: 'Analytics with redemption metrics. Offer and vendor tracking tables with search, filters, sync-to-DB. CSV bulk upload with drag-drop, client-side validation, preview, and confirmation. Access request review with expandable rows and colleague lookup. Custom vendor group management. Provider config and audit log.', why: 'Designed for operators, not power users. Every table has search and filters because the data set is large. CSV upload has validation AND preview because a bad bulk import could break the marketplace. Access review surfaces colleague info for faster decisions.' },
-                ].map((f) => (
+                  { t: 'Landing Page', desc: 'Scroll-triggered animations with staggered fade-in-up, count-up stats, infinite logo marquee. Three-step "How It Works" with animated connector lines. Gradient CTA section.', why: 'The page communicates exclusivity and breadth. Logo marquee signals "real companies use this." Count-up stats make the scale tangible. Gradient CTA creates urgency without aggression.', color: '#568FFF' },
+                  { t: 'Perks Listing', desc: 'Dual view modes: Grid (card layout) and By Vendor (accordion groups with smooth CSS grid height animation). Combined filter dropdown with 4 cascading categories. Three-tier default sort.', why: 'Dual view maps to two browsing behaviors: "I know what I need" (grid + filters) vs. "I want to see what Stripe offers" (vendor view). Three-tier sort surfaces best content without user action.', color: '#0038FF' },
+                  { t: 'Perk Detail Page', desc: 'Two-column layout: offer context + redemption sidebar. Value pills showing deal value, discount, and estimated savings. Related perks grid. Glassmorphic hero with backdrop blur.', why: 'Value pills translate abstract "perks" into concrete dollar amounts — the key conversion element. For denied users, blurred content + modal creates FOMO without frustration.', color: '#7450DA' },
+                  { t: 'Admin Dashboard — 7 Sections', desc: 'Analytics with redemption metrics. Offer and vendor tracking tables with search, filters, sync-to-DB. CSV bulk upload with drag-drop, validation, preview, confirmation. Access request review with colleague lookup. Vendor group management. Provider config and audit log.', why: 'Designed for operators. Every table has search and filters because data sets are large. CSV upload has validation AND preview because bad imports break the marketplace. Access review surfaces colleague info for faster decisions.', color: '#0D7C47' },
+                ].map((f, i) => (
                   <Item key={f.t}>
-                    <div className="rounded-xl border border-[var(--color-border)] p-6">
-                      <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-3">{f.t}</p>
-                      <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-3">{f.desc}</p>
-                      <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed pt-3 border-t border-[var(--color-border)]"><span className="font-medium">Design rationale:</span> {f.why}</p>
+                    <div className="rounded-xl border border-[var(--color-border)] overflow-hidden h-full">
+                      <div className="p-6">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: f.color, backgroundColor: f.color + '12' }}>0{i + 1}</span>
+                          <p className="text-sm font-semibold text-[var(--color-text-primary)]">{f.t}</p>
+                        </div>
+                        <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed mb-3">{f.desc}</p>
+                        <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-3 py-2">
+                          <p className="text-[10px] text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Design rationale:</span> {f.why}</p>
+                        </div>
+                      </div>
                     </div>
                   </Item>
                 ))}
               </Stagger>
 
-              {/* Designing for Failure */}
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">How I designed for API failure</h3>
-              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-6 max-w-3xl">The upstream vendor API had outages that previously showed founders blank pages. I designed a fallback experience that prioritizes user continuity over data freshness — because slightly stale perks are infinitely better than a broken page.</p>
-              <div className="grid md:grid-cols-3 gap-4 mb-10">
-                {[
-                  { icon: IconLayers, t: 'Cached Data Layer', d: 'Supabase tracker tables store the last known good state. When the API is down, users see cached data — slightly stale but functional.' },
-                  { icon: IconExclamation, t: 'Staleness Indicator', d: 'An amber "Showing cached data" banner appears when serving fallback. Users know it\'s not live but can still browse and plan.' },
-                  { icon: IconCog, t: 'Sync Architecture', d: 'I designed what to cache, when to refresh, and how to reconcile when the API returns. The sync is invisible to users.' },
-                ].map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={item.t} className="rounded-xl border border-[var(--color-border)] p-5">
-                      <IconBox><Icon className="text-[var(--color-text-primary)]" /></IconBox>
-                      <p className="text-sm font-semibold text-[var(--color-text-primary)] mt-3 mb-1">{item.t}</p>
-                      <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{item.d}</p>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Accessibility */}
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">Accessibility (WCAG 2.2 AA)</h3>
-              <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
-                {[
-                  'Focus traps in all modals (restricted modal, CSV upload, confirmation dialogs)',
-                  'aria-live regions for status updates during access gate animation',
-                  'Full keyboard navigation — every interactive element reachable via Tab',
-                  'All animations respect prefers-reduced-motion',
-                  'Page-specific document titles and aria-current on navigation',
-                  'Proper table semantics for admin data tables',
-                  'Minimum 48px touch targets on all interactive elements',
-                  'focus-visible rings (2px Royal Blue, 2px offset) on all controls',
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)] py-1">
-                    <IconCheck className="text-green-600 shrink-0 mt-0.5" />{item}
+              {/* Accessibility + Micro-interactions */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="rounded-xl border border-[#0EA02E]/20 p-5 bg-[#0EA02E]/[0.02]">
+                  <div className="flex items-center gap-2 mb-4">
+                    <IconShield className="text-[#0EA02E]" />
+                    <p className="text-[10px] font-medium text-[#0EA02E] uppercase tracking-widest">Accessibility (WCAG 2.2 AA)</p>
                   </div>
-                ))}
+                  <div className="space-y-2">
+                    {['Focus traps in all modals (restricted modal, CSV upload, confirmation dialogs)', 'aria-live regions for access gate status updates', 'Full keyboard navigation — every element reachable via Tab', 'All animations respect prefers-reduced-motion', 'Page-specific document titles and aria-current on navigation', 'Minimum 48px touch targets, focus-visible rings on all controls'].map((a) => (
+                      <div key={a} className="flex gap-2 text-[11px] text-[var(--color-text-secondary)]"><IconCheck className="text-[#0EA02E] shrink-0 mt-0.5" />{a}</div>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-xl border border-[#0038FF]/20 p-5 bg-[#0038FF]/[0.02]">
+                  <div className="flex items-center gap-2 mb-4">
+                    <IconSparkle className="text-[#0038FF]" />
+                    <p className="text-[10px] font-medium text-[#0038FF] uppercase tracking-widest">Micro-interactions I specified</p>
+                  </div>
+                  <div className="space-y-2">
+                    {[
+                      { label: 'Access gate', value: '8-second sequence with 5 animation layers' },
+                      { label: 'Card hover', value: 'translateY(-2px) + shadow elevation (200ms)' },
+                      { label: 'Accordion', value: 'CSS grid height animation for smooth expand/collapse' },
+                      { label: 'Logo marquee', value: 'Infinite scroll, pauses on hover' },
+                    ].map((a) => (
+                      <div key={a.label} className="flex items-start gap-2">
+                        <IconBolt className="text-[#0038FF] shrink-0 mt-0.5" />
+                        <p className="text-[11px] text-[var(--color-text-secondary)]"><span className="font-medium text-[var(--color-text-primary)]">{a.label}:</span> {a.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </section>
           </Reveal>
@@ -444,41 +772,94 @@ export default function BridgePerksPortalCaseStudy() {
           {/* ━━━ OUTCOME & IMPACT ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>Outcome &amp; Impact</SectionLabel>
-              <SectionTitle>Shipped to production, serving Bridge&apos;s entire VC network</SectionTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Impact</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Outcome &amp; results</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">Shipped to production, serving Bridge&apos;s entire VC network</h2>
 
-              <ul className="space-y-2 text-sm text-[var(--color-text-secondary)] max-w-3xl mb-12">
-                {[
-                  'Live at perks.brdg.app — serving Bridge\'s entire VC network',
-                  '400+ perks from 100+ vendors available to whitelisted users',
-                  'Complete access control system processing 300+ VC domains',
-                  'Admin tooling across 7 sections for full marketplace operations',
-                  'Resilient architecture handling upstream API outages gracefully',
-                  'WCAG 2.2 AA accessible across all user flows',
-                ].map((item) => (
-                  <li key={item} className="flex gap-2"><IconCheck className="text-green-600 shrink-0 mt-0.5" />{item}</li>
-                ))}
-              </ul>
+              {/* Stats row */}
+              <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-10">
+                <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[var(--color-border)]">
+                  {[
+                    { v: '400+', l: 'Perks Available', sub: 'From 100+ vendors', color: '#0EA02E' },
+                    { v: '300+', l: 'Whitelisted Domains', sub: 'VC + portfolio companies', color: '#0038FF' },
+                    { v: '7', l: 'Admin Sections', sub: 'Full marketplace operations', color: '#7450DA' },
+                    { v: 'AA', l: 'WCAG Accessible', sub: 'Across all user flows', color: '#B08A00' },
+                  ].map((s) => (
+                    <div key={s.l} className="p-5 text-center">
+                      <p className="text-3xl font-bold tracking-tight mb-1" style={{ color: s.color }}>{s.v}</p>
+                      <p className="text-xs font-semibold text-[var(--color-text-primary)]">{s.l}</p>
+                      <p className="text-[10px] text-[var(--color-text-tertiary)] mt-0.5">{s.sub}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-              <Stagger className="grid md:grid-cols-2 gap-4">
+              {/* Key takeaways */}
+              <Stagger className="grid md:grid-cols-2 gap-4 mb-10">
                 {[
-                  { icon: IconShield, t: 'Access control is a UX design challenge, not just a technical one', d: 'The difference between "you can\'t use this" and "here\'s how to get access" is entirely design. The tiered system turned a rejection into an onboarding funnel.' },
-                  { icon: IconLayers, t: 'Showing restricted content builds desire; hiding it kills it', d: 'Letting denied users browse freely but blocking at redemption was counterintuitive — but it\'s the right UX. You can\'t want what you can\'t see.' },
-                  { icon: IconBolt, t: 'Design for failure, not just success', d: 'The cached data fallback meant users never saw a blank page during API outages. Designing the failure state was as important as designing the happy path.' },
-                  { icon: IconSparkle, t: 'A designer who ships is a designer who learns faster', d: 'Owning the full stack — from research to production — meant I could iterate on UX decisions in real-time, with real users, without waiting for handoffs.' },
+                  { icon: IconShield, t: 'Access control is a UX design challenge, not just a technical one', d: 'The difference between "you can\'t use this" and "here\'s how to get access" is entirely design. The tiered system turned a rejection into an onboarding funnel.', color: '#568FFF' },
+                  { icon: IconEye, t: 'Showing restricted content builds desire; hiding it kills it', d: 'Letting denied users browse freely but blocking at redemption was counterintuitive \u2014 but it\'s the right UX. You can\'t want what you can\'t see.', color: '#0038FF' },
+                  { icon: IconBolt, t: 'Design for failure, not just success', d: 'The cached data fallback meant users never saw a blank page during API outages. Designing the failure state was as important as designing the happy path.', color: '#7450DA' },
+                  { icon: IconSparkle, t: 'A designer who ships is a designer who learns faster', d: 'Owning the full stack \u2014 from research to production \u2014 meant I could iterate on UX decisions in real-time, with real users, without waiting for handoffs.', color: '#0D7C47' },
                 ].map((item, i) => {
                   const Icon = item.icon;
                   return (
                     <Item key={item.t}>
-                      <div className="rounded-xl border border-[var(--color-border)] p-6 h-full">
-                        <div className="flex items-center gap-3 mb-3"><IconBox><Icon className="text-[var(--color-text-primary)]" /></IconBox><p className="text-xs text-[var(--color-text-tertiary)]">0{i + 1}</p></div>
-                        <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">{item.t}</p>
-                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{item.d}</p>
+                      <div className="rounded-xl border border-[var(--color-border)] overflow-hidden h-full">
+                        <div className="p-6">
+                          <div className="flex items-center gap-3 mb-3">
+                            <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: item.color, backgroundColor: item.color + '12' }}>0{i + 1}</span>
+                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: item.color + '10', color: item.color }}>
+                              <Icon />
+                            </div>
+                          </div>
+                          <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">{item.t}</p>
+                          <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{item.d}</p>
+                        </div>
                       </div>
                     </Item>
                   );
                 })}
               </Stagger>
+
+              {/* What I owned vs what AI handled */}
+              <div className="rounded-xl border border-[var(--color-border)] overflow-hidden">
+                <div className="px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                  <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">Division of labor &mdash; designer + agentic AI</p>
+                </div>
+                <div className="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <IconUser className="text-[#0038FF]" />
+                      <p className="text-xs font-semibold text-[var(--color-text-primary)]">Me (Product Designer)</p>
+                    </div>
+                    <div className="space-y-1.5">
+                      {['Product strategy & scope definition', 'Access control UX architecture', 'Design system tokens & specifications', 'UX flows & interaction patterns', 'Visual hierarchy & layout decisions', 'API resilience design strategy'].map((item) => (
+                        <div key={item} className="flex items-start gap-2">
+                          <IconCheck className="text-[#0038FF] shrink-0 mt-0.5" />
+                          <p className="text-[11px] text-[var(--color-text-secondary)]">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <IconSparkle className="text-[#7450DA]" />
+                      <p className="text-xs font-semibold text-[var(--color-text-primary)]">Claude Code (AI Partner)</p>
+                    </div>
+                    <div className="space-y-1.5">
+                      {['TypeScript implementation', 'Supabase database & queries', 'GetProven API integration', 'Next.js routing & server components', 'Caching layer & sync engine', 'Admin dashboard tables & forms'].map((item) => (
+                        <div key={item} className="flex items-start gap-2">
+                          <IconCheck className="text-[#7450DA] shrink-0 mt-0.5" />
+                          <p className="text-[11px] text-[var(--color-text-secondary)]">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </section>
           </Reveal>
 
@@ -487,11 +868,37 @@ export default function BridgePerksPortalCaseStudy() {
           {/* ━━━ REFLECTION ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>Reflection</SectionLabel>
-              <SectionTitle>What this project taught me about designing for exclusivity</SectionTitle>
-              <div className="max-w-3xl space-y-4 text-[var(--color-text-secondary)] leading-relaxed">
-                <p>The biggest lesson from this project was that access control is fundamentally a UX problem. The technical implementation of domain gating is straightforward — the hard part is designing an experience where being restricted doesn&apos;t feel punishing. The tiered browse mode was the most debated design decision, and it turned out to be the most important one.</p>
-                <p>If I were starting over, I&apos;d invest more in the admin experience earlier. The 7-section dashboard grew organically as operational needs surfaced, and some of the information architecture could be tighter. I&apos;d also build analytics into the admin panel from day one — tracking which perks get redeemed most would help Bridge prioritize vendor relationships.</p>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Reflection</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Lessons learned</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-8 leading-snug">What I&apos;d do differently next time</h2>
+
+              <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                {[
+                  { num: '01', title: 'Invest in the admin experience earlier', desc: 'The 7-section dashboard grew organically as operational needs surfaced, and some of the information architecture could be tighter. I\'d build analytics into the admin panel from day one \u2014 tracking which perks get redeemed most would help Bridge prioritize vendor relationships.', icon: IconChart, color: '#0038FF' },
+                  { num: '02', title: 'Prototype the access gate animation sooner', desc: 'The 8-second scanning animation was the most debated design decision. Getting stakeholder buy-in earlier through a quick prototype would have saved iteration time. The final result validated the approach, but the path there was longer than necessary.', icon: IconEye, color: '#7450DA' },
+                ].map((r) => {
+                  const Icon = r.icon;
+                  return (
+                    <div key={r.num} className="rounded-xl border border-[var(--color-border)] overflow-hidden">
+                      <div className="p-5">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: r.color, backgroundColor: r.color + '12' }}>{r.num}</span>
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: r.color + '10', color: r.color }}>
+                            <Icon />
+                          </div>
+                        </div>
+                        <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">{r.title}</p>
+                        <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{r.desc}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">The bigger takeaway:</span> Access control is fundamentally a UX problem. The technical implementation of domain gating is straightforward — the hard part is designing an experience where being restricted doesn&apos;t feel punishing. The tiered browse mode was the most debated design decision, and it turned out to be the most important one.</p>
               </div>
             </section>
           </Reveal>
