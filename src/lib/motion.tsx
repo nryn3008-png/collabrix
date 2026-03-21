@@ -87,8 +87,8 @@ export const heroContainerVariants: Variants = {
 
 // Viewport trigger settings
 const viewportSettings = {
-  once: false,      // Replay on re-enter
-  amount: 0.2,      // Trigger when 20% visible
+  once: true,       // Animate once — prevents tall sections from toggling
+  amount: 0.05,     // Trigger when 5% visible — works for tall mobile sections
   margin: '-40px',  // Start slightly before in view
 };
 
