@@ -51,20 +51,12 @@ export default function Header() {
                 {link.label}
               </a>
             ))}
-            <div className="flex items-center gap-4">
-              <a
-                href="/work"
-                className="text-sm font-medium px-4 py-2 rounded-lg border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] hover:border-[var(--color-text-tertiary)] transition-colors"
-              >
-                View my work
-              </a>
-              <a
-                href="#contact"
-                className="text-sm font-medium px-4 py-2 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
-              >
-                Work with me
-              </a>
-            </div>
+            <a
+              href="#contact"
+              className="text-sm font-medium px-4 py-2 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
+            >
+              Work with me
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -113,15 +105,8 @@ export default function Header() {
                 </a>
               ))}
               <a
-                href="/work"
-                className="inline-flex justify-center text-base font-medium px-4 py-3 rounded-lg border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] hover:border-[var(--color-text-tertiary)] transition-colors mt-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                View my work
-              </a>
-              <a
                 href="#contact"
-                className="inline-flex justify-center text-base font-medium px-4 py-3 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
+                className="inline-flex justify-center text-base font-medium px-4 py-3 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200 mt-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Work with me
