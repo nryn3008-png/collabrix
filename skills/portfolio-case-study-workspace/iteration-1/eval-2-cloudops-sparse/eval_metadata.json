@@ -1,0 +1,15 @@
+{
+  "eval_id": 2,
+  "eval_name": "cloudops-sparse-metrics",
+  "prompt": "Create a case study for CloudOps alert system with sparse/incomplete metrics",
+  "assertions": [
+    {"id": "impact-first-headline", "text": "Hero headline leads with outcome/impact, not project name"},
+    {"id": "handles-sparse-metrics", "text": "Uses directional language for missing metrics instead of making up numbers"},
+    {"id": "ownership-language", "text": "Uses first-person ownership language not passive voice"},
+    {"id": "no-seniority-claim", "text": "Does not explicitly claim 'senior designer'"},
+    {"id": "live-production-emphasis", "text": "Mentions the feature is live and used by 800+ engineers"},
+    {"id": "concise-output", "text": "Respects user request for conciseness - not padded with filler content"},
+    {"id": "sales-demo-mentioned", "text": "Includes the sales demo detail as evidence of business impact"},
+    {"id": "valid-nextjs", "text": "Output is valid TypeScript/Next.js component"}
+  ]
+}

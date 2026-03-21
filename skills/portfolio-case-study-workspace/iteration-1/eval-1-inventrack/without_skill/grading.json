@@ -1,0 +1,56 @@
+{
+  "eval_id": 1,
+  "eval_name": "inventrack-standard-input",
+  "expectations": [
+    {
+      "text": "Hero headline leads with outcome/impact, not project name or 'Redesigning...'",
+      "passed": false,
+      "evidence": "H1 reads 'InvenTrack' - the project name, not the outcome. The subtitle mentions the metrics but the primary headline is just the project name, which violates the assertion."
+    },
+    {
+      "text": "At least 2 key metrics displayed prominently in hero section (45% drop, 90min saved, 340 stores)",
+      "passed": true,
+      "evidence": "Three metric cards in hero: 45% stock-out reduction, 90+ minutes time saved, 340+ adoption. Displayed prominently as centered cards."
+    },
+    {
+      "text": "Uses first-person ownership language ('I led', 'I conducted', 'I designed') not passive voice",
+      "passed": false,
+      "evidence": "Language is mostly passive or uses 'I' inconsistently. Examples: 'conducted in-depth research', 'was built as a technical solution' (passive), 'I partnered with 4 engineers' (one instance). Lacks consistent first-person ownership throughout."
+    },
+    {
+      "text": "Does not explicitly claim 'senior designer' or 'senior level' - lets work speak",
+      "passed": true,
+      "evidence": "Role stated as 'Solo Product Designer' without seniority claims. Work scope demonstrates capability implicitly."
+    },
+    {
+      "text": "Explicitly mentions the product is live/in production and used by real users",
+      "passed": true,
+      "evidence": "States 'Status: Live (Oct 2024)' and 'InvenTrack shipped in 8 weeks and has been live since October 2024'. Clear that it's live and in production."
+    },
+    {
+      "text": "Problem section addresses user pain AND business impact, not just UI issues",
+      "passed": true,
+      "evidence": "Problem section covers user pain (2+ hours daily reconciliation, no filtering, context switching), and business/technical impact (errors causing findings, fragmentation issues). Both dimensions addressed."
+    },
+    {
+      "text": "Research section explains WHY specific methods were chosen, not just listing them",
+      "passed": false,
+      "evidence": "Research section lists methods: 'User Interviews (6 interviews)', 'Contextual Inquiry (2 on-site visits)' but doesn't explain WHY these specific methods were chosen. The 'Key Discovery' paragraph provides insight but the research section itself is mostly a list."
+    },
+    {
+      "text": "Output is valid TypeScript/Next.js component with proper exports",
+      "passed": false,
+      "evidence": "'use client' directive present but this is a client component. File has proper export but mixes client component logic with what should be server component patterns. Not ideal Next.js architecture but technically functional."
+    },
+    {
+      "text": "Component includes responsive styling (mobile considerations)",
+      "passed": true,
+      "evidence": "Responsive classes throughout: md:grid-cols-2, md:py-24, md:text-5xl, max-w-6xl, responsive grid layouts. Mobile-optimized."
+    },
+    {
+      "text": "Uses semantic HTML elements (article, section, figure)",
+      "passed": false,
+      "evidence": "Root element is a div instead of article. Uses section elements but wraps entire content in a non-semantic div container instead of semantic article wrapper."
+    }
+  ]
+}

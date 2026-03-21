@@ -1,0 +1,18 @@
+{
+  "eval_id": 3,
+  "eval_name": "nexus-comprehensive-leadership",
+  "prompt": "Create comprehensive case study for Nexus Platform with leadership, strategic pushback, and domain expertise",
+  "assertions": [
+    {"id": "impact-first-headline", "text": "Hero headline leads with the transformation (3 weeks to 4 days) or business outcome ($2M ARR)"},
+    {"id": "leadership-signals", "text": "Mentions leading/mentoring the junior designer as a leadership signal"},
+    {"id": "strategic-pushback", "text": "Includes the chatbot pushback story with research-backed reasoning"},
+    {"id": "design-system-mention", "text": "Covers establishing the platform design system"},
+    {"id": "progressive-disclosure", "text": "Explains the progressive disclosure decision for 200+ field forms"},
+    {"id": "confidence-score", "text": "Describes the audit confidence score visualization"},
+    {"id": "business-metrics", "text": "Includes $2M ARR, NPS 28->67, 15 institutions, 3 weeks->4 days"},
+    {"id": "reflection-quote", "text": "Incorporates the user's insight about 'delightful means trustworthy and predictable'"},
+    {"id": "ownership-language", "text": "Uses first-person ownership language throughout"},
+    {"id": "no-seniority-claim", "text": "Does not explicitly claim 'senior designer'"},
+    {"id": "valid-nextjs", "text": "Output is valid TypeScript/Next.js component"}
+  ]
+}

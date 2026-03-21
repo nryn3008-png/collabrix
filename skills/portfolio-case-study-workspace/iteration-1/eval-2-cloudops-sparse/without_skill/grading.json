@@ -1,0 +1,46 @@
+{
+  "eval_id": 2,
+  "eval_name": "cloudops-sparse-metrics",
+  "expectations": [
+    {
+      "text": "Hero headline leads with outcome/impact, not project name",
+      "passed": false,
+      "evidence": "H1 reads: 'Alert Fatigue Solution for CloudOps' - leads with the problem/solution space, not the impact outcome. Should lead with something like 'How intelligent alert grouping solved alert fatigue'."
+    },
+    {
+      "text": "Uses directional language for missing metrics instead of making up numbers",
+      "passed": true,
+      "evidence": "Uses directional language: 'Significant reduction in false positive complaints', 'Increased alert engagement', 'faster incident response'. No fabricated metrics."
+    },
+    {
+      "text": "Uses first-person ownership language not passive voice",
+      "passed": false,
+      "evidence": "Primarily passive voice: 'Engineers were systematically ignoring alerts', 'the root cause...was identified', 'I designed and shipped' appears once. Most content is written passively without consistent first-person ownership."
+    },
+    {
+      "text": "Does not explicitly claim 'senior designer'",
+      "passed": true,
+      "evidence": "No seniority claims made. Role implied through scope and outcomes."
+    },
+    {
+      "text": "Mentions the feature is live and used by 800+ engineers",
+      "passed": true,
+      "evidence": "States: 'User Base: ~800 engineers' and mentions the system being used across the user base."
+    },
+    {
+      "text": "Respects user request for conciseness - not padded with filler content",
+      "passed": false,
+      "evidence": "Very concise structure with bullet points and minimal elaboration. While it avoids padding, it reads more like an outline than a narrative case study with proper depth and context."
+    },
+    {
+      "text": "Includes the sales demo detail as evidence of business impact",
+      "passed": true,
+      "evidence": "Mentions: 'Became a demo highlight in sales calls, demonstrating product quality and responsiveness to user needs'."
+    },
+    {
+      "text": "Output is valid TypeScript/Next.js component",
+      "passed": true,
+      "evidence": "Valid React component with default export, proper component structure."
+    }
+  ]
+}

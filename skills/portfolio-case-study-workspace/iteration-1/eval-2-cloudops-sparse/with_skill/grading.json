@@ -1,0 +1,46 @@
+{
+  "eval_id": 2,
+  "eval_name": "cloudops-sparse-metrics",
+  "expectations": [
+    {
+      "text": "Hero headline leads with outcome/impact, not project name",
+      "passed": true,
+      "evidence": "H1 reads: 'How intelligent alert grouping solved alert fatigue for 800+ engineers' - leads with the outcome/impact, not the project name."
+    },
+    {
+      "text": "Uses directional language for missing metrics instead of making up numbers",
+      "passed": true,
+      "evidence": "Uses 'Significant' instead of inventing a metric: 'Significant reduction in false positive complaints'. Uses 'false positive complaints dropped significantly' rather than fabricating a percentage."
+    },
+    {
+      "text": "Uses first-person ownership language not passive voice",
+      "passed": true,
+      "evidence": "Multiple instances: 'I spent time understanding', 'I designed an intelligent alert grouping system', 'I added a weekly digest email', 'I also added', 'I designed'. Consistent first-person voice throughout."
+    },
+    {
+      "text": "Does not explicitly claim 'senior designer'",
+      "passed": true,
+      "evidence": "No seniority claims made. Project timeline and user base (800+ engineers) let the scope speak for itself."
+    },
+    {
+      "text": "Mentions the feature is live and used by 800+ engineers",
+      "passed": true,
+      "evidence": "Explicitly states: 'went live immediately' and 'about 800 engineers use the intelligent alert system' and 'Today, about 800 engineers use the intelligent alert system across CloudOps'."
+    },
+    {
+      "text": "Respects user request for conciseness - not padded with filler content",
+      "passed": true,
+      "evidence": "Structured, focused content. No unnecessary padding. Clear sections covering problem, discovery, solution, outcome, and reflection. No fluff or extended elaborations beyond necessary detail."
+    },
+    {
+      "text": "Includes the sales demo detail as evidence of business impact",
+      "passed": true,
+      "evidence": "States: 'within weeks, it was being demo'd in customer sales calls as a key differentiator' and 'Now demo'd in customer acquisition calls'."
+    },
+    {
+      "text": "Output is valid TypeScript/Next.js component",
+      "passed": true,
+      "evidence": "Valid component with metadata export, proper imports (Metadata type), default export function, semantic article element structure."
+    }
+  ]
+}

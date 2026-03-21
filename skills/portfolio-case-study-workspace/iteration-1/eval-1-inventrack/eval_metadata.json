@@ -1,0 +1,17 @@
+{
+  "eval_id": 1,
+  "eval_name": "inventrack-standard-input",
+  "prompt": "Create a case study page for InvenTrack inventory management platform with detailed project info",
+  "assertions": [
+    {"id": "impact-first-headline", "text": "Hero headline leads with outcome/impact, not project name or 'Redesigning...'"},
+    {"id": "metric-callouts", "text": "At least 2 key metrics displayed prominently in hero section (45% drop, 90min saved, 340 stores)"},
+    {"id": "ownership-language", "text": "Uses first-person ownership language ('I led', 'I conducted', 'I designed') not passive voice"},
+    {"id": "no-seniority-claim", "text": "Does not explicitly claim 'senior designer' or 'senior level' - lets work speak"},
+    {"id": "live-production-emphasis", "text": "Explicitly mentions the product is live/in production and used by real users"},
+    {"id": "problem-multi-angle", "text": "Problem section addresses user pain AND business impact, not just UI issues"},
+    {"id": "research-reasoning", "text": "Research section explains WHY specific methods were chosen, not just listing them"},
+    {"id": "valid-nextjs", "text": "Output is valid TypeScript/Next.js component with proper exports"},
+    {"id": "responsive-design", "text": "Component includes responsive styling (mobile considerations)"},
+    {"id": "semantic-html", "text": "Uses semantic HTML elements (article, section, figure)"}
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "eval_id": 1,
+  "eval_name": "inventrack-standard-input",
+  "expectations": [
+    {
+      "text": "Hero headline leads with outcome/impact, not project name or 'Redesigning...'",
+      "passed": true,
+      "evidence": "The h1 reads: 'How a unified inventory dashboard cut stock-outs by 45% and saved store managers 90+ minutes daily' - leads directly with the impact metrics and outcome."
+    },
+    {
+      "text": "At least 2 key metrics displayed prominently in hero section (45% drop, 90min saved, 340 stores)",
+      "passed": true,
+      "evidence": "Three metric cards displayed prominently in hero section: 45% stock-out reduction, 90+ min time saved, 340+ store adoption."
+    },
+    {
+      "text": "Uses first-person ownership language ('I led', 'I conducted', 'I designed') not passive voice",
+      "passed": true,
+      "evidence": "Multiple instances: 'I started by embedding myself', 'I conducted six in-depth interviews', 'I spent a full day', 'I worked closely', 'I proposed', 'I iterated', 'I tested three patterns'."
+    },
+    {
+      "text": "Does not explicitly claim 'senior designer' or 'senior level' - lets work speak",
+      "passed": true,
+      "evidence": "Role described as 'Solo Designer' with date context. No seniority claims. The work scope and outcomes let the seniority speak implicitly."
+    },
+    {
+      "text": "Explicitly mentions the product is live/in production and used by real users",
+      "passed": true,
+      "evidence": "Explicitly states: 'The feature has been live since October 2024 and is actively used by 340+ stores' and 'checking the dashboard is now the first thing they do at the start of their shift'."
+    },
+    {
+      "text": "Problem section addresses user pain AND business impact, not just UI issues",
+      "passed": true,
+      "evidence": "Problem section covers: user pain (2+ hours reconciling inventory, no contextual intelligence), business impact (stock-out incidents frequent/reactive, support team burden, regional manager issues), and technical challenges."
+    },
+    {
+      "text": "Research section explains WHY specific methods were chosen, not just listing them",
+      "passed": true,
+      "evidence": "Discovery section explains 'Rather than relying on second-hand reports, I wanted to see inventory management in context' and explains the insight reframed the challenge from data overload to information fragmentation and lack of predictive capability."
+    },
+    {
+      "text": "Output is valid TypeScript/Next.js component with proper exports",
+      "passed": true,
+      "evidence": "Valid component export: metadata object with Metadata type, default export function, proper Next.js structure with Image import and semantic article element."
+    },
+    {
+      "text": "Component includes responsive styling (mobile considerations)",
+      "passed": true,
+      "evidence": "Uses responsive classes throughout: grid-cols-1 sm:grid-cols-3, text-4xl sm:text-5xl, px-6 sm:px-8, py-20 sm:py-32. Mobile-responsive view mentioned explicitly in solution."
+    },
+    {
+      "text": "Uses semantic HTML elements (article, section, figure)",
+      "passed": true,
+      "evidence": "Uses <article>, <section> elements throughout. Properly structured semantic HTML with meaningful heading hierarchy (h1, h2)."
+    }
+  ]
+}

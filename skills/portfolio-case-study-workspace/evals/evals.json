@@ -1,0 +1,22 @@
+{
+  "skill_name": "portfolio-case-study",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Hey, I need to add a new project to my portfolio. Here's the raw info:\n\nProduct: InvenTrack - a B2B inventory management platform for mid-market retail chains\nProblem: Store managers were spending 2+ hours daily on manual stock reconciliation across 3 different screens. The existing inventory view was basically a giant table with no filtering or alerts.\nMy role: Solo designer, worked with 4 engineers and 1 PM\nWhat I did: Ran 6 interviews with store managers, did a contextual inquiry at 2 retail locations. Discovered the core issue was that managers needed predictive alerts, not just current stock levels. Designed a unified inventory dashboard with smart alerts, threshold-based reordering, and a mobile-responsive view for in-store use.\nShipped in 8 weeks. Live since Oct 2024.\nResults: Stock-out incidents dropped 45%, managers reported saving 90+ min/day, adopted by 340+ stores within 2 months.\n\nCan you create the case study page for my Next.js portfolio?",
+      "expected_output": "A complete Next.js case study page component with: impact-first headline (not 'Redesigning InvenTrack'), hero section with 3 metric callouts, full narrative following the 8-section structure, ownership language throughout, no explicit seniority claims, production/live emphasis, and proper TypeScript/responsive code.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "add this project to my portfolio:\n\nworked on the reporting module for CloudOps (devops monitoring platform). engineers were ignoring alerts because too many false positives. I researched it, found alert fatigue was the core issue. designed an intelligent alert grouping system with severity scoring and customizable thresholds. also added a weekly digest email. shipped in 2 sprints. about 800 engineers use it now. false positive complaints dropped a lot. the feature got demo'd in sales calls after launch.\n\nkeep it concise, i don't have a ton of detail on exact metrics",
+      "expected_output": "A case study that handles missing exact metrics gracefully using directional language. Should still have a compelling headline, use the detail that IS available (800 engineers, 2 sprints, sales demo usage), and not pad with filler. Should be shorter than eval 1 but still follow the structure.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I want to add my biggest project. Here's everything:\n\nProduct: Nexus Platform - enterprise workflow automation for compliance teams at financial institutions\nTimeline: 5 months, 2023-2024\nTeam: I was lead designer with 1 junior designer reporting to me, 8 engineers, 2 PMs, worked closely with compliance SMEs\nProblem: Compliance teams were using a patchwork of spreadsheets and email chains to manage audit workflows. Average audit prep took 3 weeks. Errors in documentation were causing regulatory findings. The existing tool had been built by engineers with no design input.\nResearch: 12 user interviews, shadowed 3 audit cycles, analyzed 6 months of support tickets, ran a design sprint with stakeholders\nSolution: End-to-end audit workflow management system with automated document collection, real-time collaboration, approval chains, and an audit trail dashboard. I also established the design system for the platform.\nDesign decisions: Chose a progressive disclosure pattern for complex forms (compliance forms can have 200+ fields). Designed an 'audit confidence score' visualization that gave teams real-time readiness status. Pushed back on a PM request to add a chatbot - research showed users wanted structured workflows, not conversational UI.\nResults: Audit prep time reduced from 3 weeks to 4 days. Zero regulatory findings in first 2 audits post-launch. Adopted by 15 financial institutions. Led to $2M ARR expansion. NPS went from 28 to 67.\nReflection: This project taught me how to design for highly regulated industries. The biggest lesson was that in compliance, 'delightful' means 'trustworthy and predictable,' not 'clever and novel.'",
+      "expected_output": "The most comprehensive case study - should showcase leadership (mentored junior designer), strategic pushback (chatbot decision), domain expertise (regulated industry), and business impact ($2M ARR). The headline should be powerful. The design decisions section should be particularly detailed. Reflection should include the user's own insight about 'delightful means trustworthy.'"
+    }
+  ]
+}

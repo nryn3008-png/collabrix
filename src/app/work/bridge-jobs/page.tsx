@@ -70,14 +70,6 @@ function IconArrowRight({ className = '' }: { className?: string }) {
 
 /* ─── Utility Components ─── */
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide mb-3">{children}</p>;
-}
-
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">{children}</h2>;
-}
-
 function Divider() {
   return <hr className="border-[var(--color-border)] my-16 md:my-20" />;
 }
@@ -159,12 +151,63 @@ export default function BridgeJobsCaseStudy() {
           {/* ━━━ CONTEXT — Setting the Stage ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>Context</SectionLabel>
-              <SectionTitle>Bridge needed a way to turn its VC social graph into a hiring advantage</SectionTitle>
-              <div className="max-w-3xl space-y-4 text-[var(--color-text-secondary)] leading-relaxed">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Context</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Setting the stage</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">Bridge needed a way to turn its VC social graph into a hiring advantage</h2>
+
+              <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-10">
                 <p>Bridge is a VC networking platform connecting investors, portfolio companies, and talent through warm introductions. The platform had a strong social graph and intro system — but no way for portfolio companies to surface their open roles to network talent, and no way for talent to discover jobs across the VC ecosystem.</p>
                 <p>I owned the entire product — from discovery and competitive research through UX strategy, design system creation, and production development. The scope was equivalent to what a designer plus 2–3 engineers would deliver over several months. I used Claude Code (Anthropic&apos;s agentic AI) as my development partner, authoring 9 custom skills to maintain design quality throughout.</p>
-                <p>The constraint: Bridge&apos;s existing users already had access to warm intros and investor profiles. The talent product had to feel native to that ecosystem — not a bolted-on job board.</p>
+              </div>
+
+              {/* Visual: Ecosystem gap diagram */}
+              <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-6">
+                <div className="px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                  <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">Bridge ecosystem &mdash; the missing layer</p>
+                </div>
+                <div className="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
+                  {[
+                    { icon: IconShield, label: 'What Bridge had', items: ['VC social graph', 'Warm intro engine', 'Investor profiles', 'Portfolio relationships'], color: '#0EA02E' },
+                    { icon: IconX, label: 'What was missing', items: ['Job discovery for talent', 'Hiring pipeline for VCs', 'ATS aggregation layer', 'Career page infrastructure'], color: '#E13535' },
+                    { icon: IconBolt, label: 'What I built', items: ['Unified talent board', 'Multi-ATS sync engine', 'Branded VC career pages', 'Role-based dashboards'], color: '#0038FF' },
+                  ].map((col) => {
+                    const Icon = col.icon;
+                    return (
+                      <div key={col.label} className="p-5">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Icon className="shrink-0" style={{ color: col.color }} />
+                          <p className="text-xs font-semibold text-[var(--color-text-primary)]">{col.label}</p>
+                        </div>
+                        <div className="space-y-1.5">
+                          {col.items.map((item) => (
+                            <p key={item} className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{item}</p>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* My role + scope */}
+              <div className="grid sm:grid-cols-3 gap-4 mb-6">
+                {[
+                  { label: 'My role', value: 'Solo Product Designer + Developer', detail: 'End-to-end ownership: research, strategy, design system, production code' },
+                  { label: 'AI partnership', value: '9 Custom Claude Code Skills', detail: 'Authored skills for UI, UX, accessibility, code quality, and design system fidelity' },
+                  { label: 'Scope equivalent', value: '1 Designer + 2\u20133 Engineers', detail: 'Multi-month project delivered by one person with agentic AI as multiplier' },
+                ].map((s) => (
+                  <div key={s.label} className="rounded-xl border border-[var(--color-border)] p-5">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-2">{s.label}</p>
+                    <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-1">{s.value}</p>
+                    <p className="text-[11px] text-[var(--color-text-tertiary)] leading-relaxed">{s.detail}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">The constraint:</span> Bridge&apos;s existing users already had access to warm intros and investor profiles. The talent product had to feel native to that ecosystem — not a bolted-on job board. Every design decision flowed from this constraint.</p>
               </div>
             </section>
           </Reveal>
@@ -174,39 +217,70 @@ export default function BridgeJobsCaseStudy() {
           {/* ━━━ THE PROBLEM — What Was Broken ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>The Problem</SectionLabel>
-              <SectionTitle>Talent in VC networks had no way to discover jobs — the network advantage was invisible</SectionTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Problem</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">What was broken</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">Talent in VC networks had no way to discover jobs — the network advantage was invisible</h2>
 
-              <div className="max-w-3xl space-y-4 text-[var(--color-text-secondary)] leading-relaxed mb-10">
-                <p><strong className="text-[var(--color-text-primary)]">From the user&apos;s perspective:</strong> Talent in networks like Techstars, Orange DAO, and Angel Invest Ventures had to manually check each portfolio company&apos;s career page across Greenhouse, Lever, Workable, Ashby, and a dozen more ATS providers. The &quot;network advantage&quot; they were promised by their VC connection didn&apos;t translate into an actual hiring experience.</p>
-                <p><strong className="text-[var(--color-text-primary)]">From the business perspective:</strong> Bridge&apos;s value proposition was warm introductions — but without jobs surfaced in the network, there was nothing to introduce talent TO. Competing platforms like Getro ($210–500/mo) and Consider (enterprise pricing) had staked out this space, but with generic UI and no community layer.</p>
-                <p><strong className="text-[var(--color-text-primary)]">From the technical perspective:</strong> Each VC network&apos;s portfolio companies used different ATS providers with different APIs, different data formats, and different rate limits. There was no unified way to aggregate jobs across 13+ providers without building a custom sync layer for each one.</p>
+              {/* Three perspectives as numbered cards */}
+              <div className="grid md:grid-cols-3 gap-4 mb-10">
+                {[
+                  { num: '01', lens: 'User perspective', icon: IconUser, text: 'Talent in networks like Techstars, Orange DAO, and Angel Invest Ventures had to manually check each portfolio company\u2019s career page across Greenhouse, Lever, Workable, Ashby, and a dozen more ATS providers. The \u201Cnetwork advantage\u201D didn\u2019t translate into an actual hiring experience.', color: '#568FFF' },
+                  { num: '02', lens: 'Business perspective', icon: IconChart, text: 'Bridge\u2019s value proposition was warm introductions \u2014 but without jobs surfaced in the network, there was nothing to introduce talent TO. Competitors like Getro ($210\u2013500/mo) and Consider (enterprise pricing) had staked out this space, but with generic UI and no community layer.', color: '#0038FF' },
+                  { num: '03', lens: 'Technical perspective', icon: IconCog, text: 'Each VC network\u2019s portfolio companies used different ATS providers with different APIs, different data formats, and different rate limits. There was no unified way to aggregate jobs across 13+ providers without building a custom sync layer for each one.', color: '#7450DA' },
+                ].map((p) => {
+                  const Icon = p.icon;
+                  return (
+                    <div key={p.num} className="rounded-xl border border-[var(--color-border)] p-5">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: p.color, backgroundColor: p.color + '12' }}>{p.num}</span>
+                        <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">{p.lens}</p>
+                      </div>
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: p.color + '10' }}>
+                        <Icon style={{ color: p.color }} />
+                      </div>
+                      <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{p.text}</p>
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Before / After */}
-              <div className="grid md:grid-cols-2 gap-4 mb-10">
-                <div className="rounded-xl border border-[var(--color-border)] p-6 bg-[var(--color-bg-elevated)]">
-                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide mb-4">Before — Fragmented</p>
-                  <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
-                    {['Greenhouse careers page', 'Lever careers page', 'Workable careers page', 'Ashby careers page', '9 more ATS career pages...'].map((item) => (
-                      <li key={item} className="flex items-start gap-2"><IconX className="text-[var(--color-text-tertiary)] shrink-0 mt-0.5" />{item}</li>
-                    ))}
-                    <li className="text-xs text-[var(--color-text-tertiary)] mt-3 pt-3 border-t border-[var(--color-border)]">Talent checks 10+ separate pages. Network advantage = zero.</li>
-                  </ul>
-                </div>
-                <div className="rounded-xl border border-[var(--color-text-primary)] p-6">
-                  <p className="text-xs font-medium text-[var(--color-text-primary)] uppercase tracking-wide mb-4">After — Unified</p>
-                  <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
-                    {['All 13 ATS providers in one board', 'VC trust signals on every job', 'Warm intro paths visible', 'Company discovery by network', 'Branded pages per VC fund'].map((item) => (
-                      <li key={item} className="flex items-start gap-2"><IconCheck className="text-[var(--color-text-primary)] shrink-0 mt-0.5" />{item}</li>
-                    ))}
-                    <li className="text-xs text-[var(--color-text-tertiary)] mt-3 pt-3 border-t border-[var(--color-border)]">One trusted board. Network advantage = the product.</li>
-                  </ul>
+              <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-10">
+                <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[var(--color-border)]">
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-2 h-2 rounded-full bg-[#E13535]" />
+                      <p className="text-[10px] font-medium text-[#E13535] uppercase tracking-widest">Before &mdash; Fragmented</p>
+                    </div>
+                    <div className="space-y-2">
+                      {['Greenhouse careers page', 'Lever careers page', 'Workable careers page', 'Ashby careers page', '9 more ATS career pages...'].map((item) => (
+                        <div key={item} className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]"><IconX className="text-[#E13535]/60 shrink-0 mt-0.5" />{item}</div>
+                      ))}
+                    </div>
+                    <p className="text-[10px] text-[var(--color-text-tertiary)] mt-4 pt-3 border-t border-[var(--color-border)]">Talent checks 10+ separate pages. Network advantage = zero.</p>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-2 h-2 rounded-full bg-[#0EA02E]" />
+                      <p className="text-[10px] font-medium text-[#0EA02E] uppercase tracking-widest">After &mdash; Unified</p>
+                    </div>
+                    <div className="space-y-2">
+                      {['All 13 ATS providers in one board', 'VC trust signals on every job', 'Warm intro paths visible', 'Company discovery by network', 'Branded pages per VC fund'].map((item) => (
+                        <div key={item} className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]"><IconCheck className="text-[#0EA02E] shrink-0 mt-0.5" />{item}</div>
+                      ))}
+                    </div>
+                    <p className="text-[10px] text-[var(--color-text-tertiary)] mt-4 pt-3 border-t border-[var(--color-border)]">One trusted board. Network advantage = the product.</p>
+                  </div>
                 </div>
               </div>
 
               {/* Competitive Landscape */}
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">Competitive landscape</h3>
+              <div className="flex items-center gap-3 mb-4">
+                <IconChart className="text-[#0038FF]" />
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">Competitive landscape</h3>
+              </div>
               <div className="rounded-xl border border-[var(--color-border)] overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -239,32 +313,72 @@ export default function BridgeJobsCaseStudy() {
           {/* ━━━ DISCOVERY — How I Understood the Problem ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>Discovery &amp; Research</SectionLabel>
-              <SectionTitle>I mapped three user worlds before drawing a single screen</SectionTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Discovery</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Research &amp; synthesis</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">I mapped three user worlds before drawing a single screen</h2>
 
-              <div className="max-w-3xl space-y-4 text-[var(--color-text-secondary)] leading-relaxed mb-10">
+              <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-10">
                 <p>I started with a comprehensive product specification — not wireframes. Before I could design interfaces for a multi-role platform, I needed to understand what each user type actually needed to accomplish and where those needs overlapped or conflicted.</p>
-                <p>The competitive analysis revealed an insight that shaped the entire product: existing solutions treated job boards as a standalone feature. None of them leveraged an existing social graph. Bridge already had the trust layer — warm intros, investor profiles, portfolio relationships. The design opportunity was to make that trust layer visible in the hiring experience.</p>
-                <p>I synthesized the research into five design principles that would guide every screen, and defined three primary personas with distinct goals, pain points, and permission levels.</p>
+                <p>The competitive analysis revealed an insight that shaped the entire product: existing solutions treated job boards as a standalone feature. None of them leveraged an existing social graph. Bridge already had the trust layer — the design opportunity was to make it visible in the hiring experience.</p>
+              </div>
+
+              {/* Research process flow */}
+              <div className="rounded-xl border border-[var(--color-border)] p-5 mb-10">
+                <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-4">Research &rarr; synthesis process</p>
+                <div className="flex flex-wrap items-center gap-2 text-[11px]">
+                  {[
+                    'Competitive analysis (Getro, Consider, Wellfound)',
+                    'User role mapping (4 roles, overlapping needs)',
+                    'ATS API audit (13 providers, different schemas)',
+                    'Design principles (5 pillars)',
+                    'Product specification document',
+                  ].map((step, i) => (
+                    <span key={step} className="flex items-center gap-2">
+                      <span className="px-2.5 py-1 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-secondary)] font-medium">{step}</span>
+                      {i < 4 && <IconArrowRight className="text-[var(--color-text-tertiary)]" />}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               {/* Personas */}
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-6">User personas I designed for</h3>
+              <div className="flex items-center gap-3 mb-6">
+                <IconUser className="text-[#0038FF]" />
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">User personas I designed for</h3>
+              </div>
               <Stagger className="grid md:grid-cols-3 gap-4 mb-10">
                 {[
-                  { icon: IconUser, role: 'Talent', ctx: 'Job seekers in the Bridge network', goal: 'Discover curated roles with warm intro paths instead of competing on noisy public boards.', needs: ['See which VCs back each company', 'Find mutual connections for warm intros', 'One-click apply with pre-filled profile'] },
-                  { icon: IconBuilding, role: 'Hiring Manager', ctx: 'CEOs, CTOs, VP People at portfolio companies', goal: 'Fill roles fast with vetted, network-endorsed candidates.', needs: ['Post jobs from existing ATS without duplication', 'See which candidates have warm paths', 'Track pipeline per VC network'] },
-                  { icon: IconChart, role: 'VC / Fund Manager', ctx: 'Partners and talent partners at VC firms', goal: 'Help portfolio companies hire and track talent flow across the network.', needs: ['Dashboard with hiring velocity metrics', 'Branded career page for the fund', 'Control which companies are visible'] },
-                ].map((p) => {
+                  { icon: IconUser, role: 'Talent', ctx: 'Job seekers in the Bridge network', goal: 'Discover curated roles with warm intro paths instead of competing on noisy public boards.', needs: ['See which VCs back each company', 'Find mutual connections for warm intros', 'One-click apply with pre-filled profile'], color: '#568FFF' },
+                  { icon: IconBuilding, role: 'Hiring Manager', ctx: 'CEOs, CTOs, VP People at portfolio companies', goal: 'Fill roles fast with vetted, network-endorsed candidates.', needs: ['Post jobs from existing ATS without duplication', 'See which candidates have warm paths', 'Track pipeline per VC network'], color: '#0038FF' },
+                  { icon: IconChart, role: 'VC / Fund Manager', ctx: 'Partners and talent partners at VC firms', goal: 'Help portfolio companies hire and track talent flow across the network.', needs: ['Dashboard with hiring velocity metrics', 'Branded career page for the fund', 'Control which companies are visible'], color: '#7450DA' },
+                ].map((p, i) => {
                   const Icon = p.icon;
                   return (
                     <Item key={p.role}>
-                      <div className="rounded-xl border border-[var(--color-border)] p-5 h-full">
-                        <IconBox><Icon className="text-[var(--color-text-primary)]" /></IconBox>
-                        <p className="text-sm font-semibold text-[var(--color-text-primary)] mt-3 mb-0.5">{p.role}</p>
-                        <p className="text-xs text-[var(--color-text-tertiary)] mb-3">{p.ctx}</p>
-                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-3">{p.goal}</p>
-                        <ul className="space-y-1.5">{p.needs.map((n) => (<li key={n} className="text-xs text-[var(--color-text-tertiary)] flex gap-1.5"><IconArrowRight className="shrink-0 mt-0.5" />{n}</li>))}</ul>
+                      <div className="rounded-xl border border-[var(--color-border)] overflow-hidden h-full">
+                        <div className="h-1" style={{ backgroundColor: p.color }} />
+                        <div className="p-5">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: p.color + '10' }}>
+                              <Icon style={{ color: p.color }} />
+                            </div>
+                            <div>
+                              <p className="text-sm font-semibold text-[var(--color-text-primary)]">{p.role}</p>
+                              <p className="text-[10px] text-[var(--color-text-tertiary)]">{p.ctx}</p>
+                            </div>
+                          </div>
+                          <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed mb-4">{p.goal}</p>
+                          <div className="space-y-2 pt-3 border-t border-[var(--color-border)]">
+                            {p.needs.map((n) => (
+                              <div key={n} className="flex items-start gap-2">
+                                <IconCheck className="shrink-0 mt-0.5" style={{ color: p.color }} />
+                                <p className="text-[11px] text-[var(--color-text-tertiary)]">{n}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </Item>
                   );
@@ -272,7 +386,10 @@ export default function BridgeJobsCaseStudy() {
               </Stagger>
 
               {/* Design Principles */}
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-6">Design principles I established</h3>
+              <div className="flex items-center gap-3 mb-6">
+                <IconShield className="text-[#0038FF]" />
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">Design principles I established</h3>
+              </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[
                   { icon: IconGlobe, t: 'Network-first', d: 'Every screen reinforces this is a private, trusted network — not a public job board. The VC brand is always visible.' },
@@ -285,10 +402,13 @@ export default function BridgeJobsCaseStudy() {
                   return (
                     <div key={p.t} className="rounded-xl border border-[var(--color-border)] p-5">
                       <div className="flex items-center gap-3 mb-3">
-                        <IconBox><Icon className="text-[var(--color-text-primary)]" /></IconBox>
-                        <div><p className="text-xs text-[var(--color-text-tertiary)]">0{i + 1}</p><p className="text-sm font-semibold text-[var(--color-text-primary)]">{p.t}</p></div>
+                        <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2 py-0.5 rounded">0{i + 1}</span>
+                        <div className="w-8 h-8 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] flex items-center justify-center">
+                          <Icon className="text-[var(--color-text-primary)]" />
+                        </div>
+                        <p className="text-sm font-semibold text-[var(--color-text-primary)]">{p.t}</p>
                       </div>
-                      <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{p.d}</p>
+                      <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{p.d}</p>
                     </div>
                   );
                 })}
@@ -301,10 +421,13 @@ export default function BridgeJobsCaseStudy() {
           {/* ━━━ DESIGN PROCESS — Decisions & Tradeoffs ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>Design Process</SectionLabel>
-              <SectionTitle>Four product decisions that shaped the architecture</SectionTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Process</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Architecture decisions</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">Four product decisions that shaped the architecture</h2>
 
-              <div className="max-w-3xl text-[var(--color-text-secondary)] leading-relaxed mb-14">
+              <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed mb-14">
                 <p>These aren&apos;t UI polish decisions. Each one determined how four user roles, 120+ companies, and 13 ATS providers coexist in a single product — and each one required choosing the harder path because the obvious solution didn&apos;t scale.</p>
               </div>
             </section>
@@ -590,26 +713,54 @@ export default function BridgeJobsCaseStudy() {
               {/* Design System */}
           <Reveal>
             <section>
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">The design system I built</h3>
-              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-6 max-w-3xl">I created a comprehensive design system before the first line of code — then codified it into CSS custom properties and Tailwind utilities. This became the single source of truth, and critically, the instruction set that kept AI-generated code consistent with my design intent.</p>
-              <div className="rounded-xl border border-[var(--color-border)] p-6">
-                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide mb-4">Color palette</p>
-                <div className="flex flex-wrap gap-3 mb-6">
-                  {[
-                    { n: 'Royal Blue', h: '#0038FF', r: 'Primary' }, { n: 'Charcoal', h: '#0D1531', r: 'Text' }, { n: 'Slate 05', h: '#F9F9FA', r: 'Background' }, { n: 'Slate 30', h: '#D9DBE1', r: 'Borders' },
-                    { n: 'Kelly', h: '#0EA02E', r: 'Success' }, { n: 'Honey', h: '#E19500', r: 'Warning' }, { n: 'Ruby', h: '#E13535', r: 'Error' }, { n: 'Sky', h: '#568FFF', r: 'Accent' },
-                  ].map((c) => (
-                    <div key={c.n} className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-md border border-[var(--color-border)]" style={{ backgroundColor: c.h }} />
-                      <div><p className="text-xs font-medium text-[var(--color-text-primary)]">{c.n}</p><p className="text-[10px] text-[var(--color-text-tertiary)]">{c.h} · {c.r}</p></div>
-                    </div>
-                  ))}
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">System</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Design foundation</p>
+              </div>
+              <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-4">The design system I built before the first line of code</h3>
+              <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-3 mb-8">
+                <p>I codified every design decision into CSS custom properties and Tailwind utilities. This became the single source of truth, and critically, the instruction set that kept AI-generated code consistent with my design intent across 57 components.</p>
+              </div>
+
+              {/* Color palette */}
+              <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-4">
+                <div className="px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                  <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">Color palette &mdash; 8 semantic tokens</p>
                 </div>
-                <div className="grid sm:grid-cols-3 gap-4 pt-4 border-t border-[var(--color-border)]">
-                  <div><p className="text-xs font-medium text-[var(--color-text-tertiary)] mb-1">Typography</p><p className="text-xs text-[var(--color-text-secondary)]">Mulish, weights 400–700, 12px–36px scale</p></div>
-                  <div><p className="text-xs font-medium text-[var(--color-text-tertiary)] mb-1">Spacing</p><p className="text-xs text-[var(--color-text-secondary)]">8px grid system</p></div>
-                  <div><p className="text-xs font-medium text-[var(--color-text-tertiary)] mb-1">Elevation</p><p className="text-xs text-[var(--color-text-secondary)]">Ds1 (subtle), Ds2 (card), Ds3 (hover)</p></div>
+                <div className="p-5">
+                  <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
+                    {[
+                      { n: 'Royal Blue', h: '#0038FF', r: 'Primary' }, { n: 'Charcoal', h: '#0D1531', r: 'Text' }, { n: 'Slate 05', h: '#F9F9FA', r: 'Background' }, { n: 'Slate 30', h: '#D9DBE1', r: 'Borders' },
+                      { n: 'Kelly', h: '#0EA02E', r: 'Success' }, { n: 'Honey', h: '#E19500', r: 'Warning' }, { n: 'Ruby', h: '#E13535', r: 'Error' }, { n: 'Sky', h: '#568FFF', r: 'Accent' },
+                    ].map((c) => (
+                      <div key={c.n} className="text-center">
+                        <div className="w-full aspect-square rounded-lg border border-[var(--color-border)] mb-2" style={{ backgroundColor: c.h }} />
+                        <p className="text-[10px] font-medium text-[var(--color-text-primary)]">{c.n}</p>
+                        <p className="text-[9px] text-[var(--color-text-tertiary)] font-mono">{c.h}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              </div>
+
+              {/* System specs grid */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                {[
+                  { label: 'Typography', value: 'Mulish', detail: 'Weights 400\u2013700, 12\u201336px scale, tight tracking for headings' },
+                  { label: 'Spacing', value: '8px Grid', detail: 'Consistent rhythm across all components and layouts' },
+                  { label: 'Elevation', value: '3 Levels', detail: 'Ds1 (subtle), Ds2 (card resting), Ds3 (hover/focus)' },
+                  { label: 'Radii', value: 'Contextual', detail: 'xl for cards, full for buttons/search/filters, 4px for badges' },
+                ].map((s) => (
+                  <div key={s.label} className="rounded-xl border border-[var(--color-border)] p-4">
+                    <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest mb-1">{s.label}</p>
+                    <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-1">{s.value}</p>
+                    <p className="text-[10px] text-[var(--color-text-tertiary)] leading-relaxed">{s.detail}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Why this matters for AI development:</span> The design system wasn&apos;t just documentation — it was the <em>instruction set</em> for Claude Code. Every CSS custom property, spacing token, and elevation level became a constraint that kept AI-generated components on-brand. Without this system, 57 components across 15+ pages would have drifted into visual inconsistency.</p>
               </div>
             </section>
           </Reveal>
@@ -619,38 +770,53 @@ export default function BridgeJobsCaseStudy() {
           {/* ━━━ THE SOLUTION — What I Shipped ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>What I Shipped</SectionLabel>
-              <SectionTitle>15+ pages across 4 user roles — live at jobs.brdg.app</SectionTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Shipped</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Production features</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">15+ pages across 4 user roles — live at jobs.brdg.app</h2>
 
-              <div className="max-w-3xl text-[var(--color-text-secondary)] leading-relaxed mb-10">
+              <div className="max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed mb-10">
                 <p>Every feature below is live in production and actively used. I owned the design end-to-end and partnered with Claude Code for implementation — authoring 9 custom AI skills to maintain design system fidelity, accessibility standards, and UX consistency throughout development.</p>
               </div>
 
               <Stagger className="grid md:grid-cols-2 gap-4 mb-12">
                 {[
-                  { t: 'Public Job Board', r: '/jobs', desc: 'Full-width hero with gradient, elevated search bar, Jobs/Companies tab bar, advanced filters, staggered card animations.', why: 'The hero gradient establishes brand tone immediately. Search is visually dominant — it\'s the primary action. Horizontal filter scrolling on mobile avoids a cramped multi-row layout.' },
-                  { t: 'Job Detail', r: '/jobs/:id', desc: 'Two-column layout with rich content + sidebar. Contextual breadcrumbs via URL params. Warm intros card with three auth states.', why: 'The sidebar stays fixed while content scrolls on desktop. Warm intros card sits above the company card — warm paths are the differentiator and get top placement.' },
-                  { t: 'Companies Browser', r: '/jobs?tab=companies', desc: 'Company cards with logo, industry, funding stage, open jobs count, and VC network badges. Deduplicated across VCs.', why: 'VC badges are the trust signal — always visible on the card, not behind a click. Card density optimized for scanning: enough to decide, not so much it overwhelms.' },
-                  { t: 'Branded Career Pages', r: '/careers/:domain', desc: 'Fully customizable per-VC: header, hero with custom colors, job filters, company listings, footer. Custom domain support, SEO, JSON-LD.', why: 'Each VC fund\'s career page feels like their own product. The branding form includes a live preview iframe so managers see changes in real-time.' },
-                  { t: 'VC Manager Dashboard', r: '/vc/:domain/dashboard', desc: 'Stat cards with color-coded freshness (green < 6h, amber 6–48h, red > 48h), 12-week trend chart, top hiring companies, activity log.', why: 'Color-coded freshness makes data staleness immediately visible — no need to read timestamps. Gradient chart fill adds depth without competing with stats.' },
-                  { t: 'Admin Panel', r: '/admin/*', desc: 'Aggregate stats, bulk job management, VC network CRUD, user management, sync controls. Reuses VC Manager components via shared module with basePath prop.', why: 'Component reuse was deliberate — same tables, different data scope. This kept the design language consistent and reduced surface area.' },
-                ].map((f) => (
+                  { t: 'Public Job Board', r: '/jobs', desc: 'Full-width hero with gradient, elevated search bar, Jobs/Companies tab bar, advanced filters, staggered card animations.', why: 'The hero gradient establishes brand tone immediately. Search is visually dominant — it\'s the primary action. Horizontal filter scrolling on mobile avoids a cramped multi-row layout.', color: '#568FFF' },
+                  { t: 'Job Detail', r: '/jobs/:id', desc: 'Two-column layout with rich content + sidebar. Contextual breadcrumbs via URL params. Warm intros card with three auth states.', why: 'The sidebar stays fixed while content scrolls on desktop. Warm intros card sits above the company card — warm paths are the differentiator and get top placement.', color: '#0038FF' },
+                  { t: 'Companies Browser', r: '/jobs?tab=companies', desc: 'Company cards with logo, industry, funding stage, open jobs count, and VC network badges. Deduplicated across VCs.', why: 'VC badges are the trust signal — always visible on the card, not behind a click. Card density optimized for scanning: enough to decide, not so much it overwhelms.', color: '#7450DA' },
+                  { t: 'Branded Career Pages', r: '/careers/:domain', desc: 'Fully customizable per-VC: header, hero with custom colors, job filters, company listings, footer. Custom domain support, SEO, JSON-LD.', why: 'Each VC fund\'s career page feels like their own product. The branding form includes a live preview iframe so managers see changes in real-time.', color: '#0D7C47' },
+                  { t: 'VC Manager Dashboard', r: '/vc/:domain/dashboard', desc: 'Stat cards with color-coded freshness (green < 6h, amber 6–48h, red > 48h), 12-week trend chart, top hiring companies, activity log.', why: 'Color-coded freshness makes data staleness immediately visible — no need to read timestamps. Gradient chart fill adds depth without competing with stats.', color: '#B08A00' },
+                  { t: 'Admin Panel', r: '/admin/*', desc: 'Aggregate stats, bulk job management, VC network CRUD, user management, sync controls. Reuses VC Manager components via shared module with basePath prop.', why: 'Component reuse was deliberate — same tables, different data scope. This kept the design language consistent and reduced surface area.', color: '#E13535' },
+                ].map((f, i) => (
                   <Item key={f.t}>
-                    <div className="rounded-xl border border-[var(--color-border)] p-6 h-full">
-                      <div className="flex items-baseline justify-between gap-2 mb-2">
-                        <p className="text-sm font-semibold text-[var(--color-text-primary)]">{f.t}</p>
-                        <code className="text-[10px] text-[var(--color-text-tertiary)] bg-[var(--color-bg)] border border-[var(--color-border)] px-1.5 py-0.5 rounded shrink-0">{f.r}</code>
+                    <div className="rounded-xl border border-[var(--color-border)] overflow-hidden h-full">
+                      <div className="h-1" style={{ backgroundColor: f.color }} />
+                      <div className="p-6">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: f.color, backgroundColor: f.color + '12' }}>0{i + 1}</span>
+                          <p className="text-sm font-semibold text-[var(--color-text-primary)]">{f.t}</p>
+                          <code className="text-[10px] text-[var(--color-text-tertiary)] bg-[var(--color-bg)] border border-[var(--color-border)] px-1.5 py-0.5 rounded shrink-0 ml-auto">{f.r}</code>
+                        </div>
+                        <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed mb-3">{f.desc}</p>
+                        <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-3 py-2">
+                          <p className="text-[10px] text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">Design rationale:</span> {f.why}</p>
+                        </div>
                       </div>
-                      <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-3">{f.desc}</p>
-                      <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed pt-3 border-t border-[var(--color-border)]"><span className="font-medium">Design rationale:</span> {f.why}</p>
                     </div>
                   </Item>
                 ))}
               </Stagger>
 
               {/* Component inventory */}
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">57 components across 7 domains</h3>
+              <div className="flex items-center gap-3 mb-4">
+                <IconLayers className="text-[#0038FF]" />
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">57 components across 7 domains</h3>
+              </div>
               <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-10">
+                <div className="px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                  <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">Component architecture breakdown</p>
+                </div>
                 <table className="w-full text-sm">
                   <thead><tr className="border-b border-[var(--color-border)] bg-[var(--color-bg-elevated)]">
                     <th className="text-left px-5 py-3 text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Domain</th>
@@ -677,23 +843,37 @@ export default function BridgeJobsCaseStudy() {
                 </table>
               </div>
 
-              {/* Accessibility */}
+              {/* Accessibility + Micro-interactions */}
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="rounded-xl border border-[var(--color-border)] p-5">
-                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide mb-4">Accessibility</p>
-                  <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
+                <div className="rounded-xl border border-[#0EA02E]/20 p-5 bg-[#0EA02E]/[0.02]">
+                  <div className="flex items-center gap-2 mb-4">
+                    <IconShield className="text-[#0EA02E]" />
+                    <p className="text-[10px] font-medium text-[#0EA02E] uppercase tracking-widest">Accessibility</p>
+                  </div>
+                  <div className="space-y-2">
                     {['WCAG AA color contrast on all text', 'Focus rings: 2px Royal Blue, 2px offset', 'Reduced motion via @media query', 'Semantic HTML with heading hierarchy', 'Keyboard navigation (Radix primitives)'].map((a) => (
-                      <li key={a} className="flex gap-2"><IconCheck className="text-green-600 shrink-0" />{a}</li>
+                      <div key={a} className="flex gap-2 text-[11px] text-[var(--color-text-secondary)]"><IconCheck className="text-[#0EA02E] shrink-0 mt-0.5" />{a}</div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
-                <div className="rounded-xl border border-[var(--color-border)] p-5">
-                  <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide mb-4">Micro-interactions I specified</p>
-                  <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
-                    {['Card stagger: 8 cards, 50ms delay, 300ms total', 'Card hover: translateY(-2px) + Ds3 shadow (200ms)', 'Nav transitions: 150ms color, 200ms shadow', 'Page transitions: opacity 300ms with content shift'].map((a) => (
-                      <li key={a} className="flex gap-2"><span className="text-[var(--color-text-tertiary)] shrink-0">•</span>{a}</li>
+                <div className="rounded-xl border border-[#0038FF]/20 p-5 bg-[#0038FF]/[0.02]">
+                  <div className="flex items-center gap-2 mb-4">
+                    <IconSparkle className="text-[#0038FF]" />
+                    <p className="text-[10px] font-medium text-[#0038FF] uppercase tracking-widest">Micro-interactions I specified</p>
+                  </div>
+                  <div className="space-y-2">
+                    {[
+                      { label: 'Card stagger', value: '8 cards, 50ms delay, 300ms total' },
+                      { label: 'Card hover', value: 'translateY(-2px) + Ds3 shadow (200ms)' },
+                      { label: 'Nav transitions', value: '150ms color, 200ms shadow' },
+                      { label: 'Page transitions', value: 'opacity 300ms with content shift' },
+                    ].map((a) => (
+                      <div key={a.label} className="flex items-start gap-2">
+                        <IconBolt className="text-[#0038FF] shrink-0 mt-0.5" />
+                        <p className="text-[11px] text-[var(--color-text-secondary)]"><span className="font-medium text-[var(--color-text-primary)]">{a.label}:</span> {a.value}</p>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
             </section>
@@ -704,42 +884,95 @@ export default function BridgeJobsCaseStudy() {
           {/* ━━━ OUTCOME & IMPACT ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>Outcome &amp; Impact</SectionLabel>
-              <SectionTitle>A production SaaS serving Bridge&apos;s entire VC network</SectionTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Impact</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Outcome &amp; results</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-6 leading-snug">A production SaaS serving Bridge&apos;s entire VC network</h2>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                {[
-                  { v: '1', l: 'Production SaaS — live at jobs.brdg.app' },
-                  { v: '57', l: 'UI components (8,196 lines of code)' },
-                  { v: '13', l: 'ATS integrations (6,046 lines of sync logic)' },
-                  { v: '3', l: 'Scheduled cron jobs running daily' },
-                ].map((s) => (
-                  <div key={s.l} className="rounded-xl border border-[var(--color-border)] p-4 text-center">
-                    <p className="text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight">{s.v}</p>
-                    <p className="text-xs text-[var(--color-text-tertiary)] mt-1">{s.l}</p>
-                  </div>
-                ))}
+              {/* Stats row */}
+              <div className="rounded-xl border border-[var(--color-border)] overflow-hidden mb-10">
+                <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[var(--color-border)]">
+                  {[
+                    { v: '1', l: 'Production SaaS', sub: 'Live at jobs.brdg.app', color: '#0EA02E' },
+                    { v: '57', l: 'UI Components', sub: '8,196 lines of code', color: '#0038FF' },
+                    { v: '13', l: 'ATS Integrations', sub: '6,046 lines of sync logic', color: '#7450DA' },
+                    { v: '3', l: 'Cron Jobs', sub: 'Running daily in production', color: '#B08A00' },
+                  ].map((s) => (
+                    <div key={s.l} className="p-5 text-center">
+                      <p className="text-3xl font-bold tracking-tight mb-1" style={{ color: s.color }}>{s.v}</p>
+                      <p className="text-xs font-semibold text-[var(--color-text-primary)]">{s.l}</p>
+                      <p className="text-[10px] text-[var(--color-text-tertiary)] mt-0.5">{s.sub}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <Stagger className="grid md:grid-cols-2 gap-4 mb-12">
+              {/* Key takeaways */}
+              <Stagger className="grid md:grid-cols-2 gap-4 mb-10">
                 {[
-                  { icon: IconCube, t: 'Product designers can ship production software', d: 'With the right tools, design thinking translates directly into working systems. This isn\'t a prototype — it\'s a production SaaS with enterprise auth, cron jobs, and real users.' },
-                  { icon: IconSparkle, t: 'Agentic AI is a multiplier, not a replacement', d: 'I handled every product decision, information architecture choice, and visual hierarchy call. The AI handled TypeScript, Prisma queries, and API integrations. The division was clear.' },
-                  { icon: IconLayers, t: 'Design systems matter more with AI', d: 'A well-defined design system became the instruction set that kept AI-generated code on-brand. Without tokens, specs, and principles, the output would have been inconsistent.' },
-                  { icon: IconBolt, t: 'The designer-developer gap is closing', d: 'Not because designers are becoming engineers, but because AI lets designers express intent at a level of specificity that produces engineering-quality output.' },
+                  { icon: IconCube, t: 'Product designers can ship production software', d: 'With the right tools, design thinking translates directly into working systems. This isn\'t a prototype — it\'s a production SaaS with enterprise auth, cron jobs, and real users.', color: '#568FFF' },
+                  { icon: IconSparkle, t: 'Agentic AI is a multiplier, not a replacement', d: 'I handled every product decision, information architecture choice, and visual hierarchy call. The AI handled TypeScript, Prisma queries, and API integrations. The division was clear.', color: '#0038FF' },
+                  { icon: IconLayers, t: 'Design systems matter more with AI', d: 'A well-defined design system became the instruction set that kept AI-generated code on-brand. Without tokens, specs, and principles, the output would have been inconsistent.', color: '#7450DA' },
+                  { icon: IconBolt, t: 'The designer-developer gap is closing', d: 'Not because designers are becoming engineers, but because AI lets designers express intent at a level of specificity that produces engineering-quality output.', color: '#0D7C47' },
                 ].map((item, i) => {
                   const Icon = item.icon;
                   return (
                     <Item key={item.t}>
-                      <div className="rounded-xl border border-[var(--color-border)] p-6 h-full">
-                        <div className="flex items-center gap-3 mb-3"><IconBox><Icon className="text-[var(--color-text-primary)]" /></IconBox><p className="text-xs text-[var(--color-text-tertiary)]">0{i + 1}</p></div>
-                        <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">{item.t}</p>
-                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{item.d}</p>
+                      <div className="rounded-xl border border-[var(--color-border)] overflow-hidden h-full">
+                        <div className="h-1" style={{ backgroundColor: item.color }} />
+                        <div className="p-6">
+                          <div className="flex items-center gap-3 mb-3">
+                            <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: item.color, backgroundColor: item.color + '12' }}>0{i + 1}</span>
+                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: item.color + '10' }}>
+                              <Icon style={{ color: item.color }} />
+                            </div>
+                          </div>
+                          <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">{item.t}</p>
+                          <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{item.d}</p>
+                        </div>
                       </div>
                     </Item>
                   );
                 })}
               </Stagger>
+
+              {/* What I owned vs what AI handled */}
+              <div className="rounded-xl border border-[var(--color-border)] overflow-hidden">
+                <div className="px-5 py-3 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+                  <p className="text-[10px] font-medium text-[var(--color-text-tertiary)] uppercase tracking-widest">Division of labor &mdash; designer + agentic AI</p>
+                </div>
+                <div className="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <IconUser className="text-[#0038FF]" />
+                      <p className="text-xs font-semibold text-[var(--color-text-primary)]">Me (Product Designer)</p>
+                    </div>
+                    <div className="space-y-1.5">
+                      {['Product strategy & scope definition', 'Information architecture for 4 roles', 'Design system tokens & specifications', 'UX flows & interaction patterns', 'Visual hierarchy & layout decisions', '9 custom AI skills for quality control'].map((item) => (
+                        <div key={item} className="flex items-start gap-2">
+                          <IconCheck className="text-[#0038FF] shrink-0 mt-0.5" />
+                          <p className="text-[11px] text-[var(--color-text-secondary)]">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <IconSparkle className="text-[#7450DA]" />
+                      <p className="text-xs font-semibold text-[var(--color-text-primary)]">Claude Code (AI Partner)</p>
+                    </div>
+                    <div className="space-y-1.5">
+                      {['TypeScript implementation', 'Prisma ORM & database queries', '13 ATS API client integrations', 'Next.js routing & server components', 'Cron job & sync engine logic', 'Test coverage & error handling'].map((item) => (
+                        <div key={item} className="flex items-start gap-2">
+                          <IconCheck className="text-[#7450DA] shrink-0 mt-0.5" />
+                          <p className="text-[11px] text-[var(--color-text-secondary)]">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </section>
           </Reveal>
 
@@ -748,11 +981,38 @@ export default function BridgeJobsCaseStudy() {
           {/* ━━━ REFLECTION ━━━ */}
           <Reveal>
             <section>
-              <SectionLabel>Reflection</SectionLabel>
-              <SectionTitle>What I&apos;d do differently next time</SectionTitle>
-              <div className="max-w-3xl space-y-4 text-[var(--color-text-secondary)] leading-relaxed mb-10">
-                <p>If I were starting Bridge Jobs again, I&apos;d invest more in visual artifacts before jumping to code. Even with AI, having Figma mockups to reference speeds up review cycles significantly — my design intent was clear in my head, but verifying it against production output was slower than verifying against a visual spec.</p>
-                <p>I&apos;d also build a component playground earlier. I caught most inconsistencies at the page level, but catching them at the component level is cheaper. And as the codebase grew past 50+ components, I wished I had automated visual regression testing to catch design drift before I had to spot it manually.</p>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-mono font-medium text-[#0038FF] bg-[#0038FF]/8 px-2.5 py-0.5 rounded">Reflection</span>
+                <p className="text-xs font-medium text-[var(--color-text-tertiary)] uppercase tracking-wide">Lessons learned</p>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-8 leading-snug">What I&apos;d do differently next time</h2>
+
+              <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                {[
+                  { num: '01', title: 'Invest in visual artifacts earlier', desc: 'Even with AI, having Figma mockups to reference speeds up review cycles significantly. My design intent was clear in my head, but verifying it against production output was slower than verifying against a visual spec.', icon: IconEye, color: '#0038FF' },
+                  { num: '02', title: 'Build a component playground sooner', desc: 'I caught most inconsistencies at the page level, but catching them at the component level is cheaper. Past 50+ components, I wished I had automated visual regression testing to catch design drift before I had to spot it manually.', icon: IconLayers, color: '#7450DA' },
+                ].map((r) => {
+                  const Icon = r.icon;
+                  return (
+                    <div key={r.num} className="rounded-xl border border-[var(--color-border)] overflow-hidden">
+                      <div className="h-1" style={{ backgroundColor: r.color }} />
+                      <div className="p-5">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: r.color, backgroundColor: r.color + '12' }}>{r.num}</span>
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: r.color + '10' }}>
+                            <Icon style={{ color: r.color }} />
+                          </div>
+                        </div>
+                        <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">{r.title}</p>
+                        <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed">{r.desc}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] px-4 py-3">
+                <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed"><span className="font-medium text-[var(--color-text-secondary)]">The bigger takeaway:</span> The designer-developer gap isn&apos;t closing because designers are learning to code. It&apos;s closing because AI lets designers express intent at a level of specificity that produces engineering-quality output. The design system was the bridge.</p>
               </div>
             </section>
           </Reveal>

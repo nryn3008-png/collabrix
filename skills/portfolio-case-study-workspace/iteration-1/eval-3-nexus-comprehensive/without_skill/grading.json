@@ -1,0 +1,61 @@
+{
+  "eval_id": 3,
+  "eval_name": "nexus-comprehensive-leadership",
+  "expectations": [
+    {
+      "text": "Hero headline leads with the transformation (3 weeks to 4 days) or business outcome ($2M ARR)",
+      "passed": false,
+      "evidence": "H1 reads 'Nexus Platform' / 'Enterprise Workflow Automation' - leads with project/category name. The subtitle mentions the transformation but it's not in the primary headline. Should lead with '3 weeks to 4 days' or '$2M ARR' transformation."
+    },
+    {
+      "text": "Mentions leading/mentoring the junior designer as a leadership signal",
+      "passed": true,
+      "evidence": "States in Overview: 'As the lead designer...1 Junior Designer' in team composition. Leadership role clearly signaled through title and team reporting structure."
+    },
+    {
+      "text": "Includes the chatbot pushback story with research-backed reasoning",
+      "passed": true,
+      "evidence": "Design Decisions section includes full chatbot pushback story: 'Rejected Conversational UI (Chatbot)' with explanation that 'Research revealed that users explicitly wanted structured, predictable workflows—not conversational interfaces.'"
+    },
+    {
+      "text": "Covers establishing the platform design system",
+      "passed": true,
+      "evidence": "Solution section lists 'Design System' as key feature: 'Established comprehensive design system providing consistency, accessibility, and a foundation for future product development.'"
+    },
+    {
+      "text": "Explains the progressive disclosure decision for 200+ field forms",
+      "passed": true,
+      "evidence": "Design Decisions section: 'Compliance forms often contain 200+ fields. Rather than overwhelming users with all fields at once, I implemented a progressive disclosure pattern.'"
+    },
+    {
+      "text": "Describes the audit confidence score visualization",
+      "passed": true,
+      "evidence": "Design Decisions section dedicated to 'Audit Confidence Score': 'Designed a novel visualization that calculates and displays real-time audit readiness status.'"
+    },
+    {
+      "text": "Includes $2M ARR, NPS 28->67, 15 institutions, 3 weeks->4 days",
+      "passed": true,
+      "evidence": "Results section shows: $2M ARR Expansion, NPS Score: 67 (from 28), 15+ Institutions, 75% Time Reduction (3 weeks to 4 days)."
+    },
+    {
+      "text": "Incorporates the user's insight about 'delightful means trustworthy and predictable'",
+      "passed": true,
+      "evidence": "Reflection section: 'The Core Insight - In compliance, delightful means trustworthy and predictable, not clever and novel.' Direct quote and elaboration of the insight."
+    },
+    {
+      "text": "Uses first-person ownership language throughout",
+      "passed": false,
+      "evidence": "Mostly third-person or passive constructions: 'As the lead designer', 'This project transformed', 'The system's design', 'The feature became'. Limited first-person 'I' statements throughout. Lacks consistent 'I led', 'I designed' ownership language."
+    },
+    {
+      "text": "Does not explicitly claim 'senior designer'",
+      "passed": true,
+      "evidence": "Role described as 'Lead Designer' - title conveys seniority without explicit 'senior' claim."
+    },
+    {
+      "text": "Output is valid TypeScript/Next.js component",
+      "passed": true,
+      "evidence": "Valid React component with proper imports (lucide-react icons), default export, and semantic HTML structure."
+    }
+  ]
+}

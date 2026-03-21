@@ -1,0 +1,61 @@
+{
+  "eval_id": 3,
+  "eval_name": "nexus-comprehensive-leadership",
+  "expectations": [
+    {
+      "text": "Hero headline leads with the transformation (3 weeks to 4 days) or business outcome ($2M ARR)",
+      "passed": true,
+      "evidence": "H1 reads: 'Transforming Compliance Workflows: From 3 Weeks to 4 Days' - leads directly with the transformation metric."
+    },
+    {
+      "text": "Mentions leading/mentoring the junior designer as a leadership signal",
+      "passed": true,
+      "evidence": "Context section states: 'working as the lead designer with one junior designer reporting to me'. Clear leadership signal included."
+    },
+    {
+      "text": "Includes the chatbot pushback story with research-backed reasoning",
+      "passed": true,
+      "evidence": "Dedicated paragraph: 'One decision required pushing back on a PM request...Research strongly suggested this was wrong...I presented the research, explained the risk, and advocated for a different approach.'"
+    },
+    {
+      "text": "Covers establishing the platform design system",
+      "passed": true,
+      "evidence": "States: 'Beyond the individual features, I established the design system for the platform. This meant defining patterns for complex form interactions, approval workflows, and audit trail documentation.'"
+    },
+    {
+      "text": "Explains the progressive disclosure decision for 200+ field forms",
+      "passed": true,
+      "evidence": "Design process section: 'I encountered forms with 200+ fields...Instead, I designed a progressive disclosure pattern that revealed complexity only when needed.'"
+    },
+    {
+      "text": "Describes the audit confidence score visualization",
+      "passed": true,
+      "evidence": "Design decision section: 'I designed an audit confidence score visualization that synthesized all the scattered information into a single, updateable number...This simple visualization became the emotional anchor of the entire product.'"
+    },
+    {
+      "text": "Includes $2M ARR, NPS 28->67, 15 institutions, 3 weeks->4 days",
+      "passed": true,
+      "evidence": "Key metrics shown: '3 weeks → 4 days', 'NPS Improvement 28 → 67', '15 firms' adoption. Outcomes section states: 'the success of this product line led to a $2M ARR expansion'."
+    },
+    {
+      "text": "Incorporates the user's insight about 'delightful means trustworthy and predictable'",
+      "passed": true,
+      "evidence": "Reflection section: 'In compliance, delightful doesn't mean clever interactions or novel patterns. It means trustworthy, predictable, and clear...Users in this domain are under regulatory pressure.'"
+    },
+    {
+      "text": "Uses first-person ownership language throughout",
+      "passed": true,
+      "evidence": "Consistent first-person voice: 'I led a comprehensive discovery phase', 'I knew we needed', 'I designed', 'I encountered', 'I presented the research', 'I established the design system'."
+    },
+    {
+      "text": "Does not explicitly claim 'senior designer'",
+      "passed": true,
+      "evidence": "Role described as 'Product Design Lead' without explicit seniority claim. Leadership is demonstrated through actions and responsibilities."
+    },
+    {
+      "text": "Output is valid TypeScript/Next.js component",
+      "passed": true,
+      "evidence": "Valid React component with proper default export and semantic article/section structure."
+    }
+  ]
+}
