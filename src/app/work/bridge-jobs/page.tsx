@@ -358,7 +358,6 @@ export default function BridgeJobsCaseStudy() {
                   return (
                     <Item key={p.role}>
                       <div className="rounded-xl border border-[var(--color-border)] overflow-hidden h-full">
-                        <div className="h-1" style={{ backgroundColor: p.color }} />
                         <div className="p-5">
                           <div className="flex items-center gap-3 mb-3">
                             <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: p.color + '10', color: p.color }}>
@@ -791,7 +790,6 @@ export default function BridgeJobsCaseStudy() {
                 ].map((f, i) => (
                   <Item key={f.t}>
                     <div className="rounded-xl border border-[var(--color-border)] overflow-hidden h-full">
-                      <div className="h-1" style={{ backgroundColor: f.color }} />
                       <div className="p-6">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: f.color, backgroundColor: f.color + '12' }}>0{i + 1}</span>
@@ -920,7 +918,6 @@ export default function BridgeJobsCaseStudy() {
                   return (
                     <Item key={item.t}>
                       <div className="rounded-xl border border-[var(--color-border)] overflow-hidden h-full">
-                        <div className="h-1" style={{ backgroundColor: item.color }} />
                         <div className="p-6">
                           <div className="flex items-center gap-3 mb-3">
                             <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: item.color, backgroundColor: item.color + '12' }}>0{i + 1}</span>
@@ -995,7 +992,6 @@ export default function BridgeJobsCaseStudy() {
                   const Icon = r.icon;
                   return (
                     <div key={r.num} className="rounded-xl border border-[var(--color-border)] overflow-hidden">
-                      <div className="h-1" style={{ backgroundColor: r.color }} />
                       <div className="p-5">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: r.color, backgroundColor: r.color + '12' }}>{r.num}</span>
