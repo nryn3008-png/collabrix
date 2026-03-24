@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useReducedMotion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -78,6 +79,30 @@ function IconBox({ children }: { children: React.ReactNode }) {
   return <div className="w-9 h-9 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] flex items-center justify-center shrink-0">{children}</div>;
 }
 
+/* ─── Screenshot Component ─── */
+
+function Screenshot({ src, alt, caption }: { src: string; alt: string; caption?: string }) {
+  return (
+    <figure className="my-8">
+      <div className="rounded-xl border border-[var(--color-border)] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+        <Image
+          src={src}
+          alt={alt}
+          width={1440}
+          height={900}
+          className="w-full h-auto"
+          quality={90}
+        />
+      </div>
+      {caption && (
+        <figcaption className="mt-3 text-center text-[11px] text-[var(--color-text-tertiary)]">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 /* ─── Page ─── */
 
 export default function BridgeJobsCaseStudy() {
@@ -119,6 +144,7 @@ export default function BridgeJobsCaseStudy() {
                   <div key={s.l}><p className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight">{s.v}</p><p className="text-xs text-[var(--color-text-tertiary)] mt-1">{s.l}</p></div>
                 ))}
               </div>
+              <Screenshot src="/case-studies/bridge-jobs/hero-job-board.jpg" alt="Bridge Jobs public job board showing 6,601 open positions across 334 companies and 7 VC networks" caption="The public job board — aggregating 6,601 jobs across 7 VC networks into one trusted surface" />
             </header>
           ) : (
             <HeroReveal>
@@ -143,6 +169,9 @@ export default function BridgeJobsCaseStudy() {
                       <div key={s.l}><p className="text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] tracking-tight">{s.v}</p><p className="text-xs text-[var(--color-text-tertiary)] mt-1">{s.l}</p></div>
                     ))}
                   </div>
+                </HeroItem>
+                <HeroItem>
+                  <Screenshot src="/case-studies/bridge-jobs/hero-job-board.jpg" alt="Bridge Jobs public job board showing 6,601 open positions across 334 companies and 7 VC networks" caption="The public job board — aggregating 6,601 jobs across 7 VC networks into one trusted surface" />
                 </HeroItem>
               </header>
             </HeroReveal>
@@ -618,25 +647,21 @@ export default function BridgeJobsCaseStudy() {
                   </div>
                 </div>
 
-                {/* Visual: Three different branded pages */}
+                {/* Visual: Three different branded pages — real screenshots */}
                 <div className="grid sm:grid-cols-3 gap-3 mb-6">
                   {[
-                    { name: 'Techstars', color: '#00B2A9', domain: 'careers.techstars.com' },
-                    { name: 'Orange DAO', color: '#FF6B00', domain: 'careers.orangedao.xyz' },
-                    { name: 'Angel Invest', color: '#7450DA', domain: 'careers.angelinvest.ventures' },
+                    { name: 'Bridge', src: '/case-studies/bridge-jobs/career-page-bridge.jpg', color: '#3B82F6', domain: 'careers.brdg.app' },
+                    { name: 'Techstars', src: '/case-studies/bridge-jobs/career-page-techstars.jpg', color: '#00B2A9', domain: 'careers.techstars.com' },
+                    { name: 'Orange DAO', src: '/case-studies/bridge-jobs/career-page-orangedao.jpg', color: '#FF6B00', domain: 'careers.orangedao.xyz' },
                   ].map((vc) => (
                     <div key={vc.name} className="rounded-xl overflow-hidden border border-[var(--color-border)]">
-                      <div className="h-2" style={{ backgroundColor: vc.color }} />
-                      <div className="p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-4 h-4 rounded" style={{ backgroundColor: vc.color }} />
+                      <div className="h-1.5" style={{ backgroundColor: vc.color }} />
+                      <Image src={vc.src} alt={`${vc.name} branded career page`} width={480} height={300} className="w-full h-auto" quality={90} />
+                      <div className="px-4 py-3 border-t border-[var(--color-border)]">
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 rounded" style={{ backgroundColor: vc.color }} />
                           <p className="text-[11px] font-semibold text-[var(--color-text-primary)]">{vc.name}</p>
-                        </div>
-                        <p className="text-[10px] text-[var(--color-text-tertiary)] font-mono mb-3">{vc.domain}</p>
-                        <div className="flex gap-1">
-                          {['Jobs', 'Companies'].map((tab, i) => (
-                            <span key={tab} className="text-[9px] px-2 py-0.5 rounded-full" style={{ backgroundColor: i === 0 ? vc.color + '15' : 'transparent', color: i === 0 ? vc.color : 'var(--color-text-tertiary)' }}>{tab}</span>
-                          ))}
+                          <p className="text-[9px] text-[var(--color-text-tertiary)] font-mono ml-auto">{vc.domain}</p>
                         </div>
                       </div>
                     </div>
@@ -781,15 +806,18 @@ export default function BridgeJobsCaseStudy() {
 
               <Stagger className="grid md:grid-cols-2 gap-4 mb-12">
                 {[
-                  { t: 'Public Job Board', r: '/jobs', desc: 'Full-width hero with gradient, elevated search bar, Jobs/Companies tab bar, advanced filters, staggered card animations.', why: 'The hero gradient establishes brand tone immediately. Search is visually dominant — it\'s the primary action. Horizontal filter scrolling on mobile avoids a cramped multi-row layout.', color: '#568FFF' },
-                  { t: 'Job Detail', r: '/jobs/:id', desc: 'Two-column layout with rich content + sidebar. Contextual breadcrumbs via URL params. Warm intros card with three auth states.', why: 'The sidebar stays fixed while content scrolls on desktop. Warm intros card sits above the company card — warm paths are the differentiator and get top placement.', color: '#0038FF' },
-                  { t: 'Companies Browser', r: '/jobs?tab=companies', desc: 'Company cards with logo, industry, funding stage, open jobs count, and VC network badges. Deduplicated across VCs.', why: 'VC badges are the trust signal — always visible on the card, not behind a click. Card density optimized for scanning: enough to decide, not so much it overwhelms.', color: '#7450DA' },
-                  { t: 'Branded Career Pages', r: '/careers/:domain', desc: 'Fully customizable per-VC: header, hero with custom colors, job filters, company listings, footer. Custom domain support, SEO, JSON-LD.', why: 'Each VC fund\'s career page feels like their own product. The branding form includes a live preview iframe so managers see changes in real-time.', color: '#0D7C47' },
+                  { t: 'Public Job Board', r: '/jobs', desc: 'Full-width hero with gradient, elevated search bar, Jobs/Companies tab bar, advanced filters, staggered card animations.', why: 'The hero gradient establishes brand tone immediately. Search is visually dominant — it\'s the primary action. Horizontal filter scrolling on mobile avoids a cramped multi-row layout.', color: '#568FFF', img: '/case-studies/bridge-jobs/hero-job-board.jpg' },
+                  { t: 'Job Detail', r: '/jobs/:id', desc: 'Two-column layout with rich content + sidebar. Contextual breadcrumbs via URL params. Warm intros card with three auth states.', why: 'The sidebar stays fixed while content scrolls on desktop. Warm intros card sits above the company card — warm paths are the differentiator and get top placement.', color: '#0038FF', img: '/case-studies/bridge-jobs/job-detail.jpg' },
+                  { t: 'Companies Browser', r: '/jobs?tab=companies', desc: 'Company cards with logo, industry, funding stage, open jobs count, and VC network badges. Deduplicated across VCs.', why: 'VC badges are the trust signal — always visible on the card, not behind a click. Card density optimized for scanning: enough to decide, not so much it overwhelms.', color: '#7450DA', img: '/case-studies/bridge-jobs/companies-browser.jpg' },
+                  { t: 'Branded Career Pages', r: '/careers/:domain', desc: 'Fully customizable per-VC: header, hero with custom colors, job filters, company listings, footer. Custom domain support, SEO, JSON-LD.', why: 'Each VC fund\'s career page feels like their own product. The branding form includes a live preview iframe so managers see changes in real-time.', color: '#0D7C47', img: '/case-studies/bridge-jobs/career-page-techstars.jpg' },
                   { t: 'VC Manager Dashboard', r: '/vc/:domain/dashboard', desc: 'Stat cards with color-coded freshness (green < 6h, amber 6–48h, red > 48h), 12-week trend chart, top hiring companies, activity log.', why: 'Color-coded freshness makes data staleness immediately visible — no need to read timestamps. Gradient chart fill adds depth without competing with stats.', color: '#B08A00' },
                   { t: 'Admin Panel', r: '/admin/*', desc: 'Aggregate stats, bulk job management, VC network CRUD, user management, sync controls. Reuses VC Manager components via shared module with basePath prop.', why: 'Component reuse was deliberate — same tables, different data scope. This kept the design language consistent and reduced surface area.', color: '#E13535' },
                 ].map((f, i) => (
                   <Item key={f.t}>
                     <div className="rounded-xl border border-[var(--color-border)] overflow-hidden h-full">
+                      {('img' in f && f.img) && (
+                        <Image src={f.img} alt={`${f.t} screenshot`} width={720} height={450} className="w-full h-auto border-b border-[var(--color-border)]" quality={85} />
+                      )}
                       <div className="p-6">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-xs font-mono font-medium px-2 py-0.5 rounded" style={{ color: f.color, backgroundColor: f.color + '12' }}>0{i + 1}</span>
