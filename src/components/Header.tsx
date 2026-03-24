@@ -8,7 +8,6 @@ const navLinks = [
   { href: '#expertise', label: 'What I Do' },
   { href: '#process', label: 'Process' },
   { href: '#clients', label: 'Who I Help' },
-  { href: '#contact', label: 'Contact' },
 ];
 
 export default function Header() {
@@ -58,7 +57,7 @@ export default function Header() {
               href={isHome ? '#contact' : '/#contact'}
               className="text-sm font-medium px-4 py-2 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
             >
-              Work with me
+              Get in touch
             </a>
           </div>
 
@@ -112,7 +111,7 @@ export default function Header() {
                 className="inline-flex justify-center text-base font-medium px-4 py-3 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200 mt-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Work with me
+                Get in touch
               </a>
             </div>
           </div>
