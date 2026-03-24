@@ -286,11 +286,6 @@ const hobbies = [
 // EXPERIENCE YEARS COUNTER
 // ============================================
 function YearsCounter() {
-  // Calculate roughly from May 2020 (first role)
-  const startDate = new Date(2020, 4); // May 2020
-  const now = new Date();
-  const years = Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
-
   return (
     <div className="flex items-center gap-3 mb-10">
       <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--color-text-primary)]">
@@ -298,7 +293,7 @@ function YearsCounter() {
       </div>
       <div>
         <p className="text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight leading-none">
-          {years}+ years
+          4+ years
         </p>
         <p className="text-sm text-[var(--color-text-tertiary)] mt-0.5">
           in product design
