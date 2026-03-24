@@ -96,13 +96,13 @@ export default function Hero() {
   // Static render for reduced motion
   if (shouldReduceMotion) {
     return (
-      <section className="min-h-screen flex items-center pt-20 md:pt-0">
+      <section className="min-h-screen flex items-start md:items-center pt-20 md:pt-0">
         <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8 py-16 md:py-24">
           <div>
             <p className="text-sm font-medium text-[var(--color-text-tertiary)] mb-4 tracking-wide uppercase">
               Product Designer & Developer
             </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[var(--color-text-primary)] leading-[1.1] tracking-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-semibold text-[var(--color-text-primary)] leading-[1.1] tracking-tight mb-6">
               I{' '}
               <span className="text-[var(--color-text-secondary)]">design</span>{' '}
               products and{' '}
@@ -140,7 +140,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="min-h-screen flex items-center pt-20 md:pt-0">
+    <section className="min-h-screen flex items-start md:items-center pt-20 md:pt-0">
       <div className="max-w-[var(--max-width-content)] mx-auto px-6 lg:px-8 py-16 md:py-24">
         <motion.div
           initial="hidden"
@@ -157,7 +157,7 @@ export default function Hero() {
 
           {/* 2. Headline */}
           <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[var(--color-text-primary)] leading-[1.1] tracking-tight mb-6"
+            className="text-4xl md:text-5xl lg:text-[3.5rem] font-semibold text-[var(--color-text-primary)] leading-[1.1] tracking-tight mb-6"
             variants={itemVariants}
           >
             I{' '}
