@@ -47,7 +47,7 @@ export default function CTA() {
               </a>
               <a
                 href="/work"
-                className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-lg hover:bg-[var(--color-bg-elevated)] hover:border-[var(--color-text-tertiary)] transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-[var(--color-text-primary)] border border-[var(--color-text-tertiary)] bg-[var(--color-bg-elevated)] rounded-lg hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg)] hover:border-[var(--color-text-primary)] transition-all duration-200"
               >
                 View my work
               </a>
