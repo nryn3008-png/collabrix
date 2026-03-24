@@ -57,15 +57,15 @@ const experiences = [
 const skillGroups = [
   {
     category: 'Design',
-    skills: ['Product Design', 'Design Systems', 'UX Strategy', 'User Research', 'Wireframing', 'Prototyping', 'Visual Design', 'Information Architecture'],
+    skills: ['Product Design', 'Design Systems', 'UX Strategy', 'User Research', 'Wireframing', 'Prototyping', 'Visual Design', 'Information Architecture', 'Interaction Design', 'Accessibility (WCAG)'],
   },
   {
-    category: 'Development',
-    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'HTML/CSS', 'Supabase', 'Git'],
+    category: 'Collaboration',
+    skills: ['Cross-functional Teams', 'Global Team Coordination', 'Design-to-Dev Handoff', 'Stakeholder Communication', 'Mentoring Designers', 'Design Reviews', 'Product Strategy'],
   },
   {
     category: 'Tools & Workflow',
-    skills: ['Figma', 'Design Tokens', 'Claude Code', 'AI-Assisted Dev', 'Vercel', 'VS Code', 'Linear', 'Notion'],
+    skills: ['Figma', 'Design Tokens', 'Claude Code', 'AI-Assisted Development', 'Linear', 'Notion', 'Miro', 'Vercel'],
   },
 ];
 
@@ -152,13 +152,12 @@ export default function KnowMore() {
                           <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-3">
                             {exp.company}{exp.location && <span className="text-[var(--color-text-tertiary)] font-normal"> · {exp.location}</span>}
                           </p>
-                          <ul className="space-y-1.5">
+                          <ul className="space-y-1.5 list-disc list-outside pl-4 marker:text-[var(--color-text-tertiary)]">
                             {exp.points.map((point) => (
                               <li
                                 key={point}
-                                className="text-sm text-[var(--color-text-secondary)] leading-relaxed flex gap-2"
+                                className="text-sm text-[var(--color-text-secondary)] leading-relaxed"
                               >
-                                <span className="text-[var(--color-text-tertiary)] mt-1 shrink-0">•</span>
                                 {point}
                               </li>
                             ))}
@@ -196,13 +195,12 @@ export default function KnowMore() {
                           <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-3">
                             {exp.company}{exp.location && <span className="text-[var(--color-text-tertiary)] font-normal"> · {exp.location}</span>}
                           </p>
-                          <ul className="space-y-1.5">
+                          <ul className="space-y-1.5 list-disc list-outside pl-4 marker:text-[var(--color-text-tertiary)]">
                             {exp.points.map((point) => (
                               <li
                                 key={point}
-                                className="text-sm text-[var(--color-text-secondary)] leading-relaxed flex gap-2"
+                                className="text-sm text-[var(--color-text-secondary)] leading-relaxed"
                               >
-                                <span className="text-[var(--color-text-tertiary)] mt-1 shrink-0">•</span>
                                 {point}
                               </li>
                             ))}
