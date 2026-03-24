@@ -10,7 +10,7 @@ const experiences = [
     role: 'Product Designer',
     company: 'Bridge (brdg.app)',
     duration: 'Dec 2023 — Present',
-    location: 'Full-time',
+    location: 'India \u00b7 Remote',
     points: [
       'Established design system rules and trained AI to understand Bridge\u2019s design language for consistent output across mini apps',
       'Designed and shipped 100+ features, including a full app revamp and core intro flow redesign \u2014 working closely with the CEO and engineering team',
@@ -22,7 +22,7 @@ const experiences = [
     role: 'Product Designer',
     company: 'Quantive (previously Gtmhub, acquired Workboard)',
     duration: 'Jun 2022 — Nov 2023',
-    location: 'Full-time',
+    location: 'Indore, India \u00b7 On-site',
     points: [
       'Worked across 4 products: Cliff.ai (Signals), Results, Singularity, and Modern Data Stack \u2014 a B2B SaaS suite focused on OKRs, KPIs, and strategic decision-making',
       'Led design for Modern Data Stack and Cliff.ai (business observability platform with KPI dashboards and anomaly detection), collaborating with a global team of PMs, engineers, and designers',
