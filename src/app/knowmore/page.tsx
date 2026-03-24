@@ -403,6 +403,9 @@ export default function KnowMore() {
       <p className="mt-4 text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-[var(--max-width-text)]">
         From UX internships to leading product design at a B2B SaaS company and shipping full products with AI—here&apos;s where I&apos;ve been.
       </p>
+      <div className="mt-8">
+        <YearsCounter />
+      </div>
     </div>
   );
 
@@ -445,12 +448,9 @@ export default function KnowMore() {
           <section className="mb-20 md:mb-28">
             {shouldReduceMotion ? (
               <>
-                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-                  <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight">
-                    Experience
-                  </h2>
-                  <YearsCounter />
-                </div>
+                <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-10">
+                  Experience
+                </h2>
 
                 <div className="relative">
                   {/* Timeline line with gradient */}
@@ -477,12 +477,9 @@ export default function KnowMore() {
               </>
             ) : (
               <SectionReveal>
-                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-                  <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight">
-                    Experience
-                  </h2>
-                  <YearsCounter />
-                </div>
+                <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-10">
+                  Experience
+                </h2>
 
                 <div className="relative">
                   {/* Timeline line with gradient */}
