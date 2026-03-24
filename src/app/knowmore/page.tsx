@@ -7,43 +7,49 @@ import { SectionReveal, StaggerContainer, StaggerItem } from '@/lib/motion';
 
 const experiences = [
   {
-    role: 'Product Designer & Developer',
-    company: 'Freelance',
-    duration: '2024 — Present',
+    role: 'Product Designer',
+    company: 'Bridge (brdg.app)',
+    duration: 'Dec 2023 — Present',
+    location: 'Full-time',
     points: [
-      'Designing and building end-to-end digital products for startups',
-      'Combining Figma design systems with production-ready Next.js code',
-      'Reduced client handoff cycles by 60% through unified design-dev workflow',
+      'Established design system rules and trained AI to understand Bridge\u2019s design language for consistent output across mini apps',
+      'Designed and shipped 100+ features, including a full app revamp and core intro flow redesign \u2014 working closely with the CEO and engineering team',
+      'Built two standalone products from scratch: Bridge Jobs (VC-powered talent board with 13 ATS integrations) and Bridge Perks Portal (domain-gated marketplace with 400+ vendor perks)',
+      'Own the entire product design lifecycle \u2014 from research and UX strategy to design systems, visual design, and production front-end code',
     ],
   },
   {
-    role: 'Senior Product Designer',
-    company: 'TechStartup Inc.',
-    duration: '2022 — 2024',
+    role: 'Product Designer',
+    company: 'Quantive (previously Gtmhub, acquired Workboard)',
+    duration: 'Jun 2022 — Nov 2023',
+    location: 'Full-time',
     points: [
-      'Led product design for a B2B SaaS platform serving 10K+ users',
-      'Built and maintained a component library with design tokens',
-      'Collaborated with engineering to ship features 2x faster',
+      'Worked across 4 products: Cliff.ai (Signals), Results, Singularity, and Modern Data Stack \u2014 a B2B SaaS suite focused on OKRs, KPIs, and strategic decision-making',
+      'Led design for Modern Data Stack and Cliff.ai (business observability platform with KPI dashboards and anomaly detection), collaborating with a global team of PMs, engineers, and designers',
+      'Contributed to early product concepts for Singularity alongside the leadership team, incorporating customer feedback for continuous product improvement',
+      'Identified 30+ AI use cases and led AI integration design for Results, collaborating with leadership to weave AI into existing workflows',
+      'Managed and mentored 2 junior designers \u2014 assigning tasks, reviewing work, and promoting design best practices and standards',
     ],
   },
   {
-    role: 'UI/UX Designer',
-    company: 'Digital Agency',
-    duration: '2021 — 2022',
+    role: 'Industrial Design Intern',
+    company: 'Maker\u2019s Asylum',
+    duration: 'Mar 2022 — May 2022',
+    location: 'North Goa, India \u00b7 On-site',
     points: [
-      'Designed interfaces for 15+ client projects across fintech and healthcare',
-      'Established design system foundations and style guides',
-      'Conducted user research and usability testing sessions',
+      'Designed the UI for the new DIY Hour website and learning management system',
+      'Contributed to research data collection for an upcoming foundation initiative',
+      'Finalized the outreach strategy and ideated packaging designs for the toolbox and monthly DIY Hour box',
     ],
   },
   {
-    role: 'Junior Designer',
-    company: 'Creative Studio',
-    duration: '2020 — 2021',
+    role: 'User Experience Intern',
+    company: 'Indigo Consulting',
+    duration: 'May 2020 — Aug 2020',
+    location: 'Mumbai \u00b7 Remote',
     points: [
-      'Created responsive web designs and marketing landing pages',
-      'Assisted in brand identity projects and visual systems',
-      'Learned front-end development to better communicate with engineers',
+      'Assisted the UX team in auditing, evaluating, designing, and wireframing digital experiences for prominent Indian and international fintech brands',
+      'Collaborated with the design team to review and improve the online buying experience for top e-commerce and pharmaceutical companies',
     ],
   },
 ];
@@ -51,15 +57,15 @@ const experiences = [
 const skillGroups = [
   {
     category: 'Design',
-    skills: ['Product Design', 'Design Systems', 'Figma', 'Prototyping', 'User Research', 'Wireframing', 'Visual Design'],
+    skills: ['Product Design', 'Design Systems', 'UX Strategy', 'User Research', 'Wireframing', 'Prototyping', 'Visual Design', 'Information Architecture'],
   },
   {
     category: 'Development',
-    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'HTML/CSS', 'Git'],
+    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'HTML/CSS', 'Supabase', 'Git'],
   },
   {
     category: 'Tools & Workflow',
-    skills: ['Figma Variables', 'Design Tokens', 'AI-Assisted Dev', 'Vercel', 'VS Code', 'Linear', 'Notion'],
+    skills: ['Figma', 'Design Tokens', 'Claude Code', 'AI-Assisted Dev', 'Vercel', 'VS Code', 'Linear', 'Notion'],
   },
 ];
 
@@ -98,7 +104,7 @@ export default function KnowMore() {
                 My Journey
               </h1>
               <p className="mt-4 text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-[var(--max-width-text)]">
-                4+ years of bridging design and development—here&apos;s where I&apos;ve been and what I&apos;ve picked up along the way.
+                From UX internships to leading product design at a B2B SaaS company and shipping full products with AI—here&apos;s where I&apos;ve been.
               </p>
             </div>
           ) : (
@@ -111,7 +117,7 @@ export default function KnowMore() {
                   My Journey
                 </h1>
                 <p className="mt-4 text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-[var(--max-width-text)]">
-                  4+ years of bridging design and development—here&apos;s where I&apos;ve been and what I&apos;ve picked up along the way.
+                  From UX internships to leading product design at a B2B SaaS company and shipping full products with AI—here&apos;s where I&apos;ve been.
                 </p>
               </div>
             </SectionReveal>
@@ -144,7 +150,7 @@ export default function KnowMore() {
                             </span>
                           </div>
                           <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-3">
-                            {exp.company}
+                            {exp.company}{exp.location && <span className="text-[var(--color-text-tertiary)] font-normal"> · {exp.location}</span>}
                           </p>
                           <ul className="space-y-1.5">
                             {exp.points.map((point) => (
@@ -188,7 +194,7 @@ export default function KnowMore() {
                             </span>
                           </div>
                           <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-3">
-                            {exp.company}
+                            {exp.company}{exp.location && <span className="text-[var(--color-text-tertiary)] font-normal"> · {exp.location}</span>}
                           </p>
                           <ul className="space-y-1.5">
                             {exp.points.map((point) => (
