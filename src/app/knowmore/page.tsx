@@ -95,6 +95,35 @@ function WrenchIcon({ className = '' }: { className?: string }) {
   );
 }
 
+// Hobby icons
+function CompassIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+    </svg>
+  );
+}
+
+function FlameIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+    </svg>
+  );
+}
+
+function SproutIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 20h10" />
+      <path d="M10 20c5.5-2.5.8-6.4 3-10" />
+      <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
+      <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" />
+    </svg>
+  );
+}
+
 // ============================================
 // DATA
 // ============================================
@@ -206,6 +235,24 @@ const skillGroups = [
     category: 'Tools & Workflow',
     icon: WrenchIcon,
     skills: ['Figma', 'Design Tokens', 'Claude Code', 'AI-Assisted Development', 'Linear', 'Notion', 'Miro', 'Vercel'],
+  },
+];
+
+const hobbies = [
+  {
+    icon: CompassIcon,
+    title: 'Travelling & Photography',
+    description: 'Exploring new places, capturing moments, and discovering local cuisines along the way.',
+  },
+  {
+    icon: FlameIcon,
+    title: 'Cooking',
+    description: 'Italian and Indian — two kitchens, endless experiments.',
+  },
+  {
+    icon: SproutIcon,
+    title: 'Home Gardening',
+    description: 'Growing things from scratch, both on screen and in soil.',
   },
 ];
 
@@ -582,6 +629,82 @@ export default function KnowMore() {
                                 </span>
                               ))}
                             </div>
+                          </div>
+                        </div>
+                      </StaggerItem>
+                    );
+                  })}
+                </StaggerContainer>
+              </SectionReveal>
+            )}
+          </section>
+
+          {/* ============================================
+              BEYOND WORK — HOBBIES
+              ============================================ */}
+          <section className="mt-20 md:mt-28">
+            {shouldReduceMotion ? (
+              <>
+                <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-3">
+                  Beyond Work
+                </h2>
+                <p className="text-sm text-[var(--color-text-tertiary)] mb-10 max-w-[var(--max-width-text)]">
+                  What keeps me curious outside of design and code.
+                </p>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {hobbies.map((hobby) => {
+                    const Icon = hobby.icon;
+                    return (
+                      <div
+                        key={hobby.title}
+                        className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-5 md:p-6"
+                      >
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border-subtle)]">
+                            <span className="text-[var(--color-text-secondary)]">
+                              <Icon />
+                            </span>
+                          </div>
+                          <h3 className="text-sm font-semibold text-[var(--color-text-primary)]">
+                            {hobby.title}
+                          </h3>
+                        </div>
+                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                          {hobby.description}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            ) : (
+              <SectionReveal>
+                <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-3">
+                  Beyond Work
+                </h2>
+                <p className="text-sm text-[var(--color-text-tertiary)] mb-10 max-w-[var(--max-width-text)]">
+                  What keeps me curious outside of design and code.
+                </p>
+                <StaggerContainer className="grid md:grid-cols-3 gap-6">
+                  {hobbies.map((hobby) => {
+                    const Icon = hobby.icon;
+                    return (
+                      <StaggerItem key={hobby.title}>
+                        <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-5 md:p-6 card-hover-effect h-full">
+                          <div className="card-hover-content">
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border-subtle)]">
+                                <span className="text-[var(--color-text-secondary)]">
+                                  <Icon />
+                                </span>
+                              </div>
+                              <h3 className="text-sm font-semibold text-[var(--color-text-primary)]">
+                                {hobby.title}
+                              </h3>
+                            </div>
+                            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                              {hobby.description}
+                            </p>
                           </div>
                         </div>
                       </StaggerItem>
