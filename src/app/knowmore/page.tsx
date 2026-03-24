@@ -124,6 +124,32 @@ function SproutIcon({ className = '' }: { className?: string }) {
   );
 }
 
+function GraduationCapIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+      <path d="M6 12v5c0 1.657 2.686 3 6 3s6-1.343 6-3v-5" />
+    </svg>
+  );
+}
+
+function AwardIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="8" r="7" />
+      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+    </svg>
+  );
+}
+
+function ZapIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </svg>
+  );
+}
+
 // ============================================
 // DATA
 // ============================================
@@ -556,6 +582,147 @@ export default function KnowMore() {
           </section>
 
           {/* ============================================
+              EDUCATION & GIVING BACK
+              ============================================ */}
+          <section className="mb-20 md:mb-28">
+            {shouldReduceMotion ? (
+              <>
+                <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-10">
+                  Education & Giving Back
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Education Card */}
+                  <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-5 md:p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border-subtle)]">
+                        <span className="text-[var(--color-text-secondary)]">
+                          <GraduationCapIcon />
+                        </span>
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-semibold text-[var(--color-text-primary)]">
+                          Bachelors in Design
+                        </h3>
+                        <p className="text-xs text-[var(--color-text-tertiary)]">
+                          Industrial Design
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-1">
+                      Avantika University, India
+                    </p>
+                    <p className="text-xs text-[var(--color-text-tertiary)] mb-3">
+                      2017 — 2021
+                    </p>
+                    <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                      Where I learned to design — from physical products to digital interfaces. This foundation in industrial design shaped how I think about form, function, and the people who use what I build.
+                    </p>
+                  </div>
+
+                  {/* Jury Member Card */}
+                  <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-5 md:p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border-subtle)]">
+                        <span className="text-[var(--color-text-secondary)]">
+                          <AwardIcon />
+                        </span>
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-semibold text-[var(--color-text-primary)]">
+                          Jury Member
+                        </h3>
+                        <p className="text-xs text-[var(--color-text-tertiary)]">
+                          Foundation Year Reviews
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-1">
+                      Avantika University
+                    </p>
+                    <p className="text-xs text-[var(--color-text-tertiary)] mb-3">
+                      Ongoing
+                    </p>
+                    <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                      Invited back as a jury member to evaluate foundation year students — reviewing their design thinking, craft, and problem-solving. A way to give back to the place that shaped my own design journey.
+                    </p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <SectionReveal>
+                <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight mb-10">
+                  Education & Giving Back
+                </h2>
+                <StaggerContainer className="grid md:grid-cols-2 gap-6">
+                  {/* Education Card */}
+                  <StaggerItem>
+                    <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-5 md:p-6 card-hover-effect h-full">
+                      <div className="card-hover-content">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border-subtle)]">
+                            <span className="text-[var(--color-text-secondary)]">
+                              <GraduationCapIcon />
+                            </span>
+                          </div>
+                          <div>
+                            <h3 className="text-sm font-semibold text-[var(--color-text-primary)]">
+                              Bachelors in Design
+                            </h3>
+                            <p className="text-xs text-[var(--color-text-tertiary)]">
+                              Industrial Design
+                            </p>
+                          </div>
+                        </div>
+                        <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-1">
+                          Avantika University, India
+                        </p>
+                        <p className="text-xs text-[var(--color-text-tertiary)] mb-3">
+                          2017 — 2021
+                        </p>
+                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                          Where I learned to design — from physical products to digital interfaces. This foundation in industrial design shaped how I think about form, function, and the people who use what I build.
+                        </p>
+                      </div>
+                    </div>
+                  </StaggerItem>
+
+                  {/* Jury Member Card */}
+                  <StaggerItem>
+                    <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-5 md:p-6 card-hover-effect h-full">
+                      <div className="card-hover-content">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border-subtle)]">
+                            <span className="text-[var(--color-text-secondary)]">
+                              <AwardIcon />
+                            </span>
+                          </div>
+                          <div>
+                            <h3 className="text-sm font-semibold text-[var(--color-text-primary)]">
+                              Jury Member
+                            </h3>
+                            <p className="text-xs text-[var(--color-text-tertiary)]">
+                              Foundation Year Reviews
+                            </p>
+                          </div>
+                        </div>
+                        <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-1">
+                          Avantika University
+                        </p>
+                        <p className="text-xs text-[var(--color-text-tertiary)] mb-3">
+                          Ongoing
+                        </p>
+                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                          Invited back as a jury member to evaluate foundation year students — reviewing their design thinking, craft, and problem-solving. A way to give back to the place that shaped my own design journey.
+                        </p>
+                      </div>
+                    </div>
+                  </StaggerItem>
+                </StaggerContainer>
+              </SectionReveal>
+            )}
+          </section>
+
+          {/* ============================================
               SKILLS SECTION
               ============================================ */}
           <section>
@@ -635,6 +802,49 @@ export default function KnowMore() {
                     );
                   })}
                 </StaggerContainer>
+              </SectionReveal>
+            )}
+          </section>
+
+          {/* ============================================
+              CURRENTLY INTO
+              ============================================ */}
+          <section className="mt-20 md:mt-28">
+            {shouldReduceMotion ? (
+              <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 md:p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--color-text-primary)]">
+                    <span className="text-[var(--color-bg)]">
+                      <ZapIcon />
+                    </span>
+                  </div>
+                  <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight">
+                    Currently Into
+                  </h2>
+                </div>
+                <p className="text-base text-[var(--color-text-secondary)] leading-relaxed max-w-[var(--max-width-text)]">
+                  Exploring AI-native design patterns and how LLMs are changing the way we build products. Spending a lot of time at the intersection of design systems and AI-assisted development — figuring out how to make AI understand and respect design intent. Also getting deeper into front-end engineering to close the gap between what I design and what ships.
+                </p>
+              </div>
+            ) : (
+              <SectionReveal>
+                <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 md:p-8 card-hover-effect">
+                  <div className="card-hover-content">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--color-text-primary)]">
+                        <span className="text-[var(--color-bg)]">
+                          <ZapIcon />
+                        </span>
+                      </div>
+                      <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight">
+                        Currently Into
+                      </h2>
+                    </div>
+                    <p className="text-base text-[var(--color-text-secondary)] leading-relaxed max-w-[var(--max-width-text)]">
+                      Exploring AI-native design patterns and how LLMs are changing the way we build products. Spending a lot of time at the intersection of design systems and AI-assisted development — figuring out how to make AI understand and respect design intent. Also getting deeper into front-end engineering to close the gap between what I design and what ships.
+                    </p>
+                  </div>
+                </div>
               </SectionReveal>
             )}
           </section>
