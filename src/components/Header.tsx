@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '#about', label: 'About' },
@@ -13,6 +14,8 @@ const navLinks = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +37,7 @@ export default function Header() {
         <nav className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a
-            href="#"
+            href={isHome ? '#' : '/'}
             className="text-lg font-semibold tracking-tight text-[var(--color-text-primary)]"
           >
             Aman Soni
@@ -45,14 +48,14 @@ export default function Header() {
             {navLinks.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={isHome ? link.href : `/${link.href}`}
                 className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
               >
                 {link.label}
               </a>
             ))}
             <a
-              href="#contact"
+              href={isHome ? '#contact' : '/#contact'}
               className="text-sm font-medium px-4 py-2 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200"
             >
               Work with me
@@ -97,7 +100,7 @@ export default function Header() {
               {navLinks.map((link) => (
                 <a
                   key={link.href}
-                  href={link.href}
+                  href={isHome ? link.href : `/${link.href}`}
                   className="text-base text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -105,7 +108,7 @@ export default function Header() {
                 </a>
               ))}
               <a
-                href="#contact"
+                href={isHome ? '#contact' : '/#contact'}
                 className="inline-flex justify-center text-base font-medium px-4 py-3 bg-[var(--color-accent)] text-[var(--color-bg)] rounded-lg border border-transparent hover:bg-[var(--color-bg)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200 mt-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
